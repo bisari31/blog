@@ -1,0 +1,13 @@
+@use './theme.scss' as *;
+
+body {
+  max-width: 1280px;
+  margin: 0 auto;
+  transition: 0.3s all;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+svg {
+  fill: var(--color-text);
+}

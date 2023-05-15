@@ -91,6 +91,7 @@ video {
   font: inherit;
   vertical-align: baseline;
 }
+
 /* HTML5 display-role reset for older browsers */
 article,
 aside,
@@ -131,4 +132,19 @@ table {
 a {
   text-decoration: none;
   color: inherit;
+}
+
+button {
+  font-size: 16px;
+  padding: 0;
+  border: none;
+  background: none;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+body {
+  max-width: 1280px;
+  margin: 0 auto;
 }

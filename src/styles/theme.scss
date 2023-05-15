@@ -1,0 +1,14 @@
+@use './constants.scss' as *;
+
+html[data-theme='light'] {
+  --color-text: #{$text-color-1};
+  --color-bg: #{$bg-color-1};
+  --color-bg-header: #{$bg-color-1};
+  --color-bg-footer: #{$bg-footer-color-1};
+}
+html[data-theme='dark'] {
+  --color-text: #{$text-color-2};
+  --color-bg: #{$bg-color-2};
+  --color-bg-header: #{$bg-color-2};
+  --color-bg-footer: #{$bg-footer-color-2};
+}
