@@ -1,14 +1,19 @@
-@use './constants.scss' as *;
+@use './constant.scss' as *;
 
 html[data-theme='light'] {
-  --color-text: #{$text-color-1};
-  --color-bg: #{$bg-color-1};
-  --color-bg-header: #{$bg-color-1};
-  --color-bg-footer: #{$bg-footer-color-1};
+  --color-text: #{$text-color1};
+  --color-bg: #{$bg-color1};
+  --color-bg-header: #{$bg-color1};
+  --toggle: #{$bg-color2};
+  --border: #{$border1};
+  --code: #{$code1};
 }
+
 html[data-theme='dark'] {
-  --color-text: #{$text-color-2};
-  --color-bg: #{$bg-color-2};
-  --color-bg-header: #{$bg-color-2};
-  --color-bg-footer: #{$bg-footer-color-2};
+  --color-text: #{$text-color2};
+  --color-bg: #{$bg-color2};
+  --color-bg-header: #{$bg-color2};
+  --toggle: #{$bg-color1};
+  --border: #{$border2};
+  --code: #{$code2};
 }

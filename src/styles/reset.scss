@@ -1,4 +1,4 @@
-/* http://meyerweb.com/eric/tools/css/reset/ 
+/* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
 */
@@ -107,7 +107,7 @@ section {
   display: block;
 }
 body {
-  line-height: 1;
+  line-height: 1.5;
 }
 ol,
 ul {
@@ -142,9 +142,4 @@ button {
   &:hover {
     cursor: pointer;
   }
-}
-
-body {
-  max-width: 1280px;
-  margin: 0 auto;
 }
