@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react';
 
 export default function useTheme() {
-  const [isDarkMode, setIsDarkMode] = useState(
-    window.matchMedia('(prefers-color-scheme: dark)').matches,
-  );
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   const handleToggleTheme = () => {
     setIsDarkMode((prev) => !prev);
@@ -11,9 +9,11 @@ export default function useTheme() {
 
   useEffect(() => {
     const isUserTheme = localStorage.getItem('color-theme');
+    const isOsTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
     if (isUserTheme) {
-      console.log(isUserTheme);
       setIsDarkMode(isUserTheme === 'dark');
+    } else {
+      setIsDarkMode(isOsTheme);
     }
   }, []);
 
