@@ -1,14 +1,25 @@
 interface Post {
   title: string;
-  img: string;
+  date: date;
   description: string;
-  date: {
-    long: string;
-    iso: string;
+  thumbnail?: string;
+  keywords?: string[];
+  body: { code: string };
+
+  _id: string;
+  _raw: {
+    sourceFilePath: string;
+    sourceFileName: string;
+    sourceFileDir: string;
+    contentType: string;
+    flattenedPath: string;
   };
+  type: string;
+  url: string;
 }
 
-interface MdxMataData {
-  id: string;
-  post: Post;
-}
+type PostsResult = {
+  previousPost?: Post;
+  nextPost?: Post;
+  currentPost?: Post;
+};

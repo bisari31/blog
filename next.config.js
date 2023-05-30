@@ -1,4 +1,6 @@
-/** @type {import('next').NextConfig} */
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { withContentlayer } = require('next-contentlayer');
+
 const nextConfig = {
   webpack(config) {
     config.module.rules.push({
@@ -7,14 +9,9 @@ const nextConfig = {
     });
     return config;
   },
-  experimental: {
-    mdxRs: true,
-  },
   images: {
     domains: ['images.velog.io'],
   },
 };
 
-const withMDX = require('@next/mdx')();
-// module.exports = nextConfig;
-module.exports = withMDX(nextConfig);
+module.exports = withContentlayer(nextConfig);
