@@ -23,7 +23,30 @@ export const generateMetadata = ({
   const post = allPosts.find(
     (post: Post) => post.url === `/posts/${decodedSlug}`,
   );
-  return { title: post?.title, description: post?.description };
+  return {
+    title: post?.title,
+    description: post?.description,
+    openGraph: {
+      title: post?.title,
+      description: post?.description,
+      url: post?.url,
+      siteName: '기술 블로그',
+      images: [
+        {
+          url: post?.thumbnail,
+          width: 800,
+          height: 600,
+        },
+        {
+          url: post?.thumbnail,
+          width: 1800,
+          height: 1600,
+        },
+      ],
+      locale: 'ko_KR',
+      type: 'website',
+    },
+  };
 };
 
 export default function page({
