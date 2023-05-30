@@ -1,32 +1,53 @@
-$bg-color1: #fff;
-$bg-color2: #2a2a2a;
-$text-color1: #2a2a2a;
-$text-color2: #fff;
-$border1: #dbdcdd;
-$border2: #3e3e3e;
-$code1: #e9e9e9;
-$code2: #404040;
+$bg1: #fff;
+$bg2: #131313;
+$bg-blur1: rgba(255, 255, 255, 0.2);
+$bg-blur2: rgba(0, 0, 0, 0.2);
+$title1: #2a2a2a;
+$title2: #fafafa;
+$text1: #2a2a2a;
+$text2: #d9d9d9;
+$header1: #2a2a2a;
+$header2: #fff;
+
+$keyword-text1: #010001;
+$keyword-text2: #fff;
+$keyword-bg1: #f5f6f9;
+$keyword-bg2: #2a2a2a;
+$keyword-bg-hover1: darken($keyword-bg1, 3%);
+$keyword-bg-hover2: lighten($keyword-bg2, 3%);
+
+$time-text1: #ababab;
+$time-text2: #919191;
+
+$des-text1: #818181;
+$des-text2: #a7a7a7;
+
+$border1: #e5e7eb;
+$border2: #343434;
+
+$code1: #f3f3f3;
+$code2: #1e1e1e;
+
+$code-border1: #e8e8e8;
+$code-border2: #3e3c3c;
+
+$svg1: #94a3b8;
+$svg2: #7e848d;
+$svg-bg-hover1: #f9fafb;
+$svg-bg-hover2: #060606;
+$svg-hover1: #64748b;
+$svg-hover2: #afb3b8;
+
+$search-bg-hover1: #f4f4f4;
+$search-bg-hover2: #1c1c1c;
+$search-text1: #585858;
+$search-text2: #b5b5b5;
 
 $header-height: 60px;
 
-$main-margin: 0 40px;
+$main-margin: 0 40px 150px 40px;
 $header-margin: 0 46px;
-$mobile-margin: 0 25px;
+$header-mobile-margin: 0 25px;
+$main-mobile-margin: 0 25px 150px 25px;
 
 $max-width: 1048px;
-
-$mobile: 767px;
-$tablet: 1023px;
-$desktop: 1024px;
-
-@mixin mobile {
-  @media (max-width: $mobile) {
-    margin: $mobile-margin;
-  }
-}
-
-@mixin desktop {
-  @media (min-width: $mobile + 1) {
-    @content;
-  }
-}

@@ -1,19 +1,47 @@
 @use './constant.scss' as *;
 
 html[data-theme='light'] {
-  --color-text: #{$text-color1};
-  --color-bg: #{$bg-color1};
-  --color-bg-header: #{$bg-color1};
-  --toggle: #{$bg-color2};
+  --text: #{$text1};
+  --title: #{$title1};
+  --header: #{$header1};
+  --bg: #{$bg1};
+  --bg-blur: #{$bg-blur1};
+  --bg-header: #{$bg1};
+  --toggle: #{$bg2};
   --border: #{$border1};
   --code: #{$code1};
+  --code-border: #{$code-border1};
+  --keyword-bg: #{$keyword-bg1};
+  --keyword-bg-hover: #{$keyword-bg-hover1};
+  --keyword-text: #{$keyword-text1};
+  --time-text: #{$time-text1};
+  --des-text: #{$des-text1};
+  --svg: #{$svg1};
+  --svg-hover: #{$svg-hover1};
+  --svg-bg-hover: #{$svg-bg-hover1};
+  --search-bg-hover: #{$search-bg-hover1};
+  --search-text: #{$search-text1};
 }
 
 html[data-theme='dark'] {
-  --color-text: #{$text-color2};
-  --color-bg: #{$bg-color2};
-  --color-bg-header: #{$bg-color2};
-  --toggle: #{$bg-color1};
+  --text: #{$text2};
+  --title: #{$title2};
+  --header: #{$header2};
+  --bg: #{$bg2};
+  --bg-blur: #{$bg-blur2};
+  --bg-header: #{$bg2};
+  --toggle: #{$bg1};
   --border: #{$border2};
   --code: #{$code2};
+  --code-border: #{$code-border2};
+  --keyword-text: #{$keyword-text2};
+  --keyword-bg: #{$keyword-bg2};
+  --keyword-bg-hover: #{$keyword-bg-hover2};
+  --time-text: #{$time-text2};
+  --des-text: #{$des-text2};
+  --svg: #{$svg2};
+  --svg-hover: #{$svg-hover2};
+  --svg-bg-hover: #{$svg-bg-hover2};
+  --search-bg-hover: #{$search-bg-hover2};
+  --search-text: #{$search-text2};
 }
