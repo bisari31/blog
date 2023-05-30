@@ -27,7 +27,13 @@
   },
   "rules": {
     "react/button-has-type": "error",
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ]
     // "react/jsx-filename-extension": ["warn", { "extensions": [".ts", ".tsx"] }],
     // "no-useless-catch": "off"
   }
