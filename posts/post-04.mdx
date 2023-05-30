@@ -9,6 +9,7 @@ keywords:
 ---
 
 ```js
+// Test.tsx
 export default function Portal({ children }: PorTalProps) {
   const modal = document.getElementById('portal') as HTMLElement;
   return ReactDOM.createPortal(children, modal);

@@ -3,40 +3,21 @@ import Link from 'next/link';
 
 import styles from './header.module.scss';
 import { CloseIcon, MenuIcon } from 'assets';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import Nav from './Nav';
 import Modal from './modal/Modal';
 import Portal from 'components/common/Portal';
+import { useTheme, useModalOpen } from 'hooks';
 
 export default function Header() {
   const [isSideNavOpen, setIsSideNavOpen] = useState(false);
-  const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const { isDarkMode, handleToggleTheme } = useTheme();
+  const { isModalOpen, setIsModalOpen } = useModalOpen();
 
   const handleToggleState = (state: 'dark' | 'modal') => {
-    state === 'dark'
-      ? setIsDarkMode(!isDarkMode)
-      : setIsSearchModalOpen(!isSearchModalOpen);
+    state === 'dark' ? handleToggleTheme() : setIsModalOpen((prev) => !prev);
   };
-
-  useEffect(() => {
-    document.documentElement.setAttribute(
-      'data-theme',
-      `${isDarkMode ? 'dark' : 'light'}`,
-    );
-  }, [isDarkMode]);
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.ctrlKey && e.key === 'k') {
-        e.preventDefault();
-        setIsSearchModalOpen(true);
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
 
   return (
     <header className={styles.header}>
@@ -75,10 +56,10 @@ export default function Header() {
           />
         </div>
       )}
-      {isSearchModalOpen && (
+      {isModalOpen && (
         <Portal>
           <Modal
-            setIsSearchModalOpen={setIsSearchModalOpen}
+            setIsSearchModalOpen={setIsModalOpen}
             setIsSideNavOpen={setIsSideNavOpen}
           />
         </Portal>
