@@ -1,0 +1,37 @@
+---
+title: sunt aut facere repellat provident occaecati excepturi optio reprehenderit
+date: 2023-05-15
+thumbnail: https://images.velog.io/images/jay/post/3a497590-d1b6-414c-9f3f-7b6c7eb18f6d/img.png
+description: quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto
+keywords:
+  - next.js
+  - react
+  - hook
+---
+
+```js
+  return (
+    <div className={styles.wrapper}>
+      <div className={styles.title}>
+        <h1>
+          Filtered Posts <small>({filteredPosts.length})</small>
+        </h1>
+      </div>
+      <KeywordWrapper isKeywordsPage>
+        {KEYWORDS.map((keyword) => (
+          <Keyword
+            key={keyword}
+            name={keyword}
+            isKeywordsPage
+            isActive={keyword === activeKeyword}
+            onClick={handleClickKeyword}
+          />
+        ))}
+      </KeywordWrapper>
+      <div className={styles.postWarpper}>
+        {filteredPosts.map((post) => (
+          <PostPreview post={post} key={post._id} />
+        ))}
+      </div>
+    </div>
+```
