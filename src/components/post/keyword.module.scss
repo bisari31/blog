@@ -18,6 +18,7 @@
     background-color: var(--bg);
     line-height: 30px;
     border: 1px solid var(--keyword-bg-hover);
+
     &.isActive {
       border: none;
       color: var(--bg);
