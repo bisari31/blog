@@ -10,7 +10,7 @@ const nextConfig = {
     return config;
   },
   images: {
-    domains: ['images.velog.io'],
+    domains: [],
   },
 };
 
