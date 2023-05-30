@@ -1,0 +1,129 @@
+@use '/src/styles/mixin.scss';
+
+.wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-blur);
+  z-index: 9999;
+  &::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    // -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    z-index: -1;
+  }
+}
+
+.modal {
+  overflow: hidden;
+  border: 1px solid var(--border);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--bg);
+  width: 50%;
+  border-radius: 10px;
+  z-index: 10000;
+  box-shadow: rgba(17, 12, 46, 0.2) 0px 0px 40px 0px;
+
+  .inputWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    border-bottom: 1px solid var(--border);
+    input {
+      margin-left: 0.5rem;
+      color: var(--text);
+      background-color: var(--bg);
+      font-size: 1rem;
+      border: none;
+      height: 57px;
+      box-sizing: border-box;
+      width: 100%;
+      &:focus {
+        outline: none;
+      }
+      &::placeholder {
+        font-size: 0.95rem;
+        color: var(--time-text);
+      }
+    }
+    svg {
+      path,
+      circle {
+        fill: var(--time-text);
+      }
+    }
+    button {
+      border-radius: 3px;
+      padding: 0.15rem 0.2rem;
+      font-size: 0.72rem;
+      color: var(--des-text);
+      border: 1px solid var(--border);
+      &:hover {
+        color: var(--svg-hover);
+        background-color: var(--search-bg-hover);
+      }
+    }
+  }
+
+  .list {
+    max-height: 275px;
+    padding: 1rem;
+    overflow-y: scroll;
+    div {
+      font-weight: 300;
+      color: var(--search-text);
+      svg {
+        min-width: 20px;
+        path {
+          fill: var(--search-text);
+        }
+        margin-right: 10px;
+      }
+      font-size: 14px;
+      padding: 0 0.5em;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      height: 48px;
+      cursor: pointer;
+
+      div {
+      }
+    }
+    .noResults {
+      cursor: default;
+      display: flex;
+      justify-content: center;
+      &:hover {
+        background: none;
+      }
+    }
+    .isActive {
+      color: var(--text);
+      background-color: var(--search-bg-hover);
+      svg {
+        path {
+          fill: var(--text);
+        }
+      }
+    }
+  }
+
+  @include mixin.mobile {
+    width: 90%;
+  }
+  @include mixin.tablet {
+    width: 70%;
+  }
+}

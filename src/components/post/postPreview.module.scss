@@ -1,0 +1,47 @@
+@use '/src/styles/mixin.scss';
+
+.article {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .imgWrapper {
+    min-width: 300px;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-left: 50px;
+    img {
+      object-fit: cover;
+      border-radius: 5px;
+    }
+  }
+
+  @include mixin.mobile {
+    flex-direction: column-reverse;
+    margin-left: 0;
+    .imgWrapper {
+      width: 100%;
+      margin-left: 0;
+      margin-bottom: 20px;
+      img {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.contentWrapper {
+  time {
+    font-weight: 400;
+    color: var(--time-text);
+  }
+  h2 {
+    font-size: 28px;
+    font-weight: 600;
+    margin: 20px 0;
+  }
+  span {
+    color: var(--des-text);
+  }
+}

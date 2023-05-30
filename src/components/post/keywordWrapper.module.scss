@@ -1,0 +1,12 @@
+@use '/src/styles/mixin.scss';
+
+.keywords {
+  margin: 25px 0;
+  gap: 20px 30px;
+  display: flex;
+  flex-wrap: wrap;
+
+  &.isKeywordsPage {
+    margin: 0 0 65px 0;
+  }
+}
