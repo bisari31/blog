@@ -4,7 +4,7 @@ export default function useTheme() {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   const handleThemeToggle = () => {
-    setIsDarkMode((prev) => !prev);
+    setIsDarkMode(!isDarkMode);
   };
 
   useEffect(() => {
@@ -15,7 +15,7 @@ export default function useTheme() {
     } else {
       setIsDarkMode(isOsTheme);
     }
-  }, [setIsDarkMode]);
+  }, []);
 
   useEffect(() => {
     document.documentElement.setAttribute(

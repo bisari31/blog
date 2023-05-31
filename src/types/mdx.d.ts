@@ -5,7 +5,6 @@ interface Post {
   thumbnail?: string;
   keywords?: string[];
   body: { code: string };
-
   _id: string;
   _raw: {
     sourceFilePath: string;

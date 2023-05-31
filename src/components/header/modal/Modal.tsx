@@ -1,11 +1,11 @@
 'use client';
 import React, { useState, useMemo } from 'react';
-import { allPosts } from 'contentlayer/generated';
 import { useRouter } from 'next/navigation';
 
 import styles from './modal.module.scss';
 import { SearchIcon, DocumentIcon } from 'assets';
 import { useFocus, useKeyboardSelection, useOutsideClick } from 'hooks';
+import { sortedPosts } from 'lib/contentlayer';
 
 type SetState = React.Dispatch<React.SetStateAction<boolean>>;
 
@@ -21,17 +21,17 @@ export default function SearchModal({
   const router = useRouter();
   const inputRef = useFocus<HTMLInputElement>();
   const [search, setSearch] = useState('');
-  const { modalRef } = useOutsideClick(setIsSearchModalOpen);
+  const modalRef = useOutsideClick(setIsSearchModalOpen);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setSearch(e.target.value);
 
   const filteredPosts = useMemo(
     () =>
-      allPosts.filter(
-        (item) =>
-          item.title.toLowerCase().includes(search.toLowerCase()) ||
-          item.keywords?.some((tag) =>
+      sortedPosts.filter(
+        ({ title, keywords }) =>
+          title.toLowerCase().includes(search.toLowerCase()) ||
+          keywords?.some((tag) =>
             tag.toLowerCase().includes(search.toLowerCase()),
           ),
       ),

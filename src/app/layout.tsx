@@ -1,7 +1,8 @@
-import 'styles/reset.scss';
-import 'styles/global.scss';
 import { Noto_Sans_KR } from 'next/font/google';
 import React from 'react';
+
+import 'styles/reset.scss';
+import 'styles/global.scss';
 import Header from 'components/header/Header';
 
 const notoSans = Noto_Sans_KR({

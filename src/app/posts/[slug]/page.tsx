@@ -1,15 +1,21 @@
-import { allPosts } from 'contentlayer/generated';
-import styles from './posts.module.scss';
+import { sortedPosts } from 'lib/contentlayer';
 import { getMDXComponent } from 'next-contentlayer/hooks';
 import { format, parseISO } from 'date-fns';
 import Image from 'next/image';
+
+import styles from './posts.module.scss';
 import PostNavigator from 'components/post/PostNavigator';
-import Keyword from 'components/post/Keyword';
-import KeywordWrapper from 'components/post/KeywordWrapper';
 import Utterances from 'components/comment/Utterances';
+import Keywords from 'components/post/Keywords';
+
+type PostsResult = {
+  previousPost?: Post;
+  nextPost?: Post;
+  currentPost?: Post;
+};
 
 export const generateStaticParams = async () =>
-  allPosts.map((post: Post) => {
+  sortedPosts.map((post: Post) => {
     return {
       slug: post.url,
     };
@@ -21,25 +27,25 @@ export const generateMetadata = ({
   params: { slug: string };
 }) => {
   const decodedSlug = decodeURIComponent(slug);
-  const post = allPosts.find(
+  const currentPost = sortedPosts.find(
     (post: Post) => post.url === `/posts/${decodedSlug}`,
   );
   return {
-    title: post?.title,
-    description: post?.description,
+    title: currentPost?.title,
+    description: currentPost?.description,
     openGraph: {
-      title: post?.title,
-      description: post?.description,
-      url: post?.url,
+      title: currentPost?.title,
+      description: currentPost?.description,
+      url: currentPost?.url,
       siteName: '기술 블로그',
       images: [
         {
-          url: post?.thumbnail,
+          url: currentPost?.thumbnail,
           width: 800,
           height: 600,
         },
         {
-          url: post?.thumbnail,
+          url: currentPost?.thumbnail,
           width: 1800,
           height: 1600,
         },
@@ -70,17 +76,17 @@ export default function page({
 
   const decodedSlug = decodeURIComponent(slug);
 
-  const { currentPost, nextPost, previousPost } = [...allPosts]
-    .sort()
-    .reverse()
-    .reduce((acc: PostsResult, cur, idx, src) => {
+  const { currentPost, nextPost, previousPost } = sortedPosts.reduce(
+    (acc: PostsResult, cur, idx, src) => {
       if (cur.url === `/posts/${decodedSlug}`) {
         acc.currentPost = cur;
         if (idx) acc.previousPost = src[idx - 1];
         if (src.length - 1 > idx) acc.nextPost = src[idx + 1];
       }
       return acc;
-    }, {});
+    },
+    {},
+  );
 
   let MDXContent;
 
@@ -98,11 +104,7 @@ export default function page({
             {format(parseISO(currentPost.date), 'LLLL d yyyy')}
           </time>
           <h1>{currentPost.title}</h1>
-          <KeywordWrapper>
-            {currentPost.keywords?.map((tag) => (
-              <Keyword name={tag} key={tag} />
-            ))}
-          </KeywordWrapper>
+          <Keywords keywords={currentPost.keywords} />
         </div>
         <article>
           <MDXContent components={components} />
