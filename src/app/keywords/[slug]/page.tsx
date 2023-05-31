@@ -1,7 +1,6 @@
-'use client';
 import { sortedPosts, keywords } from 'lib/contentlayer';
 
-import PostForm from 'components/post/PostForm';
+import PostList from 'components/post/PostList';
 import Keywords from 'components/post/Keywords';
 
 export default function Page({
@@ -16,8 +15,8 @@ export default function Page({
   const filteredPosts = getFilteredPosts();
 
   return (
-    <PostForm posts={filteredPosts}>
+    <PostList posts={filteredPosts}>
       <Keywords isKeywordsPage keywords={keywords} slug={slug} />
-    </PostForm>
+    </PostList>
   );
 }

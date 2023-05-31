@@ -1,10 +1,10 @@
 import { sortedPosts } from 'lib/contentlayer';
-import PostForm from 'components/post/PostForm';
+import PostList from 'components/post/PostList';
 
 export default function page() {
   return (
-    <PostForm posts={sortedPosts} isMainPage>
+    <PostList posts={sortedPosts} isMainPage>
       {null}
-    </PostForm>
+    </PostList>
   );
 }

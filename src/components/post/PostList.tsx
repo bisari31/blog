@@ -9,7 +9,7 @@ interface Props {
   isMainPage?: boolean;
 }
 
-export default function PostForm({
+export default function PostList({
   children,
   posts,
   isMainPage = false,
