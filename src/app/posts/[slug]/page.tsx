@@ -6,6 +6,7 @@ import Image from 'next/image';
 import PostNavigator from 'components/post/PostNavigator';
 import Keyword from 'components/post/Keyword';
 import KeywordWrapper from 'components/post/KeywordWrapper';
+import Utterances from 'components/comment/Utterances';
 
 export const generateStaticParams = async () =>
   allPosts.map((post: Post) => {
@@ -107,6 +108,7 @@ export default function page({
           <MDXContent components={components} />
         </article>
         <PostNavigator nextPost={nextPost} previousPost={previousPost} />
+        <Utterances />
       </div>
     </div>
   );
