@@ -1,11 +1,7 @@
-import { useEffect } from 'react';
-import { useThemeContext } from 'context/theme';
+import { useEffect, useState } from 'react';
 
 export default function useTheme() {
-  // <<<<<<< Updated upstream
-  //   const [isDarkMode, setIsDarkMode] = useState(false);
-  // =======
-  const { isDarkMode, setIsDarkMode } = useThemeContext();
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   const handleToggleTheme = () => {
     setIsDarkMode((prev) => !prev);
