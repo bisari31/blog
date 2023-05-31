@@ -6,14 +6,20 @@ import styles from './postForm.module.scss';
 interface Props {
   posts: Post[];
   children: React.ReactNode;
+  isMainPage?: boolean;
 }
 
-export default function PostForm({ children, posts }: Props) {
+export default function PostForm({
+  children,
+  posts,
+  isMainPage = false,
+}: Props) {
   return (
     <div className={styles.wrapper}>
       <div className={styles.title}>
         <h1>
-          Filtered Posts <small>({posts.length})</small>
+          {isMainPage ? 'All' : 'Filtered'} Posts{' '}
+          <small>({posts.length})</small>
         </h1>
       </div>
       {children}
