@@ -1,11 +1,11 @@
 'use client';
-import React, { useEffect, useRef, useState, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { allPosts } from 'contentlayer/generated';
 import { useRouter } from 'next/navigation';
 
 import styles from './modal.module.scss';
 import { SearchIcon, DocumentIcon } from 'assets';
-import { useKeyboardSelection, useOutsideClick } from 'hooks';
+import { useFocus, useKeyboardSelection, useOutsideClick } from 'hooks';
 
 type SetState = React.Dispatch<React.SetStateAction<boolean>>;
 
@@ -19,7 +19,7 @@ export default function SearchModal({
   setIsSideNavOpen,
 }: Props) {
   const router = useRouter();
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useFocus<HTMLInputElement>();
   const [search, setSearch] = useState('');
   const { modalRef } = useOutsideClick(setIsSearchModalOpen);
 
@@ -51,10 +51,6 @@ export default function SearchModal({
       handleNavitation,
       'url',
     );
-
-  useEffect(() => {
-    inputRef.current?.focus();
-  }, []);
 
   return (
     <div className={styles.wrapper}>
