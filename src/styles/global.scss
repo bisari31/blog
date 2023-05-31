@@ -25,4 +25,8 @@ main {
     }
     margin: constant.$main-margin;
   }
+
+  .utterances {
+    max-width: 100% !important;
+  }
 }
