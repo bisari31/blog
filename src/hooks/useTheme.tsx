@@ -1,7 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useThemeContext } from 'context/theme';
 
 export default function useTheme() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  // <<<<<<< Updated upstream
+  //   const [isDarkMode, setIsDarkMode] = useState(false);
+  // =======
+  const { isDarkMode, setIsDarkMode } = useThemeContext();
 
   const handleToggleTheme = () => {
     setIsDarkMode((prev) => !prev);
@@ -15,7 +19,7 @@ export default function useTheme() {
     } else {
       setIsDarkMode(isOsTheme);
     }
-  }, []);
+  }, [setIsDarkMode]);
 
   useEffect(() => {
     document.documentElement.setAttribute(
@@ -23,7 +27,7 @@ export default function useTheme() {
       `${isDarkMode ? 'dark' : 'light'}`,
     );
     window.localStorage.setItem('color-theme', isDarkMode ? 'dark' : 'light');
-  }, [isDarkMode]);
+  }, [isDarkMode, setIsDarkMode]);
 
   return { handleToggleTheme, isDarkMode };
 }

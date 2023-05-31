@@ -3,6 +3,7 @@ import 'styles/global.scss';
 import { Noto_Sans_KR, Fira_Code } from 'next/font/google';
 import React from 'react';
 import Header from 'components/header/Header';
+import { ThemeContextProvider } from 'context/theme';
 
 const notoSans = Noto_Sans_KR({
   subsets: ['latin'],
@@ -28,9 +29,11 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={`${notoSans.className} ${fira.variable}`}>
-        <Header />
-        <main>{children}</main>
-        <div id="portal" />
+        <ThemeContextProvider>
+          <Header />
+          <main>{children}</main>
+          <div id="portal" />
+        </ThemeContextProvider>
       </body>
     </html>
   );
