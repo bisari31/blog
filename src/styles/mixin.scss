@@ -19,14 +19,3 @@ $desktop: 1024px;
     @content;
   }
 }
-
-@mixin keywords($keywordsPage: false) {
-  @if $keywordsPage {
-    margin: 25px 0 65px 0;
-  } @else {
-    margin: 25px 0;
-  }
-  gap: 20px 30px;
-  display: flex;
-  flex-wrap: wrap;
-}
