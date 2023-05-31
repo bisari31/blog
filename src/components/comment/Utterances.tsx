@@ -4,7 +4,6 @@ import styles from './utterances.module.scss';
 
 export default function Utterances() {
   const { isDarkMode } = useThemeContext();
-  console.log(isDarkMode);
   return (
     <section
       className={styles.wrapper}
