@@ -32,7 +32,7 @@ export default function Page() {
   };
   const filteredPosts = getFilteredPosts();
 
-  const handleClickKeyword = (name: string) => setActiveKeyword(name);
+  const handleKeywordClick = (name: string) => setActiveKeyword(name);
 
   useEffect(() => {
     setActiveKeyword(searchParams.get('path') ?? '');
@@ -52,7 +52,7 @@ export default function Page() {
             name={keyword}
             isKeywordsPage
             isActive={keyword === activeKeyword}
-            onClick={handleClickKeyword}
+            onClick={handleKeywordClick}
           />
         ))}
       </KeywordWrapper>

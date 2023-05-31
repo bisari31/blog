@@ -12,11 +12,11 @@ import { useTheme, useModalOpen } from 'hooks';
 
 export default function Header() {
   const [isSideNavOpen, setIsSideNavOpen] = useState(false);
-  const { isDarkMode, handleToggleTheme } = useTheme();
+  const { isDarkMode, handleThemeToggle } = useTheme();
   const { isModalOpen, setIsModalOpen } = useModalOpen();
 
-  const handleToggleState = (state: 'dark' | 'modal') => {
-    state === 'dark' ? handleToggleTheme() : setIsModalOpen((prev) => !prev);
+  const handleStateToggle = (state: 'dark' | 'modal') => {
+    state === 'dark' ? handleThemeToggle() : setIsModalOpen((prev) => !prev);
   };
 
   return (
@@ -29,7 +29,7 @@ export default function Header() {
           <div className={styles.navWrapper}>
             <Nav
               isTabletNav={false}
-              onToggle={handleToggleState}
+              onToggle={handleStateToggle}
               isDarkMode={isDarkMode}
             />
           </div>
@@ -51,7 +51,7 @@ export default function Header() {
         <div className={styles.sideNavWrapper}>
           <Nav
             isTabletNav
-            onToggle={handleToggleState}
+            onToggle={handleStateToggle}
             isDarkMode={isDarkMode}
           />
         </div>

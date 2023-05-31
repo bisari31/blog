@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 export default function useTheme() {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
-  const handleToggleTheme = () => {
+  const handleThemeToggle = () => {
     setIsDarkMode((prev) => !prev);
   };
 
@@ -25,5 +25,5 @@ export default function useTheme() {
     window.localStorage.setItem('color-theme', isDarkMode ? 'dark' : 'light');
   }, [isDarkMode, setIsDarkMode]);
 
-  return { handleToggleTheme, isDarkMode };
+  return { handleThemeToggle, isDarkMode };
 }
