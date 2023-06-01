@@ -2,6 +2,7 @@ import { sortedPosts } from 'lib/contentlayer';
 import { getMDXComponent } from 'next-contentlayer/hooks';
 import { format, parseISO } from 'date-fns';
 import Image from 'next/image';
+import { notFound } from 'next/navigation';
 
 import styles from './posts.module.scss';
 import PostNavigator from 'components/post/PostNavigator';
@@ -88,13 +89,10 @@ export default function page({
     {},
   );
 
-  let MDXContent;
-
   if (!currentPost) {
-    return <div>404</div>;
-  } else {
-    MDXContent = getMDXComponent(currentPost.body.code);
+    return notFound();
   }
+  const MDXContent = getMDXComponent(currentPost.body.code);
 
   return (
     <div>

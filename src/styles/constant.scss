@@ -45,9 +45,10 @@ $search-text2: #b5b5b5;
 
 $header-height: 60px;
 
-$main-margin: 0 40px 150px 40px;
+$margin-bottom: 150px;
+$main-margin: 0 40px $margin-bottom 40px;
 $header-margin: 0 46px;
 $header-mobile-margin: 0 25px;
-$main-mobile-margin: 0 25px 150px 25px;
+$main-mobile-margin: 0 25px $margin-bottom 25px;
 
 $max-width: 1048px;
