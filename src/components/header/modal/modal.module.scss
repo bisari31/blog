@@ -54,20 +54,20 @@
       }
       &::placeholder {
         font-size: 0.95rem;
-        color: var(--time-text);
+        color: var(--text-date);
       }
     }
     svg {
       path,
       circle {
-        fill: var(--time-text);
+        fill: var(--text-date);
       }
     }
     button {
       border-radius: 3px;
       padding: 0.15rem 0.2rem;
       font-size: 0.72rem;
-      color: var(--des-text);
+      color: var(--text-des);
       border: 1px solid var(--border);
       &:hover {
         color: var(--svg-hover);

@@ -34,7 +34,7 @@
 .contentWrapper {
   time {
     font-weight: 400;
-    color: var(--time-text);
+    color: var(--text-date);
   }
   h2 {
     font-size: 28px;
@@ -42,6 +42,6 @@
     margin: 20px 0;
   }
   span {
-    color: var(--des-text);
+    color: var(--text-des);
   }
 }
