@@ -10,7 +10,8 @@ export default function useOutsideClick(
   useEffect(() => {
     const handleOutsideClick = (e: MouseEvent) => {
       const target = e.target as HTMLDivElement;
-      if (!ref.current?.contains(target)) setModalOpen(false);
+      console.log(ref.current);
+      if (ref.current && !ref.current.contains(target)) setModalOpen(false);
     };
 
     document.addEventListener('mousedown', handleOutsideClick);
