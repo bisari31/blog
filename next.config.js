@@ -1,4 +1,17 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {}
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { withContentlayer } = require('next-contentlayer');
 
-module.exports = nextConfig
+const nextConfig = {
+  webpack(config) {
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: ['@svgr/webpack'],
+    });
+    return config;
+  },
+  images: {
+    domains: [],
+  },
+};
+
+module.exports = withContentlayer(nextConfig);

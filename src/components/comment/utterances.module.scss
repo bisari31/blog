@@ -1,0 +1,14 @@
+.wrapper {
+  display: none;
+}
+
+html[data-theme='dark'] {
+  .wrapper.dark {
+    display: block;
+  }
+}
+html[data-theme='light'] {
+  .wrapper.light {
+    display: block;
+  }
+}

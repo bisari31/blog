@@ -1,0 +1,36 @@
+$white: #fff;
+
+$black-100: #343434;
+$black-200: #2a2a2a;
+$black-300: #1e1e1e;
+$black-400: #161616;
+$black-500: #131313;
+$black-600: #060606;
+
+$gray-100: #f3f3f3;
+$gray-200: #e5e7eb;
+$gray-300: #d9d9d9;
+$gray-400: #ababab;
+$gray-500: #919191;
+$gray-600: #838383;
+
+$misty-blue-100: #f5f6f9;
+$misty-blue-200: #f9fafb;
+$misty-blue-300: #afb3b8;
+$misty-blue-400: #94a3b8;
+$misty-blue-500: #64748b;
+$misty-blue-600: #7e848d;
+
+$white-blur: rgba(255, 255, 255, 0.2);
+$black-blur: rgba(0, 0, 0, 0.2);
+
+$keyword-bg-hover1: darken($misty-blue-100, 3%);
+$keyword-bg-hover2: lighten($black-200, 3%);
+
+$header-height: 60px;
+$margin-bottom: 150px;
+$main-margin: 0 40px $margin-bottom 40px;
+$header-margin: 0 46px;
+$header-mobile-margin: 0 25px;
+$main-mobile-margin: 0 25px $margin-bottom 25px;
+$max-width: 1048px;

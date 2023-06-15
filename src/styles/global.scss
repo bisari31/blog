@@ -1,0 +1,32 @@
+@use './theme.scss';
+@use './constant.scss';
+@use './mixin.scss';
+
+body {
+  transition: 0.3s all;
+  background-color: var(--bg);
+  color: var(--text);
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--text-title);
+  }
+}
+
+main {
+  max-width: 980px;
+  margin: 0 auto;
+  & > div {
+    @include mixin.mobile {
+      margin: constant.$main-mobile-margin;
+    }
+    margin: constant.$main-margin;
+  }
+
+  .utterances {
+    max-width: 100% !important;
+  }
+}

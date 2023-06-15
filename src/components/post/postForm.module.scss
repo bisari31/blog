@@ -1,0 +1,18 @@
+.wrapper {
+  .title {
+    h1 {
+      font-size: 25px;
+      font-weight: 600;
+      padding: 20px 0;
+      margin: 52px 0;
+      small {
+        font-size: 60%;
+      }
+    }
+  }
+  .postWarpper {
+    display: flex;
+    flex-direction: column;
+    gap: 80px 0;
+  }
+}

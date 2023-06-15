@@ -1,0 +1,38 @@
+.wrapper {
+  margin-top: 300px;
+  margin-bottom: 150px;
+  display: flex;
+  justify-content: space-between;
+  p {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  a {
+    color: var(--text-title);
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: var(--keyword-bg);
+    display: flex;
+    width: 40%;
+    justify-content: center;
+    &.next {
+      align-items: flex-end;
+      text-align: end;
+    }
+    &.previous {
+      text-align: start;
+      align-items: flex-start;
+    }
+  }
+
+  &.isOnlyNextPost {
+    justify-content: flex-end;
+  }
+  &.isOnlyPreviousPost {
+    justify-content: flex-start;
+  }
+}

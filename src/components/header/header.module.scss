@@ -1,0 +1,75 @@
+@use '/src/styles/constant.scss';
+@use '/src/styles/mixin.scss';
+
+.header {
+  position: sticky;
+  width: 100%;
+  top: 0;
+  border-bottom: 1px solid var(--border);
+  background-color: var(--bg);
+  z-index: 100;
+  color: var(--text-title);
+  svg {
+    path,
+    circle {
+      fill: var(--svg);
+    }
+  }
+}
+
+.wrapper {
+  margin: 0 auto;
+  max-width: 1048px;
+  height: constant.$header-height;
+}
+
+.innerWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  margin: constant.$header-margin;
+  @include mixin.mobile {
+    margin: constant.$header-mobile-margin;
+  }
+  .logo {
+    font-weight: 500;
+    font-size: 18px;
+  }
+}
+
+.tabletButton {
+  display: none;
+  @include mixin.tablet {
+    display: flex;
+  }
+  @include mixin.mobile {
+    display: flex;
+  }
+}
+
+.navWrapper {
+  @include mixin.tablet {
+    display: none;
+  }
+  @include mixin.mobile {
+    display: none;
+  }
+}
+.sideNavWrapper {
+  @include mixin.tablet {
+    display: flex;
+  }
+  @include mixin.mobile {
+    display: flex;
+  }
+  display: none;
+  border-top: 1px solid var(--border);
+  border-left: 1px solid var(--border);
+  background-color: var(--bg);
+  right: 0;
+  height: 100vh;
+  width: 120px;
+  position: absolute;
+  padding: 32px;
+}
