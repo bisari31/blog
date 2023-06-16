@@ -1,6 +1,5 @@
-'use client';
-import { useRouter } from 'next/navigation';
 import styles from './keywords.module.scss';
+import Link from 'next/link';
 
 interface Props {
   isKeywordsPage?: boolean;
@@ -13,10 +12,6 @@ export default function Keywords({
   slug,
   isKeywordsPage = false,
 }: Props) {
-  const router = useRouter();
-  const handleClick = (keyword: string) => {
-    router.push(`/keywords/${keyword}`);
-  };
   return (
     <div
       className={`${styles.keywords} ${
@@ -24,17 +19,15 @@ export default function Keywords({
       }`}
     >
       {keywords?.map((keyword) => (
-        <button
-          onClick={() => handleClick(keyword)}
-          type="button"
+        <Link
+          href={`/keywords/${keyword}`}
           key={keyword}
           className={`${slug && keyword === slug ? styles.isActive : ''} ${
             isKeywordsPage ? styles.isKeywordsPage : ''
           }`}
-          // href={`/keywords/${keyword}`}
         >
           {keyword}
-        </button>
+        </Link>
       ))}
     </div>
   );
