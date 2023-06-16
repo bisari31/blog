@@ -7,7 +7,7 @@
   &.isKeywordsPage {
     margin: 0 0 65px 0;
   }
-  button {
+  a {
     color: var(--keyword-text);
     font-size: 14px;
     line-height: 35px;
@@ -23,7 +23,6 @@
     &.isKeywordsPage {
       height: 30px;
       color: var(--text-date);
-      font-weight: 500;
       background-color: var(--bg);
       line-height: 30px;
       border: 1px solid var(--keyword-bg-hover);
