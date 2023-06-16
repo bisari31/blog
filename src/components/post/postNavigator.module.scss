@@ -1,3 +1,6 @@
+@use '/src/styles/mixin.scss';
+@use '/src/styles/constant.scss';
+
 .wrapper {
   margin-top: 300px;
   margin-bottom: 150px;
@@ -34,5 +37,17 @@
   }
   &.isOnlyPreviousPost {
     justify-content: flex-start;
+  }
+  @include mixin.mobile {
+    flex-direction: column;
+    gap: 50px;
+    a {
+      width: calc(100% - 50px);
+
+      &.next {
+        text-align: start;
+        align-items: flex-start;
+      }
+    }
   }
 }
