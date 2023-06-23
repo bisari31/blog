@@ -14,9 +14,9 @@ export default function useOutsideClick(
     };
 
     document.addEventListener('mousedown', handleOutsideClick);
-
     return () => {
       document.body.style.overflow = 'unset';
+      document.removeEventListener('mousedown', handleOutsideClick);
     };
   }, [setModalOpen]);
 
