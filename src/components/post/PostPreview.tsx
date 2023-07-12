@@ -20,11 +20,9 @@ export default function PostPreview({ post }: { post: Post }) {
           <Keywords keywords={post.keywords} />
         </div>
         {post.thumbnail && (
-          <div className={styles.imgWrapper}>
-            <Link href={{ pathname: post.url }}>
-              <Image src={post.thumbnail} alt={post.title} fill />
-            </Link>
-          </div>
+          <Link href={{ pathname: post.url }} className={styles.imgWrapper}>
+            <Image src={post.thumbnail} alt={post.title} fill />
+          </Link>
         )}
       </div>
     </div>
