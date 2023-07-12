@@ -8,21 +8,23 @@ import Keywords from './Keywords';
 export default function PostPreview({ post }: { post: Post }) {
   return (
     <div>
-      <Link className={styles.article} href={{ pathname: post.url }}>
-        <div className={styles.contentWrapper}>
-          <time dateTime={post.date}>
-            {format(parseISO(post.date), 'LLL d, yyyy')}
-          </time>
-          <h2>{post.title}</h2>
-          <span>{post.description}</span>
+      <div className={styles.article}>
+        <div>
+          <Link href={{ pathname: post.url }} className={styles.contentWrapper}>
+            <time dateTime={post.date}>
+              {format(parseISO(post.date), 'LLL d, yyyy')}
+            </time>
+            <h2>{post.title}</h2>
+            <span>{post.description}</span>
+          </Link>
+          <Keywords keywords={post.keywords} />
         </div>
         {post.thumbnail && (
-          <div className={styles.imgWrapper}>
+          <Link href={{ pathname: post.url }} className={styles.imgWrapper}>
             <Image src={post.thumbnail} alt={post.title} fill />
-          </div>
+          </Link>
         )}
-      </Link>
-      <Keywords keywords={post.keywords} />
+      </div>
     </div>
   );
 }
