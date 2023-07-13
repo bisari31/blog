@@ -11,8 +11,8 @@ const notoSans = Noto_Sans_KR({
 });
 
 export const metadata = {
-  title: '기술 블로그',
-  description: '개발 관련 지식을 공유하는 블로그입니다.',
+  title: '이상원 기술 블로그',
+  description: '프론트엔드 개발자 이상원입니다.',
   verification: {
     google: 'e-TNPhd8w4G89P7qHvpbNUMOzmwlO8jX-6zAin2jbK8',
   },
