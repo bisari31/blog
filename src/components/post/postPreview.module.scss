@@ -20,6 +20,7 @@
   @include mixin.mobile {
     flex-direction: column-reverse;
     margin-left: 0;
+    align-items: start;
     .imgWrapper {
       width: 100%;
       margin-left: 0;
