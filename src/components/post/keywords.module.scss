@@ -4,9 +4,6 @@
   display: flex;
   flex-wrap: wrap;
 
-  &.isKeywordsPage {
-    margin: 0 0 65px 0;
-  }
   a {
     color: var(--keyword-text);
     font-size: 14px;
@@ -19,8 +16,11 @@
     &:hover {
       background-color: var(--keyword-bg-hover);
     }
+  }
 
-    &.isKeywordsPage {
+  &.isKeywordsPage {
+    margin: 0 0 25px 0;
+    a {
       height: 30px;
       color: var(--text-date);
       background-color: var(--bg);
