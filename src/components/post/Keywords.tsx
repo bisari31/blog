@@ -4,12 +4,12 @@ import Link from 'next/link';
 interface Props {
   isKeywordsPage?: boolean;
   keywords: Post['keywords'];
-  slug?: string;
+  currentQuery?: string;
 }
 
 export default function Keywords({
   keywords,
-  slug,
+  currentQuery,
   isKeywordsPage = false,
 }: Props) {
   return (
@@ -20,11 +20,9 @@ export default function Keywords({
     >
       {keywords?.map((keyword) => (
         <Link
-          href={`/keywords/${keyword}`}
+          href={keyword === 'All' ? '/' : { query: { keyword } }}
           key={keyword}
-          className={`${slug && keyword === slug ? styles.isActive : ''} ${
-            isKeywordsPage ? styles.isKeywordsPage : ''
-          }`}
+          className={`${keyword === currentQuery ? styles.isActive : ''}`}
         >
           {keyword}
         </Link>
