@@ -1,11 +1,14 @@
 import styles from './keywords.module.scss';
 import Link from 'next/link';
+import cn from 'classnames/bind';
 
 interface Props {
   isKeywordsPage?: boolean;
   keywords: Post['keywords'];
   currentQuery?: string;
 }
+
+const cx = cn.bind(styles);
 
 export default function Keywords({
   keywords,
@@ -14,15 +17,15 @@ export default function Keywords({
 }: Props) {
   return (
     <div
-      className={`${styles.keywords} ${
-        isKeywordsPage ? styles.isKeywordsPage : ''
-      }`}
+      className={cx('keywords', {
+        isKeywordsPage,
+      })}
     >
       {keywords?.map((keyword) => (
         <Link
           href={keyword === 'All' ? '/' : { query: { keyword } }}
           key={keyword}
-          className={`${keyword === currentQuery ? styles.isActive : ''}`}
+          className={cx({ isActive: keyword === currentQuery })}
         >
           {keyword}
         </Link>
