@@ -22,7 +22,7 @@ html[data-theme='light'] {
 }
 
 html[data-theme='dark'] {
-  --text: #{$gray-300};
+  --text: #{$gray-200};
   --text-date: #{$gray-600};
   --text-des: #{$gray-500};
   --text-title: #{$white};
