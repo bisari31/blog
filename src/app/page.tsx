@@ -8,12 +8,18 @@ export default function Home({
 }: {
   searchParams: { keyword: string };
 }) {
+  const getFilterPosts = () => {
+    if (!keyword) return sortedPosts;
+    return sortedPosts.filter((post) => post.keywords?.includes(keyword));
+  };
+  const filtedPosts = getFilterPosts();
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.title}>
         <h1>
           {keyword ? 'Filtered' : 'All'} Posts{' '}
-          <small>({sortedPosts.length})</small>
+          <small>({filtedPosts.length})</small>
         </h1>
       </div>
       <Keywords
@@ -22,7 +28,7 @@ export default function Home({
         isKeywordsPage
       />
       <div className={styles.postWarpper}>
-        {sortedPosts.map((post) => (
+        {filtedPosts.map((post) => (
           <PostPreview post={post} key={post._id} />
         ))}
       </div>
