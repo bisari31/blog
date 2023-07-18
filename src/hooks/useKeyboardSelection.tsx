@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 
 export default function useKeyboardSelection<T>(
   list: T[],
@@ -9,15 +9,15 @@ export default function useKeyboardSelection<T>(
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const listRef = useRef<HTMLDivElement>(null);
 
-  const scrollToElement = (index: number) => {
+  const scrollToElement = useCallback((index: number) => {
     listRef.current?.children[index]?.scrollIntoView({
       behavior: 'smooth',
       block: 'nearest',
     });
-  };
+  }, []);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    let index;
+    let index: number;
     switch (e.key) {
       case 'Escape':
         setModalOpen(false);
