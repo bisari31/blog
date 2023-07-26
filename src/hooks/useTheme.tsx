@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 export default function useTheme() {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
-  const handleThemeToggle = () => {
-    setIsDarkMode(!isDarkMode);
-  };
+  const handleThemeToggle = useCallback(() => {
+    setIsDarkMode((prev) => !prev);
+  }, []);
 
   useEffect(() => {
     const isUserTheme = localStorage.getItem('color-theme');
