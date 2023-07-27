@@ -1,5 +1,7 @@
 'use client';
+
 import cn from 'classnames/bind';
+
 import styles from './utterances.module.scss';
 
 const THEME_LIST = [

@@ -1,14 +1,15 @@
 'use client';
+
 import Link from 'next/link';
+import { useState } from 'react';
 
 import styles from './header.module.scss';
 import { CloseIcon, MenuIcon } from 'assets';
-import { useState } from 'react';
+import { useTheme, useModalOpen } from 'hooks';
 
 import Nav from './Nav';
 import Modal from './modal/Modal';
 import Portal from 'components/common/Portal';
-import { useTheme, useModalOpen } from 'hooks';
 
 export default function Header() {
   const [isSideNavOpen, setIsSideNavOpen] = useState(false);

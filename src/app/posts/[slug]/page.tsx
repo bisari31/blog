@@ -1,10 +1,11 @@
-import { sortedPosts } from 'lib/contentlayer';
-import { getMDXComponent } from 'next-contentlayer/hooks';
 import { format, parseISO } from 'date-fns';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
+import { getMDXComponent } from 'next-contentlayer/hooks';
 
+import { sortedPosts } from 'lib/contentlayer';
 import styles from './posts.module.scss';
+
 import PostNavigator from 'components/post/PostNavigator';
 import Utterances from 'components/comment/Utterances';
 import Keywords from 'components/post/Keywords';

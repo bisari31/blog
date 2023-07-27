@@ -1,6 +1,7 @@
-import styles from './keywords.module.scss';
 import Link from 'next/link';
 import cn from 'classnames/bind';
+
+import styles from './keywords.module.scss';
 
 interface Props {
   isKeywordsPage?: boolean;

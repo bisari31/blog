@@ -1,8 +1,8 @@
 import Link from 'next/link';
+import cn from 'classnames/bind';
 
 import styles from './nav.module.scss';
 import { SunIcon, MoonIcon, GithubIcon, SearchIcon } from 'assets';
-import cn from 'classnames/bind';
 
 interface Props {
   onToggle: (state: 'dark' | 'modal') => void;

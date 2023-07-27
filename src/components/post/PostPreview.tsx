@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { format, parseISO } from 'date-fns';
 
 import styles from './postPreview.module.scss';
+
 import Keywords from './Keywords';
 
 export default function PostPreview({ post }: { post: Post }) {

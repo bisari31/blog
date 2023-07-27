@@ -1,4 +1,5 @@
 import Link from 'next/link';
+
 import styles from './postNavigator.module.scss';
 import cn from 'classnames/bind';
 
