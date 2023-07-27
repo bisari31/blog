@@ -25,7 +25,7 @@ export default function Keywords({
         <Link
           href={keyword === 'All' ? '/' : { query: { keyword } }}
           key={keyword}
-          className={cx({ isActive: keyword === currentQuery })}
+          className={cx(keyword === currentQuery && 'isActive')}
         >
           {keyword}
         </Link>

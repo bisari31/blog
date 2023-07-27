@@ -1,7 +1,6 @@
 ---
 title: 가상 돔(Virtual DOM)이란 무엇인가요?
 date: 2023-07-26
-thumbnail:
 description: 면접에서 자주 물어보는 Virtual DOM에 대해 알아보자
 keywords:
   - rendering
@@ -18,7 +17,9 @@ Virtual DOM 이란 실제 DOM에 접근하여 조작하는 대신 이를 추상�
 마치 DOM 사본을 만드는 것과 비슷하다.
 
 <figure align="center">
-  <img src="https://github.com/bisari31/blog/assets/98396758/49d43ecc-64c3-4bad-88f4-cca9f8ddc705" />
+
+![what-is-dom-in-react2](https://github.com/bisari31/blog/assets/98396758/9f89a488-3873-4281-96d9-ab678f996d3f)
+
   <figcaption>https://www.javatpoint.com/what-is-dom-in-react</figcaption>
 </figure>
 
@@ -30,9 +31,8 @@ Virtual DOM 이란 실제 DOM에 접근하여 조작하는 대신 이를 추상�
 
 > 요소가 30개가 바뀌었다고 레이아웃을 30개씩 새로 하는 것이 아니라 모든 변화를 하나로 묶어 딱 한 번만 실행시킨다.
 
-연산 횟수를 줄이기 때문에 실제 DOM보다 효율적이다.
-Virtual DOM이 하는 것은 DOM fragment를 사용하여 하나로 묶어 적용한 다음
-DOM에 던져주는 과정에 불가하다.
+연산 횟수를 줄이기 때문에 실제 DOM보다 효율적이다. <br/>
+Virtual DOM이 하는 것은 DOM fragment를 사용하여 하나로 묶어 적용한 다음 DOM에 던져주는 과정에 불가하다.
 
 ### Virtual DOM은 무조건 빠르지 않다.
 

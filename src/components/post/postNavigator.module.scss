@@ -2,8 +2,7 @@
 @use '/src/styles/constant.scss';
 
 .wrapper {
-  margin-top: 300px;
-  margin-bottom: 150px;
+  margin: 150px 0;
   display: flex;
   justify-content: space-between;
   p {
@@ -32,10 +31,10 @@
     }
   }
 
-  &.isOnlyNextPost {
+  &.noPreviousPost {
     justify-content: flex-end;
   }
-  &.isOnlyPreviousPost {
+  &.noNextPost {
     justify-content: flex-start;
   }
   @include mixin.mobile {

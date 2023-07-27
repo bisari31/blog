@@ -41,12 +41,14 @@
       margin-top: 50px;
       font-weight: 600;
     }
+
     h4 {
       font-size: 1.2rem;
       line-height: 2rem;
       margin-top: 30px;
       font-weight: 600;
     }
+
     h5 {
       font-size: 1rem;
       line-height: 1.5rem;
@@ -121,6 +123,9 @@
 
     figure {
       padding: 30px 0;
+      p {
+        margin: 0;
+      }
       figcaption {
         color: var(--text-date);
         font-size: 14px;
@@ -143,5 +148,14 @@
 
   div > a {
     text-decoration: none;
+  }
+  :global {
+    .ref {
+      margin-top: 150px;
+    }
+
+    .utterances {
+      max-width: 100% !important;
+    }
   }
 }
