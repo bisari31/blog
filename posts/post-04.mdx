@@ -1,0 +1,124 @@
+---
+title: SPA와 MPA 그리고 CSR, SSR, SSG
+date: 2023-07-29
+description: React는 어떤 방식을 사용하고 Next.js는 어떤 방식을 사용할까
+keywords:
+  - Rendering
+---
+
+SSR과 CSR의 차이를 알기전에 웹 아키텍처인 MPA와 SPA에 대해 알아보자.
+
+## MPA (Multi Page Application)
+
+<div className="post_img">
+  ![MPA
+  Lifecylce](https://github.com/bisari31/blog/assets/98396758/966efd09-9912-4c27-a4b4-e4e311e02b59)
+  <a
+    href="https://learn.microsoft.com/en-us/archive/msdn-magazine/2013/november/asp-net-single-page-applications-build-modern-responsive-web-apps-with-asp-net"
+    target="_blank"
+  >
+    MPA Lifecylce (microsoft)
+  </a>
+</div>
+
+MPA는 여러 페이지로 구성된 웹 애플리케이션이다. 전통적인 방식이며 jsp, php 등이 MPA 방식을 사용한다. 페이지 이동 시 서버로부터 HTML 파일을 전달받아 다시 렌더링 한다. 이 때문에 새로고침(깜빡임) 발생한다. 그렇기 때문에 페이지를 로드하는데 오래 걸리고 새로고침으로 인해 스크롤 위치, 폼 양식, 포커스 등이 사라져 유저 경험에서도 좋지 않다.
+반면, MPA는 SPA에 비해 SEO에 유리하다. 그 이유는 여러 페이지로 구성되어 있기 때문에 각각 키워드에 맞춰 meta tag를 추가할 수 있기 때문이다.
+
+## SPA (Single Page Application)
+
+<div className="post_img">
+  ![SPA
+  Lifecylce](https://github.com/bisari31/blog/assets/98396758/10a10d4b-1bad-4765-9d61-180a67fdf5da)
+  <a
+    href="https://learn.microsoft.com/en-us/archive/msdn-magazine/2013/november/asp-net-single-page-applications-build-modern-responsive-web-apps-with-asp-net"
+    target="_blank"
+  >
+    SPA Lifecylce (microsoft)
+  </a>
+</div>
+
+SPA는 단일 페이지로 구성된 웹 애플리케이션이다. 비교적 최신(나온 지 20년이 지났지만..)의 기술이고 React, Vue, Angular가 등장하면서 주목받기 시작했다. SPA는 최초에 한번 HTML 파일을 전달받는다. 그 후 모든 동작들은 Ajax를 통해 부분 업데이트를 실행한다. 그렇기 때문에 MPA와 달리 새로고침이 일어나지 않는다는 것이 가장 큰 장점이다. 네이티브 앱에 가깝게 페이지 이동이 부드럽기 때문에 구글 맵, 넷플릭스 등 인터랙션이 많은 웹 애플리케이션에 주로 사용된다.
+
+하지만 단점도 존재한다. SPA는 자바스크립트로 페이지를 구성하기 때문에 자바스크립트를 읽지 못하는 크롤러 봇(Googlebot은 자바스크립트를 실행할 수 있다고는 하지만 느리다고 한다)은 페이지에 대한 정보를 읽을 수 없어 SEO에 취약하다. 또한 html 파일이 하나이기 때문에 meta tag를 추가하는데 어려움이 있다.
+
+### CSR (Client-side Rendering)
+
+<div className="post_img">
+  ![csr](https://github.com/bisari31/blog/assets/98396758/904906f9-f31e-4e61-a9d0-3c7a4c45a112)
+  <a href="https://www.reactpwa.com/docs/en/feature-ssr.html" target="_blank">
+    ReactPWA (CSR)
+  </a>
+</div>
+
+웹 페이지를 렌더링 하는 방식은 크게 3가지가 있다. 이 방식의 차이는 어느 쪽(side)에서 렌더링을 하는지에 대한 차이이다.<br/>
+그 중 CSR은 Client-side Rendering의 약자로 HTML 렌더링이 클라이언트(사용자의 브라우저)에서 실행되는 방식이다.
+사용자가 웹 사이트에 방문하면 브라우저는 서버에 HTML,CSS,Javascript 같은 리소스들을 요청한다.
+서버는 빈 뼈대의 html과 js를 건네주고 브라우저는 이 파일들을 파싱하여 렌더링한다.
+
+```html
+<html lang="ko">
+  <head>
+    ...
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="app.js"></script>
+  </body>
+</html>
+```
+
+브라우저는 위와 같은 html 파일을 전달받아 파싱 후 app.js파일을 파싱 하기 시작한다. 이 과정까지 클라이언트는 빈 화면을 보게 된다. SSR에 비해 TTV(Time To View: 사용자가 내용을 볼 수 있는 시점)가 길다. 또한 크롤러 봇은 빈 HTML 파일을 보기 때문에 SEO가 좋지 않다. CSR 방식이 주로 SPA에서 사용되며 모든 코드가 Javascript로 이루어져 있기 때문에 번들의 크기도 커 로딩이 오래 걸리는 단점이 존재한다.
+장점은 후속 로딩이 빠르다는 것이다. 이미 js 파일을 렌더링을 마쳤기 때문에 추가 부분적인 렌더링만 필요하기 때문에 후속 로딩이 빠르다. 클라이언트에서 렌더링을 하기 때문에 서버 자원을 아낄 수 있다.
+
+### SSR (Server-side Rendering)
+
+SSR은 Server-side Rendering의 약자로 HTML 렌더링을 서버에서 실행되는 방식이다. 서버는 이미 렌더링 된 HTML 파일을 브라우저에게 전달한다. 브라우저는 이미 렌더링 된 HTML 파일을 받기 때문에 사용자에게 웹 페이지를 빠르게 보여줄 수 있다. 하지만 아직 Javascript 파일이 렌더링 되기 전이라 사용자가 이벤트를 동작할 수 없다. 즉 TTV는 빠르지만 TTV 와 TTI(Time To Interact:인터랙션이 가능한 시간)의 간격이 크다는 단점이 있다.
+
+<div className="post_img">
+  ![ssr](https://github.com/bisari31/blog/assets/98396758/2232cbbc-284d-4b7d-a979-ec8f22902a8e)
+  <a href="https://www.reactpwa.com/docs/en/feature-ssr.html" target="_blank">
+    ReactPWA (SSR)
+  </a>
+</div>
+
+```html
+<html lang="ko">
+  <head>
+    ...
+  </head>
+  <body class="__className_572b85">
+    <header class="header_header__3o0p0">
+      <div class="header_wrapper__bDAMK">
+        <div class="header_innerWrapper__GGmug">
+          <div class="header_logo___eW3r"><a href="/">기술 블로그</a></div>
+          <div class="header_navWrapper__4SJU0">
+            <nav class="nav_wrapper__sTQaf">
+              <div class="nav_search__R_Sh_">
+                <button type="button">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="15"
+                    height="15"
+                    fill="none"
+                    viewBox="0 0 20 20"
+                  >
+             ...
+    </main>
+    <div id="portal"></div>
+    <script src="/_next/static/chunks/webpack.js" async=""></script>
+    <script src="/_next/static/chunks/main-app.js" async=""></script>
+  </body>
+</html>
+```
+
+SSR은 위 코드와 같은 완성된 HTML 파일을 전달받기 때문에 SEO에 유리하다.
+
+### SSG (Static-Site Generation)
+
+SSG는 정적 사이트 생성 (Static-Site Generation)의 약자로 사전 렌더링이라고도 한다.<br/>
+SSG는 SSR과 다르게 빌드 시점에 렌더링한다.
+빌드 시점에 정적 페이지를 한 번 렌더링을 하기 때문에 요청이 들어오면 만들어 놓은 HTML 문서를 응답해 준다.
+그렇기 때문에 응답 속도가 매우 빠르며 서버 부하가 적다.<br/>
+또한 <a href="http://localhost:3000/posts/cdn-content-delivery-network-%EC%9D%B4%EB%9E%80-" target="_blank">CDN</a> 에 캐싱 될 수 있어 요청에 응답 속도는 더욱 빠른 편이다.<br/>
+단점은 빌드 시점에 렌더링을 하기 때문에 번들의 규모가 커질수록 빌드 시간이 오래 걸린다.<br/>
+자주 업데이트되는 페이지라면 빌드를 다시 해줘야 하는 번거로움이 있다. 정적인 페이지(블로그 글)에 주로 사용되며 SEO에 유리하다.
