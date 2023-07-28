@@ -72,6 +72,7 @@ export default function page({
       style={{ width: '100%', height: 'auto' }}
     />
   );
+
   const components = {
     img: ResponsiveImage,
   };
