@@ -83,8 +83,8 @@ export default function page({
     (acc: PostsResult, cur, idx, src) => {
       if (cur.url === `/posts/${decodedSlug}`) {
         acc.currentPost = cur;
-        if (idx) acc.previousPost = src[idx - 1];
-        if (src.length - 1 > idx) acc.nextPost = src[idx + 1];
+        if (idx) acc.nextPost = src[idx - 1];
+        if (src.length - 1 > idx) acc.previousPost = src[idx + 1];
       }
       return acc;
     },
