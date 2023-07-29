@@ -1,6 +1,7 @@
-import styles from './keywords.module.scss';
 import Link from 'next/link';
 import cn from 'classnames/bind';
+
+import styles from './keywords.module.scss';
 
 interface Props {
   isKeywordsPage?: boolean;
@@ -25,7 +26,7 @@ export default function Keywords({
         <Link
           href={keyword === 'All' ? '/' : { query: { keyword } }}
           key={keyword}
-          className={cx({ isActive: keyword === currentQuery })}
+          className={cx(keyword === currentQuery && 'isActive')}
         >
           {keyword}
         </Link>

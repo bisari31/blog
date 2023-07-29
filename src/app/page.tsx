@@ -1,6 +1,7 @@
 import { sortedPosts, keywords } from 'lib/contentlayer';
-import Keywords from 'components/post/Keywords';
 import styles from './page.module.scss';
+
+import Keywords from 'components/post/Keywords';
 import PostPreview from 'components/post/PostPreview';
 
 export default function Home({

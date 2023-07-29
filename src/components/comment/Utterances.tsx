@@ -1,4 +1,7 @@
 'use client';
+
+import cn from 'classnames/bind';
+
 import styles from './utterances.module.scss';
 
 const THEME_LIST = [
@@ -6,13 +9,15 @@ const THEME_LIST = [
   { theme: 'github-light', name: 'light' },
 ];
 
+const cx = cn.bind(styles);
+
 export default function Utterances() {
   return (
     <>
       {THEME_LIST.map(({ theme, name }) => (
         <section
           key={theme}
-          className={`${styles.wrapper} ${styles[name]}`}
+          className={cx('wrapper', styles[name])}
           ref={(elem) => {
             if (!elem) {
               return;

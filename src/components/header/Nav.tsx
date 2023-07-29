@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import cn from 'classnames/bind';
 
 import styles from './nav.module.scss';
 import { SunIcon, MoonIcon, GithubIcon, SearchIcon } from 'assets';
@@ -9,9 +10,11 @@ interface Props {
   isTabletNav: boolean;
 }
 
+const cx = cn.bind(styles);
+
 export default function Nav({ isDarkMode, onToggle, isTabletNav }: Props) {
   return (
-    <nav className={`${styles.wrapper} ${isTabletNav && styles.isTabletNav} `}>
+    <nav className={cx('wrapper', { isTabletNav })}>
       <div className={styles.search}>
         <button type="button" onClick={() => onToggle('modal')}>
           <SearchIcon width={15} height={15} />

@@ -1,10 +1,11 @@
-import { sortedPosts } from 'lib/contentlayer';
-import { getMDXComponent } from 'next-contentlayer/hooks';
 import { format, parseISO } from 'date-fns';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
+import { getMDXComponent } from 'next-contentlayer/hooks';
 
+import { sortedPosts } from 'lib/contentlayer';
 import styles from './posts.module.scss';
+
 import PostNavigator from 'components/post/PostNavigator';
 import Utterances from 'components/comment/Utterances';
 import Keywords from 'components/post/Keywords';
@@ -71,6 +72,7 @@ export default function page({
       style={{ width: '100%', height: 'auto' }}
     />
   );
+
   const components = {
     img: ResponsiveImage,
   };
@@ -81,8 +83,8 @@ export default function page({
     (acc: PostsResult, cur, idx, src) => {
       if (cur.url === `/posts/${decodedSlug}`) {
         acc.currentPost = cur;
-        if (idx) acc.previousPost = src[idx - 1];
-        if (src.length - 1 > idx) acc.nextPost = src[idx + 1];
+        if (idx) acc.nextPost = src[idx - 1];
+        if (src.length - 1 > idx) acc.previousPost = src[idx + 1];
       }
       return acc;
     },
