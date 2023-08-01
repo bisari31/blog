@@ -12,6 +12,7 @@ const nextConfig = {
   images: {
     domains: ['github.com'],
   },
+  swcMinify: false,
 };
 
 module.exports = withContentlayer(nextConfig);
