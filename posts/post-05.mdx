@@ -1,0 +1,122 @@
+---
+title: 이벤트 버블링과 캡처링
+date: 2023-07-30
+description: 브라우저에서 이벤트는 어떻게 동작하며 이벤트 버블링과 캡처링, 위임에 대해 알아보자
+keywords:
+  - javascript
+  - event
+---
+
+브라우저는 특정 사건이 발생하면 감지하여 이벤트(event)를 발생(trigger) 시킨다. 이벤트가 발생됐을 때 실행할 함수를 이벤트 핸들러라고 하며 이벤트가 발생됐을 때 브라우저에게 핸들러 호출을 위임하는 것을 이벤트 핸들러 위임이라 한다. 사용자가 함수를 언제 호출할지 모르므로 브라우저에게 함수 호출을 위임할 수 있다.
+
+이벤트가 발생했을 때 DOM 요소 노드에서 발생된 이벤트는 DOM 트리를 타고 전파된다. 이를 이벤트 전파(Event Propagation)라 하는데 이벤트 전파 방향에 따라 단계를 구분한다.
+
+<div className="post_img">
+  ![Event
+  Propagation](https://github.com/bisari31/blog/assets/98396758/d420c9e6-65ed-4c7b-bb82-23c28a036d9e)
+  <a href="https://ehsankorhani.com/" target="_blank">
+    https://ehsankorhani.com/
+  </a>
+</div>
+
+## 버블링 단계 (Bubbling Phase)
+
+요소에서 이벤트가 발생하면 해당 요소의 이벤트 핸들러가 동작하고 부모 요소의 핸들러가 순차적으로 동작하게 된다. 이 흐름이 마치 물속 거품과 같다하여 이벤트 버블링이라고 부른다. `<p>` 태그를 클릭해도 순차적으로 `p` > `div` > `form` 이벤트 핸들러가 동작한다.
+
+<iframe
+  src="https://codesandbox.io/embed/post-05-3-xjjl4v?autoresize=1&expanddevtools=1&fontsize=14&hidenavigation=1&theme=dark"
+  style={{
+    width: '100%',
+    height: '400px',
+    border: '0',
+    borderRadius: '4px',
+    overflow: 'hidden',
+  }}
+  title="post-05[3]"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
+
+`e.stopPropagation()` 을 통해 이벤트 전파를 막을 수 있다. 단 버블링 단계에서만 전파를 막을 수 있다. 캡처링 단계는 막지 못한다. `<p>` 태그를 클릭 시 console에는 p만 찍힌다. 하지만 `<div>`를 클릭 시 전파되어 form 태그도 console에 찍히는 걸 확인할 수 있다.
+
+<iframe
+  src="https://codesandbox.io/embed/post-05-2-lgv7y5?autoresize=1&expanddevtools=1&fontsize=14&hidenavigation=1&theme=dark"
+  style={{
+    width: '100%',
+    height: '400px',
+    border: '0',
+    borderRadius: '4px',
+    overflow: 'hidden',
+  }}
+  title="post-05[2]"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
+
+또한 아래의 이벤트는 버블링 되지 않는다. 캡처링이나 대체 이벤트를 사용해야 한다.
+
+`focus` -> `focusin`<br/>
+`blur` -> `focusout`<br/>
+`mouseEnter` -> `mouseover`<br/>
+`mouseLeave` -> `mouseout`<br/>
+
+## 캡처링 단계 (Capturing Phase)
+
+캡처링은 버블링의 반대 개념이다. 하위 요소에서 이벤트가 발생했다면 상위 요소에서부터 순차적으로 이벤트가 실행된다. 캡처링 단계를 이용해야 하는 일이 흔지않기 때문에 알고만 있자. 캡처링을 사용하기 위해서는 자바스크립트에서는 `elem.addEventListener(..., {capture: true})` 또는 `elem.addEventListener(..., true)` 를 리액트에서는 `onClickCapture`를 사용하면 캡처링 단계에서 이벤트를 잡을 수 있다.
+
+<iframe
+  src="https://codesandbox.io/embed/post-05-3-xcdc6v?autoresize=1&expanddevtools=1&fontsize=14&hidenavigation=1&theme=dark"
+  style={{
+    width: '100%',
+    height: '400px',
+    border: '0',
+    borderRadius: '4px',
+    overflow: 'hidden',
+  }}
+  title="post-05[3]"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
+
+`<p>` 태그를 클릭했지만 console에는 `form` > `p` > `div` 가 실행되는 걸 볼 수 있다. 그 이유는 form 태그의 핸들러는 캡처링 단계에서 이벤트를 캐치하고 `p`와 `div` 태그는 버블링 단계에서 이벤트를 캐치하니 `form`부터 이벤트 핸들러가 실행되기 때문이다.
+
+## 이벤트 위임
+
+자바스크립트는 기본적으로 버블링 단계에서 이벤트를 캐치한다. 이 흐름을 이용하여 모든 요소에 이벤트를 등록하지 않고 상위 요소에 이벤트를 등록하여 이벤트를 캐치할 수 있다.
+만약 100개의 요소에 동일한 이벤트를 등록해야 한다면 성능 저하의 원인이 되며 유지 보수에도 좋지 않다. 이럴 때 이벤트 위임이 유용하다.
+
+<iframe
+  src="https://codesandbox.io/embed/angry-davinci-7r7zyd?autoresize=1&expanddevtools=1&fontsize=14&hidenavigation=1&theme=dark"
+  style={{
+    width: '100%',
+    height: '400px',
+    border: '0',
+    borderRadius: '4px',
+    overflow: 'hidden',
+  }}
+  title="angry-davinci-7r7zyd"
+  allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+  sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>
+
+상위 요소에 `onClick` 이벤트를 위임 후 하위 요소를 클릭해도 이벤트가 실행된다. 이벤트 위임 시 `currentTarget` 대신 `target` 프로퍼티를 사용해야 한다.
+
+`target` : 이벤트가 발생한 요소<br/>
+`currentTarget` : 이벤트 핸들러가 등록된 요소
+
+이벤트를 위임하지 않았다면 `target`과 `currentTarget` 은 동일하다.
+
+### `e.preventDefault()` 와 `e.stopPropagation()` 의 차이
+
+`stopPropagation`은 이벤트 전파를 막고
+`preventDefault`는 이벤트를 제외한 브라우저의 기본 기능(form submit, a 페이지 이동, checkbox 체크 등)을 막는다.
+
+<div className="post_ref">
+### 참고
+
+<p>모던 자바스크립트 Deep Dive</p>
+<a href="https://ko.javascript.info/bubbling-and-capturing" target="_blank">
+  https://ko.javascript.info/bubbling-and-capturing
+</a>
+
+</div>

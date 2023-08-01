@@ -1,4 +1,4 @@
-import { sortedPosts, keywords } from 'lib/contentlayer';
+import { sortedPosts, sortedUniqueKeywords } from 'lib/contentlayer';
 import styles from './page.module.scss';
 
 import Keywords from 'components/post/Keywords';
@@ -24,7 +24,7 @@ export default function Home({
         </h1>
       </div>
       <Keywords
-        keywords={keywords}
+        keywords={sortedUniqueKeywords}
         currentQuery={keyword || 'All'}
         isKeywordsPage
       />
