@@ -95,7 +95,7 @@
 
     pre {
       font-family: Consolas;
-      padding: 20px;
+      padding: 20px 0;
       border-radius: 6px;
       //border: 1px solid var(--code-border);
       background-color: var(--code);
@@ -109,6 +109,8 @@
       padding: 0;
       border-radius: 0px;
       border: none;
+      display: flex;
+      flex-direction: column;
     }
 
     em,
@@ -169,6 +171,19 @@
           font-size: inherit;
         }
       }
+    }
+    .line {
+      font-size: 0.8rem;
+      padding: 5px 20px;
+    }
+    .line.highlighted {
+      background: #393941;
+      border-left: 3px solid constant.$blue;
+    }
+    .line > .word {
+      padding: 5px;
+      border-radius: 5px;
+      background-color: #393941;
     }
 
     .utterances {
