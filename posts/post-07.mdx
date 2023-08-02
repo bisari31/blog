@@ -7,7 +7,7 @@ keywords:
 ---
 
 iterable(반복 가능한) 객체란 `for..of` 문을 사용할 수 있는 객체를 의미한다. 좀 더 정확히 표현하자면 이터러블이란 `Symbol.iterator` 메서드를 직접 구현하거나 프로토타입 체인을 통해 상속받은 객체를 말한다.
-배열과 문자열은 대표적인 이터러블이다.
+대표적인 이터러블은 배열이 있다. 문자열 또한 이터러블이다.
 
 ## Symbol.iterator
 
@@ -44,7 +44,7 @@ for (let num of range) {
 1. `for..of`호출 시 `Symbol.iterator`가 호출된다. `Symbol.iterator`는 `iterator` 객체를 반환한다.
 2. 이후 `for..of`는 반환된 `iterator` 객체만을 대상으로 동작하며 이때 다음 값도 정해진다.
 3. 반복마다 `next` 메서드가 호출된다.
-4. `done`이 `true`가 되면 반복문을 종료한다.
+4. `done` 프로퍼티가 `true`가 되면 반복문을 종료한다.
 
 ## 유사 배열 객체
 
@@ -74,7 +74,7 @@ for (const key of arrayLike) {
 `for..in`문은 객체의 프로토타입 체인 상에 존재하는 모든 프로퍼티 중에서 프로퍼티 어트리뷰트 `[[Enumerable]]` 값이 `true`인 프로퍼티를 열거한다.
 단, 키가 Symbol인 프로퍼티는 열거하지 않는다.
 
-`for..of`문은 내부적으로 `next()` 메서드를 호출하여 순회하며 객체의 value 값을 할당하여 `true`가 될 때까지 순회한다.
+`for..of`문은 내부적으로 `next()` 메서드를 호출하여 순회하며 객체의 value 값을 할당하여 `done`프로퍼티가 `true`가 될 때까지 순회한다.
 
 ### `Array.from()`
 
