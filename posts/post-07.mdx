@@ -63,7 +63,7 @@ for (let i = 0; i < arrayLike.length; i++) {
   // 유사 배열 객체는 배열처럼 index를 통해 객체에 접근할 수 있다.
 }
 
-// 유사 배열이 아니기 때문에 for..of 순회 불가
+// 유사 배열 객체는 이터러블이 아니기 때문에 for..of 순회 불가
 for (const key of arrayLike) {
   console.lang(key); // TypeError: Invalid attempt to iterate non-iterable instance.
 }
