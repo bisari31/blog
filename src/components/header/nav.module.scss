@@ -63,6 +63,8 @@ $margin: 25px;
   }
 
   .buttons {
+    width: 100%;
+    justify-content: flex-end;
     display: flex;
     align-items: center;
     * + * {
