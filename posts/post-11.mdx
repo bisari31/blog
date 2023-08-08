@@ -202,10 +202,6 @@ export default function PostList() {
 
 `createSlice`는 `aciton creator`와 `action type`을 자동으로 생성한다. `createAsyncThunk`로 인해 생성된 action type은 리듀서가 처리하지 못한다. 이때 `extraReducers`를 사용하면 처리할 수 있다.
 
-### extraReducers
-
-`createSlice`는 `aciton creator`와 `action type`을 자동으로 생성한다. `createAsyncThunk`로 인해 생성된 action type은 리듀서가 처리하지 못한다. 이때 `extraReducers`를 사용하면 처리할 수 있다.
-
 ```ts
 // features/postsSlice.ts
 const postsSlice = createSlice({
