@@ -23,7 +23,7 @@ $npm i @reduxjs/toolkit react-redux
 
 ## PostsReducer
 
-먼저, `features/postsSlice.ts`를 만들어 slice를 생성한다. 또한 `initialState`를 생성하여 dummy 데이터를 추가하였다. `reducers`는 비어있는 상태다.
+`features/postsSlice.ts`를 만들어 slice를 생성한다. 또한 `initialState`를 생성하여 dummy 데이터를 추가하였다. `reducers`는 비어있는 상태다.
 
 ```ts
 // features/postsSlice.ts
@@ -54,7 +54,7 @@ const postsSlice = createSlice({
 export default postsSlice.reducer;
 ```
 
-`app/store.ts`에서 `configureStore`를 이용해 store를 생성한 후에 `postsSlice`를 posts 리듀서에 추가한다. `useSelector`를 통해 `state.posts`로 접근이 가능하다
+`app/store.ts`에서 `configureStore`를 이용해 store를 생성한 후에 `postsSlice`를 posts 리듀서에 추가한다. `useSelector`를 통해 `state.posts`로 접근이 가능하다.
 
 ```ts
 // app/store.ts

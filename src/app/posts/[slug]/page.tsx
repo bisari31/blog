@@ -101,7 +101,7 @@ export default function page({
       <div className={styles.wrapper}>
         <div className={styles.header}>
           <time dateTime={currentPost.date}>
-            {format(parseISO(currentPost.date), 'LLLL d yyyy')}
+            {format(parseISO(currentPost.date), 'LLLL d, yyyy')}
           </time>
           <h1>{currentPost.title}</h1>
           <Keywords keywords={currentPost.keywords} />
