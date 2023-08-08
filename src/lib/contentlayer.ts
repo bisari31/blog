@@ -1,9 +1,9 @@
 import { allPosts } from 'contentlayer/generated';
 
 export const sortedPosts = allPosts.sort((a, b) => {
-  const pathA = +a._raw.flattenedPath.split('-')[1];
-  const pathB = +b._raw.flattenedPath.split('-')[1];
-  return pathB - pathA;
+  return b._raw.flattenedPath
+    .split('-')[1]
+    .localeCompare(a._raw.flattenedPath.split('-')[1]);
 });
 
 const getSortedUniqueKeywords = (posts: Post[]) => {
