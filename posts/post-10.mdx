@@ -1,0 +1,446 @@
+---
+title: Redux Toolkit 튜토리얼 (3)
+date: 2023-08-06
+description: 상태 관리 압도적 1위 Redux에 대해 알아보자
+keywords:
+  - redux
+  - 상태 관리
+---
+
+<div className="post_img">
+  ![redux-logo-landscape](https://github.com/bisari31/blog/assets/98396758/e2aae64f-fe1a-4b92-8588-9cad16c00e93)
+  <a href="https://ko.redux.js.org" target="_blank">
+    https://ko.redux.js.org
+  </a>
+</div>
+
+본격적으로 redux toolkit을 이용하여 간단한 sns 앱을 만들어보자.  
+redux와 redux toolkit을 먼저 설치한다. 코딩 환경은 React와 Typescript를 사용했다. 스타일링은 tailwind를 사용했다.
+
+```bash
+$npm i @reduxjs/toolkit react-redux
+```
+
+## PostsReducer
+
+먼저, `features/postsSlice.ts`를 만들어 slice를 생성한다. 또한 `initialState`를 생성하여 dummy 데이터를 추가하였다. `reducers`는 비어있는 상태다.
+
+```ts
+// features/postsSlice.ts
+import { createSlice } from '@reduxjs/toolkit';
+
+const initialState: Post[] = [
+  {
+    id: '1',
+    title:
+      'sunt aut facere repellat provident occaecati excepturi optio reprehenderit',
+    content:
+      'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"',
+  },
+  {
+    id: '2',
+    title: 'qui est esse',
+    content:
+      'est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla',
+  },
+];
+
+const postsSlice = createSlice({
+  name: 'posts',
+  initialState,
+  reducers: {},
+});
+
+export default postsSlice.reducer;
+```
+
+`app/store.ts`에서 `configureStore`를 이용해 store를 생성한 후에 `postsSlice`를 posts 리듀서에 추가한다. `useSelector`를 통해 `state.posts`로 접근이 가능하다
+
+```ts
+// app/store.ts
+import { configureStore } from '@reduxjs/toolkit';
+import postsSlice from 'features/postsSlice';
+
+export const store = configureStore({
+  reducer: { posts: postsSlice },
+});
+
+export type RootState = ReturnType<typeof store.getState>;
+
+export type AppDispatch = typeof store.dispatch;
+```
+
+이제 브라우저에서 `Redux DevTools Extension`을 통해 posts 상태를 확인할 수 있다.
+
+<div className="post_img">
+  ![캡처](https://github.com/bisari31/blog/assets/98396758/aed2382c-6566-4c93-b33a-e73ebd79f0bb)
+</div>
+
+지금까지 렌더링 화면은 다음과 같다.
+
+<div className="post_img">
+  ![캡처](https://github.com/bisari31/blog/assets/98396758/7dd36e16-4d77-4397-9251-9edd095831d2)
+</div>
+
+postsSlice에서 게시글 등록 리듀서 함수를 추가해야 한다. postAdded 함수는 state와 action 두 개의 파라미터를 받고 `action.payload`에는 post의 정보가 전달된다. `createSlice` 안에서 push를 사용하여 불변성을 지키지 않아도 되는 이유는 내부적으로 immer 라이브러리를 사용하여 안전하게 불변성을 지키기 때문이다.
+
+```ts {7-9, 13}
+// features/postsSlice.ts
+// 코드 생략
+const postsSlice = createSlice({
+  name: 'posts',
+  initialState,
+  reducers: {
+    postAdded(state, action: PayloadAction<Post>) {
+      state.push(action.payload);
+    },
+  },
+});
+
+export const { postAdded } = postsSlice.actions;
+```
+
+`postAdded` 액션을 export 하여 외부 컴포넌트에서 사용할 수 있게 한다. 이제 `PostForm` 컴포넌트로 돌아가 submit 함수에 디스패치 코드를 추가한다.
+
+### nanoid
+
+```tsx {2-3, 10-14}
+// 코드 생략
+import { nanoid } from '@reduxjs/toolkit';
+import { postAdded } from 'features/postsSlice';
+
+export default function PostForm() {
+  // 코드 생략
+
+  const handlePostSave = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (title && content) {
+      dispatch(postAdded({ id: nanoid(), title, content }));
+      setTitle('');
+      setContent('');
+    }
+  };
+  // 코드 생략
+}
+```
+
+데이터베이스에는 `id`값이 자동으로 추가되지만 현재는 로컬 상태이므로 `id` 값을 넣어주어야 한다. redux-toolkit의 nanoid는 유니크한 값을 생성하기 때문에 nanoid를 사용하여 `id`값을 추가하였다.
+
+<div className="post_img">
+  ![캡처](https://github.com/bisari31/blog/assets/98396758/a5b1cfe8-3d8b-45b2-b75a-407534a8b29f)
+</div>
+
+버튼을 클릭하면 `posts/postAdded` action이 정상적으로 dispatch 되는 걸 확인할 수 있다.
+
+`SinglePostPage` 컴포넌트를 생성하고 `useParams`를 이용해 postId를 받는다. `useAppSelector`에서 `Array.find`를 이용하여 postId와 일치하는 post를 전달받는다. `useAppSelector`는 반환하는 참조의 값이 변경될 때마다 컴포넌트가 다시 렌더링 된다.
+
+```tsx
+import { useParams } from 'react-router-dom';
+import { useAppSelector } from 'hooks';
+import PostItem from 'components/posts/PostItem';
+
+export default function SinglePostPage() {
+  const { postId } = useParams();
+
+  const post = useAppSelector((state) =>
+    state.posts.find((p) => p.id === postId),
+  );
+
+  if (!post) {
+    return (
+      <section>
+        <h2>Post not found!</h2>
+      </section>
+    );
+  }
+
+  return (
+    <section>
+      <PostItem post={post} />
+    </section>
+  );
+}
+```
+
+이제 `postUpdated` 리듀서 함수를 생성하자.
+
+```ts
+// features/postsSlice.ts
+const postsSlice = createSlice({
+  name: 'posts',
+  initialState,
+  reducers: {
+    postAdded(state, action: PayloadAction<Post>) {
+      state.push(action.payload);
+    },
+    postUpdated(state, action: PayloadAction<Post>) {
+      const { content, id, title } = action.payload;
+      const existingPost = state.find((post) => post.id === id);
+      if (existingPost) {
+        existingPost.title = title;
+        existingPost.content = content;
+      }
+    },
+  },
+});
+```
+
+`action.payload`에서 post 정보를 받아와 일치하는 포스트를 찾아 수정한다.
+
+### prepare
+
+현재 `PostForm` 컴포넌트에서는 submit 하기 전에 nanoid를 이용하여 id를 생성하고 `postAdded` 액션을 dispatch 한다. 만약 여러 개의 다른 컴포넌트에서도 동일한 액션을 dispatch 하거나 payload의 로직이 복잡하다면 반복되는 코드의 양이 많을 것이다. `prepare`를 이용하면 이러한 문제를 해결할 수 있다.
+
+직접 `createAction`을 이용하면 payload 로직을 직접 구현이 가능하지만 redux toolkit의 `createSlice`는 자동으로 action creator를 생성하므로 `prepare`를 이용하여 해결해야 한다.
+
+```js
+function postAdded(title, content) {
+  const id = nanoid();
+  return {
+    type: 'posts/postAdded',
+    payload: { id, title, content },
+  };
+}
+```
+
+> 액션에 고유 id 또는 임의의 값을 포함해야 하는 경우 항상 먼저 생성하여 액션 객체에 넣어야 한다. 리듀서는 결과를 예측할 수 없으므로 절대로 임의의 값을 계산해선 안된다.
+
+```ts {5-18}
+const postsSlice = createSlice({
+  name: 'posts',
+  initialState,
+  reducers: {
+    postAdded: {
+      reducer(state, action: PayloadAction<Post>) {
+        state.push(action.payload);
+      },
+      prepare(title, content) {
+        return {
+          payload: {
+            id: nanoid(),
+            title,
+            content,
+          },
+        };
+      },
+    },
+    // 코드 생략
+  },
+});
+```
+
+`prepare`를 사용하면 store에 `action.payload`가 전달되기 전에(미들웨어와 같은) 추가 작업을 진행할 수 있다.
+
+```tsx
+// components/posts/PostForm.tsx
+const handlePostSave = (e: React.FormEvent) => {
+  // 코드생략
+  dispatch(postAdded(title, content));
+  // 코드생략
+};
+```
+
+이제 `postAdded` 액션 함수는 2개의 인수를 받는다.
+
+### UsersReducer
+
+usersSlice를 생성 후 store에 추가한다.
+
+```ts
+// features/usersSlice.ts
+import { createSlice } from '@reduxjs/toolkit';
+
+const initialState: User[] = [
+  {
+    id: '1',
+    name: 'Leanne Graham',
+  },
+  {
+    id: '2',
+    name: 'Ervin Howell',
+  },
+  {
+    id: '3',
+    name: 'Clementine Bauch',
+  },
+];
+
+const usersSlice = createSlice({
+  name: 'users',
+  initialState,
+  reducers: {},
+});
+
+export default usersSlice.reducer;
+```
+
+```ts
+// app/store.ts
+import { configureStore } from '@reduxjs/toolkit';
+import postsSlice from 'features/postsSlice';
+import usersSlice from 'features/usersSlice';
+
+export const store = configureStore({
+  reducer: { posts: postsSlice, users: usersSlice },
+});
+```
+
+store에 user state가 추가되었으므로 포스트를 등록할 때 유저를 선택할 수 있도록 `postAdded` 리듀서에 userId를 추가시킨다. `PostForm` 컴포넌트에도 userId를 선택할 수 있는 양식을 추가한다. 추가로 post 작성일을 확인하기 위해 prepare 함수에 date 코드를 추가 작성한다.
+
+```ts {9,13,16}
+const postsSlice = createSlice({
+  name: 'posts',
+  initialState,
+  reducers: {
+    postAdded: {
+      reducer(state, action: PayloadAction<Post>) {
+        state.push(action.payload);
+      },
+      prepare(title, content, userId) {
+        return {
+          payload: {
+            id: nanoid(),
+            date: new Date().toISOString(),
+            title,
+            content,
+            userId,
+          },
+        };
+      },
+    },
+    // 코드 생략
+  },
+});
+```
+
+사용자가 포스트에 이모티콘을 추가할 수 있도록 `ReactionButtons` 컴포넌트를 만든다. reactionEmoji 객체는 키와 이모지로 구성되어 있는데 `Object.entries` 메서드를 이용하여 배열로 변경하고 `map` 반복문을 돌려 button을 생성한다. 버튼을 클릭하면 `reactionAdded` 액션을 dispatch 하게 되는데 이때 해당 post를 찾기 위해 id 값과 emoji count 증가를 위해 emoji name을 넘겨준다.
+
+```tsx
+import { reactionAdded } from 'features/postsSlice';
+import { useAppDispatch } from 'hooks';
+
+const reactionEmoji = {
+  thumbsUp: '👍',
+  hooray: '🎉',
+  heart: '❤️',
+  rocket: '🚀',
+  eyes: '👀',
+};
+
+export default function ReactionButtons({ post }: { post: Post }) {
+  const dispatch = useAppDispatch();
+
+  const handleReactionAdd = (name: string) => {
+    dispatch(reactionAdded({ id: post.id, key: name }));
+  };
+
+  return (
+    <div className="flex gap-x-2 mt-2">
+      {Object.entries(reactionEmoji).map(([name, emoji]) => (
+        <button
+          onClick={() => handleReactionAdd(name)}
+          className="border p-1 rounded"
+          type="button"
+          key={name}
+        >
+          {emoji} {post.reactions[name as keyof typeof reactionEmoji]}
+        </button>
+      ))}
+    </div>
+  );
+}
+```
+
+마지막으로 `reactions` 상수를 추가하여 dummy data의 값과 prepare 함수에 각각 추가한다. `reactionAdded` 함수를 만들어 payload는 id와 key를 받고 해당 post를 찾아 값을 변경하도록 코드를 작성한다.
+
+```ts {2-8,19,28,48,53-59}
+// features/postsSlice.ts
+const reactions = {
+  eyes: 0,
+  heart: 0,
+  hooray: 0,
+  rocket: 0,
+  thumbsUp: 0,
+};
+
+const initialState: Post[] = [
+  {
+    id: '1',
+    title:
+      'sunt aut facere repellat provident occaecati excepturi optio reprehenderit',
+    content:
+      'quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"',
+    userId: '1',
+    date: sub(new Date(), { minutes: 10 }).toISOString(),
+    reactions,
+  },
+  {
+    id: '2',
+    title: 'qui est esse',
+    content:
+      'est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla',
+    userId: '2',
+    date: sub(new Date(), { minutes: 5 }).toISOString(),
+    reactions,
+  },
+];
+
+const postsSlice = createSlice({
+  name: 'posts',
+  initialState,
+  reducers: {
+    postAdded: {
+      reducer(state, action: PayloadAction<Post>) {
+        state.push(action.payload);
+      },
+      prepare(title, content, userId) {
+        return {
+          payload: {
+            id: nanoid(),
+            date: new Date().toISOString(),
+            title,
+            content,
+            userId,
+            reactions,
+          },
+        };
+      },
+    },
+    reactionAdded(state, action: PayloadAction<{ id: string; key: string }>) {
+      const { id, key } = action.payload;
+      const existingPost = state.find((post) => post.id === id);
+      if (existingPost) {
+        existingPost.reactions[key as keyof typeof reactions] += 1;
+      }
+    },
+    // 코드 생략
+  },
+});
+```
+
+<br />
+<br />
+<br />
+<br />
+<div className="post_img">
+  ![GIF 2023-08-08 오후
+  10-37-18](https://github.com/bisari31/blog/assets/98396758/3d7360a7-eaef-4be9-bce2-1a2bd33510ee)
+</div>
+
+<div className="post_ref">
+### 참고
+
+<a
+  href="https://ko.redux.js.org/tutorials/essentials/part-3-data-flow/"
+  target="_blank"
+>
+  https://ko.redux.js.org/tutorials/essentials/part-3-data-flow/
+</a>
+<a
+  href="https://ko.redux.js.org/tutorials/essentials/part-4-using-data"
+  target="_blank"
+>
+  https://ko.redux.js.org/tutorials/essentials/part-4-using-data
+</a>
+
+</div>
