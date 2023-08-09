@@ -53,18 +53,18 @@ thunk를 직접 작성한다면 코드는 위와 같다. 하지만 redux-toolkit
 <br />
 비동기 thunk 코드 작성을 위해 기존 dummy 데이터를 json-server로 이동시킨다.
 
-```bash
-$npm i json-server
+```html
+npm i json-server
 ```
 
 ### 비동기 요청 로딩 상태
 
 로딩 상태는 크게 4가지로 볼 수 있다.
 
-1. 요청이 시작되지 않음
-2. 요청이 진행 중
-3. 요청 성공
-4. 요청 실패
+- 요청이 시작되지 않음
+- 요청이 진행 중
+- 요청 성공
+- 요청 실패
 
 ```ts
 {

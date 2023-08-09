@@ -55,10 +55,10 @@ keywords:
 
 또한 아래의 이벤트는 버블링 되지 않는다. 캡처링이나 대체 이벤트를 사용해야 한다.
 
-`focus` -> `focusin`<br/>
-`blur` -> `focusout`<br/>
-`mouseEnter` -> `mouseover`<br/>
-`mouseLeave` -> `mouseout`<br/>
+- `focus` -> `focusin`<br/>
+- `blur` -> `focusout`<br/>
+- `mouseEnter` -> `mouseover`<br/>
+- `mouseLeave` -> `mouseout`<br/>
 
 ## 캡처링 단계 (Capturing Phase)
 
@@ -101,8 +101,8 @@ keywords:
 
 상위 요소에 `onClick` 이벤트를 위임 후 하위 요소를 클릭해도 이벤트가 실행된다. 이벤트 위임 시 `currentTarget` 대신 `target` 프로퍼티를 사용해야 한다.
 
-`target` : 이벤트가 발생한 요소<br/>
-`currentTarget` : 이벤트 핸들러가 등록된 요소
+- `target` : 이벤트가 발생한 요소<br/>
+- `currentTarget` : 이벤트 핸들러가 등록된 요소
 
 이벤트를 위임하지 않았다면 `target`과 `currentTarget` 은 동일하다.
 
