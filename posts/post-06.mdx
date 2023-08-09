@@ -17,9 +17,9 @@ next.js 13에서 블로그 글을 포스팅 후 프로덕션 모드로 테스트
   ![캡처1](https://github.com/bisari31/blog/assets/98396758/388641a6-a607-44e6-948e-4ccebdc46a5c)
 </div>
 
-`Uncaught Error: Minified React error #423; visit https://reactjs.org/docs/error-decoder.html?invariant=423 for the full message or use the non-minified dev environment for full errors and additional helpful warnings.`
+> Uncaught Error: Minified React error #423; visit https://reactjs.org/docs/error-decoder.html?invariant=423 for the full message or use the non-minified dev environment for full errors and additional helpful warnings.
 
-`VM418:1 Uncaught (in promise) SyntaxError: Unexpected token '해', ..."0 \\uB300\해 \\uC54C\"... is not valid JSON`
+> VM418:1 Uncaught (in promise) SyntaxError: Unexpected token '해', ..."0 \\uB300\해 \\uC54C\"... is not valid JSON
 
 렌더링 과정에서 hydrate 오류가 발생한 것 같은데 막막했다. 어떤 <a href="https://yiyb-blog.vercel.app/posts/nextjs-contentlayer-blog" target="_blank">블로그</a>에서 원인을 알 수 있었는데, 마크다운 내용에 한글만 있어 발생하는 에러였다.
 
