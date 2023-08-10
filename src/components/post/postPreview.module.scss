@@ -43,6 +43,11 @@
     margin: 20px 0;
   }
   span {
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
     color: var(--text-des);
   }
 }
