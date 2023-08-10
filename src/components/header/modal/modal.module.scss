@@ -81,8 +81,6 @@
     padding: 1rem;
     overflow-y: scroll;
     div {
-      font-weight: 300;
-      color: var(--search-text);
       svg {
         min-width: 20px;
         path {
@@ -90,6 +88,15 @@
         }
         margin-right: 10px;
       }
+      p {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+      }
+      font-weight: 300;
+      color: var(--search-text);
       font-size: 14px;
       padding: 0 0.5em;
       border-radius: 10px;

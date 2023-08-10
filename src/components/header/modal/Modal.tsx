@@ -79,7 +79,7 @@ export default function SearchModal({
               onClick={() => handleNavitation(post.url)}
             >
               <DocumentIcon width={20} height={20} />
-              {post.title}
+              <p>{post.title}</p>
             </div>
           ))}
           {!filteredPosts.length && (
