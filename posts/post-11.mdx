@@ -14,7 +14,7 @@ keywords:
   </a>
 </div>
 
-비동기 로직은 스토어 외부에서 발생해야 한다. 스토어 안에서 비동기 코드를 작성하기 위해서는 middleware를 사용해야 하는데 redux-toolkit의 `configureStore`는 기본적으로 `thunk` middleware를 자동으로 설정한다. redux는 비동기 로직을 작성할 때 `thunk`를 사용하는 것을 권장한다고 한다.
+비동기 로직은 스토어 외부에서 발생해야 한다. 스토어 안에서 비동기 코드를 작성하기 위해서는 미들웨어를 사용해야 하는데 redux toolkit의 `configureStore`는 기본적으로 `thunk` 미들웨어를 자동으로 설정한다. 리덕스는 비동기 로직을 작성할 때 `thunk`를 사용하는 것을 권장한다고 한다.
 
 <div className="post_img">
   ![ReduxAsyncDataFlowDiagram-d97ff38a0f4da0f327163170ccc13e80](https://github.com/bisari31/blog/assets/98396758/af5685bf-018c-47a8-8865-99bd444f589d)
@@ -48,10 +48,10 @@ const fetchIssuesCount = (org, repo) => async (dispatch) => {
 };
 ```
 
-thunk를 직접 작성한다면 코드는 위와 같다. 하지만 redux-toolkit의 `createAsyncThunk`는 action type과 creator를 생성하고 액션을 자동으로 dispatch 하는 thunk를 생성하여 추상화시킨다. 또한 비동기 호출을 실행하고 data와 함께 promise를 반환하는 콜백 함수를 제공한다.
+thunk를 직접 작성한다면 코드는 위와 같다. 하지만 redux toolkit의 `createAsyncThunk`는 action type과 creator를 생성하고 액션을 자동으로 디스패치 하는 thunk를 생성하여 추상화시킨다. 또한 비동기 호출을 실행하고 데이터와 함께 프로미스를 반환하는 콜백 함수를 제공한다.
 
 <br />
-비동기 thunk 코드 작성을 위해 기존 dummy 데이터를 json-server로 이동시킨다.
+비동기 thunk 코드 작성을 위해 기존 더미 데이터를 json-server로 이동시킨다.
 
 ```html
 npm i json-server
@@ -143,7 +143,7 @@ export default postsSlice.reducer;
 ### createAsyncThunk
 
 redux toolkit의 `createAsyncThunk` API는 start/success/failure 작업을 자동으로 전송하는 thunk를 생성한다.  
-`createAsyncThunk`를 사용하여 `json-server`를 통해 가상의 서버에 dummy posts를 요청한다.
+`createAsyncThunk`를 사용하여 `json-server`에 posts를 요청한다.
 
 ```ts {3-6}
 // features/postsSlice.ts
@@ -160,9 +160,9 @@ const postsSlice = createSlice({
 `createAsyncThunk`는 두 개의 파라미터를 받는다.
 
 1. action type
-2. 데이터가 포함된 promise 또는 rejected된 promise를 리턴하는 payload creator 콜백 함수
+2. 데이터가 포함된 프로미스 또는 rejected된 프로미스를 리턴하는 payload creator 콜백 함수
 
-payload creator는 일반적으로 ajax 호출을 수행하며 promise를 반환한다.  
+payload creator는 일반적으로 ajax 호출을 수행하며 프로미스를 반환한다.  
 `PostList`컴포넌트에서 `fetchPosts` 함수를 이용하여 data를 가져오자. 다른 dispatch 함수와 사용법은 같다.
 
 ```tsx
@@ -227,9 +227,9 @@ const postsSlice = createSlice({
 });
 ```
 
-`extraReducers`는 builder 매개변수를 받는다. builder 객체는 `addCase`를 통해 각각의 action을 처리할 수 있다.
+`extraReducers`는 builder 매개변수를 받는다. builder 객체는 `addCase`를 통해 각각의 액션을 처리할 수 있다.
 
-usersSlice 또한 initialState 값을 초기화 시킨 후 기존 데이터를 db.json으로 옮긴다. 그 후 `createAsyncThunk`를 사용하여 `fetchUsers` thunk를 추가한다. usersSlice의 상태는 중복적인 데이터 fetching을 막기 위해 `status` 대신 `isSuccess` 하나만 추가했다.
+usersSlice 또한 initialState 값을 초기화 시킨 후 기존 데이터를 db.json으로 옮긴다. 그 후 `createAsyncThunk`를 사용하여 `fetchUsers` thunk를 추가한다. usersSlice의 상태는 중복적인 데이터 패칭을 막기 위해 `status` 대신 `isSuccess` 하나만 추가했다.
 
 ```ts
 // features/usersSlice.ts
@@ -274,7 +274,7 @@ useEffect(() => {
 // 코드 생략
 ```
 
-지금 게시글을 올리면 server에 추가되지 않고 내부 상태에만 추가된다. `addNewPost` thunk를 생성하여 server에 POST 요청을 해야 한다. body에 id를 추가하지 않은 이유는 서버에서는 고유 id를 생성하기 때문이다.
+지금 게시글을 올리면 서버에 추가되지 않고 내부 상태에만 추가된다. `addNewPost` thunk를 생성하여 서버에 POST 요청을 해야 한다. body에 id를 추가하지 않은 이유는 서버에서는 고유 id를 생성하기 때문이다.
 
 ```ts {3-16,26-31}
 // 코드 생략
@@ -316,7 +316,7 @@ export const { postUpdated, reactionAdded } = postsSlice.actions;
 export default postsSlice.reducer;
 ```
 
-`addNewPost` thunk를 전송한다. `extraReducers`를 통해 로딩 상태를 처리하지 않고 `useState`를 이용해 로딩 상태를 처리했다. `addRequestStatus`가 false 일 때는 button의 `disabled`를 활성화시켜 로딩 중임을 나타냈다. 로딩 상태가 눈에 보이기 위해 delay를 2초 적용했다.
+`addNewPost` thunk를 전송한다. `extraReducers`를 통해 로딩 상태를 처리하지 않고 `useState`를 이용해 로딩 상태를 처리했다. `addRequestStatus`가 false 일 때는 버튼의 `disabled`를 활성화시켜 로딩 중임을 나타냈다. 로딩 상태가 눈에 보이기 위해 딜레이를 2초 적용했다.
 
 ```tsx {11-17, 5}
 // components/posts/PostForm.tsx

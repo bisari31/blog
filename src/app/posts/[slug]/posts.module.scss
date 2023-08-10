@@ -53,13 +53,9 @@
       margin-top: 30px;
     }
     ul {
-      list-style: disc;
       margin-top: 20px;
       li {
         padding-left: 1.5rem;
-      }
-      li::marker {
-        content: '';
       }
       li::before {
         position: absolute;
@@ -79,12 +75,14 @@
       margin-top: 20px;
     }
     li {
+      line-height: 1.8rem;
       position: relative;
       font-size: 1rem;
       margin-top: 10px;
     }
 
     a {
+      text-decoration: none;
       color: constant.$blue;
       transition: 0.2s ease;
       p {
@@ -140,9 +138,6 @@
     }
   }
 
-  div > a {
-    text-decoration: none;
-  }
   :global {
     .post_ref {
       margin-top: 150px;

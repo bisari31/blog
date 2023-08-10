@@ -23,7 +23,7 @@ npm i @reduxjs/toolkit react-redux
 
 ## PostsReducer
 
-`features/postsSlice.ts`를 만들어 slice를 생성한다. 또한 `initialState`를 생성하여 dummy 데이터를 추가하였다. `reducers`는 비어있는 상태다.
+`features/postsSlice.ts`를 만들어 slice를 생성한다. 또한 `initialState`를 생성하여 더미 데이터를 추가하였다. `reducers`는 비어있는 상태다.
 
 ```ts
 // features/postsSlice.ts
@@ -54,7 +54,7 @@ const postsSlice = createSlice({
 export default postsSlice.reducer;
 ```
 
-`app/store.ts`에서 `configureStore`를 이용해 store를 생성한 후에 `postsSlice`를 posts 리듀서에 추가한다. `useSelector`를 통해 `state.posts`로 접근이 가능하다.
+`app/store.ts`에서 `configureStore`를 이용해 스토어를 생성한 후에 `postsSlice`를 posts 리듀서에 추가한다. `useSelector`를 통해 `state.posts`로 접근이 가능하다.
 
 ```ts
 // app/store.ts
@@ -100,7 +100,7 @@ const postsSlice = createSlice({
 export const { postAdded } = postsSlice.actions;
 ```
 
-`postAdded` 액션을 export 하여 외부 컴포넌트에서 사용할 수 있게 한다. 이제 `PostForm` 컴포넌트로 돌아가 submit 함수에 디스패치 코드를 추가한다.
+`postAdded` 액션을 export 하여 외부 컴포넌트에서 사용할 수 있게 한다. 이제 `PostForm` 컴포넌트로 돌아가 이벤트 핸들러에 postAdded 액션을 디스패치하는 코드를 추가시킨다.
 
 ### nanoid
 
@@ -124,13 +124,13 @@ export default function PostForm() {
 }
 ```
 
-데이터베이스에는 `id`값이 자동으로 추가되지만 현재는 로컬 상태이므로 `id` 값을 넣어주어야 한다. redux-toolkit의 nanoid는 유니크한 값을 생성하기 때문에 nanoid를 사용하여 `id`값을 추가하였다.
+데이터베이스에는 `id`값이 자동으로 추가되지만 현재는 로컬 상태이므로 `id` 값을 넣어주어야 한다. redux toolkit의 nanoid는 유니크한 값을 생성하기 때문에 nanoid를 사용하여 `id`값을 추가하였다.
 
 <div className="post_img">
   ![캡처](https://github.com/bisari31/blog/assets/98396758/a5b1cfe8-3d8b-45b2-b75a-407534a8b29f)
 </div>
 
-버튼을 클릭하면 `posts/postAdded` action이 정상적으로 dispatch 되는 걸 확인할 수 있다.
+버튼을 클릭하면 `posts/postAdded` 액션이 정상적으로 디스패치되는 걸 확인할 수 있다.
 
 `SinglePostPage` 컴포넌트를 생성하고 `useParams`를 이용해 postId를 받는다. `useAppSelector`에서 `Array.find`를 이용하여 postId와 일치하는 post를 전달받는다. `useAppSelector`는 반환하는 참조의 값이 변경될 때마다 컴포넌트가 다시 렌더링 된다.
 
@@ -189,7 +189,7 @@ const postsSlice = createSlice({
 
 ### prepare
 
-현재 `PostForm` 컴포넌트에서는 submit 하기 전에 nanoid를 이용하여 id를 생성하고 `postAdded` 액션을 dispatch 한다. 만약 여러 개의 다른 컴포넌트에서도 동일한 액션을 dispatch 하거나 payload의 로직이 복잡하다면 반복되는 코드의 양이 많을 것이다. `prepare`를 이용하면 이러한 문제를 해결할 수 있다.
+현재 `PostForm` 컴포넌트에서는 디스패칭하기 전에 nanoid를 이용하여 id를 생성하고 `postAdded` 액션을 디스패치한다. 만약 여러 개의 다른 컴포넌트에서도 동일한 액션을 디스패치하거나 payload의 로직이 복잡하다면 반복되는 코드의 양이 많을 것이다. `prepare`를 이용하면 이러한 문제를 해결할 수 있다.
 
 직접 `createAction`을 이용하면 payload 로직을 직접 구현이 가능하지만 redux toolkit의 `createSlice`는 자동으로 action creator를 생성하므로 `prepare`를 이용하여 해결해야 한다.
 
@@ -244,7 +244,7 @@ const handlePostSave = (e: React.FormEvent) => {
 
 ### UsersReducer
 
-usersSlice를 생성 후 store에 추가한다.
+usersSlice를 생성 후 스토어에 추가한다.
 
 ```ts
 // features/usersSlice.ts
@@ -285,7 +285,7 @@ export const store = configureStore({
 });
 ```
 
-store에 user state가 추가되었으므로 포스트를 등록할 때 유저를 선택할 수 있도록 `postAdded` 리듀서에 userId를 추가시킨다. `PostForm` 컴포넌트에도 userId를 선택할 수 있는 양식을 추가한다. 추가로 post 작성일을 확인하기 위해 prepare 함수에 date 코드를 추가 작성한다.
+스토어에 유저 상태가 추가되었으므로 포스트를 등록할 때 유저를 선택할 수 있도록 `postAdded` 리듀서에 userId를 추가시킨다. `PostForm` 컴포넌트에도 userId를 선택할 수 있는 양식을 추가한다. 추가로 포스트 작성일을 확인하기 위해 prepare 함수에 date 코드를 추가 작성한다.
 
 ```ts {9,13,16}
 const postsSlice = createSlice({
@@ -313,7 +313,7 @@ const postsSlice = createSlice({
 });
 ```
 
-사용자가 포스트에 이모티콘을 추가할 수 있도록 `ReactionButtons` 컴포넌트를 만든다. reactionEmoji 객체는 키와 이모지로 구성되어 있는데 `Object.entries` 메서드를 이용하여 배열로 변경하고 `map` 반복문을 돌려 button을 생성한다. 버튼을 클릭하면 `reactionAdded` 액션을 dispatch 하게 되는데 이때 해당 post를 찾기 위해 id 값과 emoji count 증가를 위해 emoji name을 넘겨준다.
+사용자가 포스트에 이모티콘을 추가할 수 있도록 `ReactionButtons` 컴포넌트를 만든다. reactionEmoji 객체는 키와 이모지로 구성되어 있는데 `Object.entries` 메서드를 이용하여 배열로 변경하고 `map` 반복문을 돌려 button을 생성한다. 버튼을 클릭하면 `reactionAdded` 액션을 디스패치하게 되는데 이때 해당 post를 찾기 위해 id 값과 emoji count 증가를 위해 emoji name을 넘겨준다.
 
 ```tsx
 import { reactionAdded } from 'features/postsSlice';
@@ -351,7 +351,7 @@ export default function ReactionButtons({ post }: { post: Post }) {
 }
 ```
 
-마지막으로 `reactions` 상수를 추가하여 dummy data의 값과 prepare 함수에 각각 추가한다. `reactionAdded` 함수를 만들어 payload는 id와 key를 받고 해당 post를 찾아 값을 변경하도록 코드를 작성한다.
+마지막으로 `reactions` 상수를 추가하여 더미 데이터의 값과 prepare 함수에 각각 추가한다. `reactionAdded` 함수를 만들어 payload는 id와 key를 받고 해당 post를 찾아 값을 변경하도록 코드를 작성한다.
 
 ```ts {2-8,19,28,48,53-59}
 // features/postsSlice.ts

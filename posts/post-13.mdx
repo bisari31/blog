@@ -1,0 +1,90 @@
+---
+title: css로 텍스트 생략(...)하기
+date: 2023-08-10
+description: 현재 블로그의 검색 창을 모바일에서 확인해보면 글자 수가 일정 길이 이상일 때 영역을 벗어나 다른 리스트들을 침범하고 있다. 자바스크립트 코드로 해결할 수 있지만 css에서도 속성을 제공하기 때문에 굳이 자바스크립트를 사용할 이유가 없다.(css로 문제를 해결할 수 있다면 성능 측면에서 이점을 가져갈 수 있다.) css가 제공하는 속성에 대해 알아보자.
+keywords:
+  - css
+---
+
+현재 블로그의 검색 창을 모바일에서 확인해 보면 글자 수가 일정 길이 이상일 때 영역을 벗어나 다른 리스트들을 침범하고 있다. 자바스크립트 코드로 해결할 수 있지만 css에서도 속성을 제공하기 때문에 굳이 자바스크립트를 사용할 이유가 없다.(css로 문제를 해결할 수 있다면 성능 측면에서 이점을 가져갈 수 있다.)
+
+<div className="post_img">
+  ![search
+  modal](https://github.com/bisari31/blog/assets/98396758/ffa5b692-1688-45b6-9693-54bcd61fd8b8)
+</div>
+
+css를 사용해서 문자열을 줄이기 위해서는 display 속성 값에 따라 약간의 코드가 추가된다.  
+block 요소는 기본적으로 부모의 너비를 상속받기 때문에 추가 속성이 필요 없다. 하지만 inline 요소는 `width` 값을 변경할 수 없고, 콘텐츠의 크기만큼 값을 가지므로 `inline-block`으로 변경 후 `width:100%`를 통해 부모 너비를 상속받아야 한다.
+
+아래 예제는 `<div>`태그 안에 `<h2>`와 `<span>`태그가 있다.
+
+<div className="post_img">
+  ![캡처](https://github.com/bisari31/blog/assets/98396758/a2f73b47-8796-4801-8515-b285ea693b0a)
+</div>
+
+```jsx
+<div className="content">
+  <h2>qui est esse</h2>
+  <span>
+    vest rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea
+    dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut
+    reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla
+  </span>
+</div>
+```
+
+`<span>` 태그의 텍스트를 한 줄로 변경하려면 css 속성은 다음과 같다.
+
+```css
+span {
+  display: inline-block; /* inline 요소이기 때문에 width 상속을 위해 inline-block으로 변경 */
+  width: 100%; /* 부모 너비 상속 */
+  white-space: nowrap; /* 자동 줄바꿈 해제 */
+  overflow: hidden; /* 영역 밖 콘텐츠 숨김 */
+  text-overflow: ellipsis; /* 숨겨진 콘텐츠 생략(...) 표기 */
+}
+```
+
+*위 속성들을 정리하면 부모의 너비를 상속받아 콘텐츠를 한 줄로 표기하고 너비를 벗어난 콘텐츠는 보이지 않게 하며 생략(...) 표기를 해라*로 해석할 수 있다.
+
+<div className="post_img">
+  ![캡처](https://github.com/bisari31/blog/assets/98396758/e996c3f2-51ed-4923-8b90-0ed91c15f0e5)
+</div>
+
+만약 `<span>` 태그가 아닌 block 요소인 `<p>` 태그라면 `display` 속성과 `width` 속성이 필요 없다.
+
+```css
+p {
+  /* display: inline-block;
+  width: 100%; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+```
+
+두 줄 이상일 때의 css 속성은 다음과 같다.
+
+```css {4-6}
+p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+```
+
+<div className="post_img">
+  ![캡처](https://github.com/bisari31/blog/assets/98396758/daca7c38-f195-4cce-9039-0229cbd7f702)
+</div>
+
+<div className="post_ref">
+
+### 참고
+
+<a href="https://tailwindcss.com/docs/installation" target="_blank">
+  https://tailwindcss.com/docs/installation
+</a>
+
+</div>
