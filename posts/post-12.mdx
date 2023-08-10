@@ -1,7 +1,7 @@
 ---
 title: tailwind css 똑똑하게 사용하기
 date: 2023-08-09
-description: 이전에 tailwind의 존재를 알았지만 클래스명을 더럽힌다는 이유로 기피했다. nextjs를 접하면서 tailwind를 사용하게 되었는데 단점도 존재하지만 장점이 참 많은 라이브러리 같다. tailwind를 좀더 똑똑하게 사용하기 위해 알면 좋은 정보들과 개념들을 익혀보자.
+description: 이전에 tailwind(이하 테일윈드)의 존재를 알았지만 클래스명을 더럽힌다는 이유로 기피했다. nextjs를 접하면서 테일윈드를 사용하게 되었는데 단점도 존재하지만 장점이 참 많은 라이브러리 같다. 테일윈드를 좀 더 똑똑하게 사용하기 위해 알면 좋은 정보들과 개념들을 익혀보자.
 keywords:
   - css
 ---
@@ -10,7 +10,7 @@ keywords:
   ![tailwindcss](https://github.com/bisari31/blog/assets/98396758/10c23809-d46c-4111-9ba4-15dca3b63dd8)
 </div>
 
-이전에 tailwind의 존재를 알았지만 클래스명을 더럽힌다는 이유로 기피했다. nextjs를 접하면서 tailwind를 사용하게 되었는데 단점도 존재하지만 장점이 참 많은 라이브러리 같다. tailwind를 좀 더 똑똑하게 사용하기 위해 알면 좋은 정보들과 개념들을 익혀보자.
+이전에 tailwind(이하 테일윈드)의 존재를 알았지만 클래스명을 더럽힌다는 이유로 기피했다. nextjs를 접하면서 테일윈드를 사용하게 되었는데 단점도 존재하지만 장점이 참 많은 라이브러리 같다. 테일윈드를 좀 더 똑똑하게 사용하기 위해 알면 좋은 정보들과 개념들을 익혀보자.
 
 ## Code Editor 설정
 
@@ -21,7 +21,7 @@ keywords:
   2-39-46](https://github.com/bisari31/blog/assets/98396758/ff3ce0a2-d780-478b-bc4a-697efe557e5d)
 </div>
 
-tailwind 공식 익스텐션을 사용하면 자동 완성, 클래스명 호버 시 해당 클래스 명의 대한 클래스 속성 확인, 린팅 등의 기능을 제공하여 좀 더 편리하게 코드를 작성할 수 있다.
+테일윈드 공식 익스텐션을 사용하면 자동 완성, 클래스명 호버 시 해당 클래스 명의 대한 클래스 속성 확인, 린팅 등의 기능을 제공하여 좀 더 편리하게 코드를 작성할 수 있다.
 
 ### Prettier 플러그인
 
@@ -30,7 +30,7 @@ tailwind 공식 익스텐션을 사용하면 자동 완성, 클래스명 호버 
   2-17-40](https://github.com/bisari31/blog/assets/98396758/abedddca-d88a-4329-bcaf-e41753397020)
 </div>
 
-tailwind 공식 prettier 플러그인을 사용하면 권장 순서에 따라 클래스를 자동 정렬할 수 있다.
+테일윈드 공식 prettier 플러그인을 사용하면 권장 순서에 따라 클래스를 자동 정렬할 수 있다.
 
 ```html
 npm install -D prettier-plugin-tailwindcss
@@ -69,7 +69,7 @@ module.exports = {
 };
 ```
 
-`font-size`의 경우 tailwind는 `text-sm: 14px`, `text-base: 16px`, `text-lg: 18px`을 제공하기에 15px을 추가하여 사용했다.
+`font-size`의 경우 테일윈드는 `text-sm: 14px`, `text-base: 16px`, `text-lg: 18px`을 제공하기에 15px을 추가하여 사용했다.
 
 ```tsx /bg-primary/ /text-15px/
 <button type="button" className="rounded-md bg-primary text-15px">
@@ -127,7 +127,7 @@ module.exports = {
 }
 ```
 
-### tailwind가 스타일을 3개의 layer로 구성하는 이유
+### 테일윈드가 스타일을 3개의 layer로 구성하는 이유
 
 css 스타일이 중복될 때 스타일시트 안에서 마지막에 선언된 클래스의 스타일이 적용된다.
 
