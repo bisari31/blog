@@ -17,12 +17,19 @@ body {
 }
 
 main {
-  max-width: 980px;
+  display: flex;
   margin: 0 auto;
+  max-width: 1080px;
   & > div {
-    @include mixin.mobile {
-      margin: constant.$main-mobile-margin;
+    margin: 0 20px;
+    @include mixin.tablet {
+      margin: 0 40px;
     }
-    margin: constant.$main-margin;
+    @include mixin.laptop {
+      margin: 0 40px;
+    }
+    @include mixin.desktop {
+      margin: 0;
+    }
   }
 }
