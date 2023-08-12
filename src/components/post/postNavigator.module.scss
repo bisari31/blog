@@ -1,12 +1,12 @@
-@use '/src/styles/mixin.scss';
+@use '/src/styles/mixin';
 
 .wrapper {
   margin: 150px 0;
   display: flex;
-  background-color: #fff;
+  background-color: var(--bg);
   flex-direction: column;
   gap: 30px;
-  box-shadow: 0px 14px 24px 0px rgba(0, 0, 0, 0.07);
+  box-shadow: var(--box-shadow);
   a {
     display: flex;
     flex-direction: row;
@@ -36,12 +36,8 @@
         color: #6a6a6a;
       }
       .title {
+        @include mixin.ellipsis(3);
         font-size: 16px;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
         font-weight: 500;
       }
     }
@@ -51,19 +47,21 @@
     text-align: right;
     flex-direction: row-reverse;
   }
-
+  &.noNextPost {
+    width: auto;
+  }
+  &.noPrevPost {
+    margin-left: auto;
+  }
   @include mixin.tablet {
+    gap: 50px;
     flex-direction: row;
     a {
       flex: 1;
     }
+    &.noNextPost,
+    &.noPrevPost {
+      width: fit-content;
+    }
   }
-}
-
-.noNextPost {
-  width: fit-content;
-}
-.noPreviousPost {
-  margin-left: auto;
-  max-width: fit-content;
 }

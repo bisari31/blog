@@ -5,29 +5,27 @@
   flex-wrap: wrap;
   a {
     font-weight: normal;
-    padding: 3px 13px;
+    padding: 3px 10px;
     color: #fff;
-    // color: var(--keyword-text);
     font-size: 14px;
     display: inline-block;
-    background-color: #cecece;
-    // background-color: var(--keyword-bg);
+    background-color: var(--keyword-bg);
     border-radius: 9px;
     &:hover {
-      background-color: var(--text);
+      color: var(--bg);
+      background-color: var(--title);
     }
   }
 
   &.isKeywordsPage {
     a {
-      color: var(--text-date);
+      color: var(--keyword-text);
       background-color: var(--bg);
-      border: 1px solid var(--keyword-bg-hover);
-
+      border: 1px solid var(--code-border);
       &.isActive {
         border: none;
         color: var(--bg);
-        background-color: var(--keyword-text);
+        background-color: var(--title);
       }
     }
   }

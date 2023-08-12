@@ -2,42 +2,42 @@
 
 html[data-theme='light'] {
   --text: #{$black-200};
-  --text-date: #{$gray-400};
-  --text-des: #{$gray-500};
-  --text-title: #{$black-200};
+  --date: #{$gray-400};
+  --des: #{$gray-500};
+  --title: #{$black-200};
   --bg: #{$white};
   --bg-blur: #{$white-blur};
   --border: #{$gray-200};
   --code: #{$gray-100};
   --code-border: #{$gray-200};
-  --keyword-bg: #{$misty-blue-100};
-  --keyword-bg-hover: #{$keyword-bg-hover1};
-  --keyword-text: #{$black-200};
+  --keyword-bg: #{$light-keyword};
+  --keyword-text: #{$light-keyword-text-color};
   --svg: #{$misty-blue-400};
   --svg-hover: #{$misty-blue-500};
   --svg-bg-hover: #{$misty-blue-200};
   --search-bg-hover: #{$misty-blue-100};
   --search-bg-hover2: #{$misty-blue-100};
   --search-text: #{$gray-600};
+  --box-shadow: #{$light-box-shadow};
 }
 
 html[data-theme='dark'] {
   --text: #{$gray-300};
-  --text-date: #{$gray-600};
-  --text-des: #{$gray-500};
-  --text-title: #{$white2};
+  --date: #{$gray-600};
+  --des: #{$gray-500};
+  --title: #{$white2};
   --bg: #{$black-500};
   --bg-blur: #{$black-blur};
   --border: #{$black-100};
   --code: #{$black-300};
   --code-border: #{$black-200};
-  --keyword-text: #{$white2};
-  --keyword-bg: #{$black-200};
-  --keyword-bg-hover: #{$keyword-bg-hover2};
+  --keyword-bg: #{$dark-keyword};
+  --keyword-text: #{$dark-keyword-text-color};
   --svg: #{$misty-blue-600};
   --svg-hover: #{$misty-blue-300};
   --svg-bg-hover: #{$black-600};
   --search-bg-hover: #{$black-600};
   --search-bg-hover2: #{$black-400};
   --search-text: #{$gray-500};
+  --box-shadow: #{$dark-box-shadow};
 }

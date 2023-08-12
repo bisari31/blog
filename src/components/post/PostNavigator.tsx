@@ -15,7 +15,7 @@ export default function PostNavigator({ nextPost, previousPost }: Props) {
     <div
       className={cx(
         'wrapper',
-        !previousPost && 'noPreviousPost',
+        !previousPost && 'noPrevPost',
         !nextPost && 'noNextPost',
       )}
     >
