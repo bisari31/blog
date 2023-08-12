@@ -97,8 +97,8 @@ export default function page({
   const MDXContent = getMDXComponent(currentPost.body.code);
 
   return (
-    <div>
-      <div className={styles.wrapper}>
+    <div className={styles.postWrapper}>
+      <div className={styles.postInner}>
         <div className={styles.header}>
           <time dateTime={currentPost.date}>
             {format(parseISO(currentPost.date), 'LLLL d, yyyy')}

@@ -21,20 +21,20 @@ export default function Header() {
   };
 
   return (
-    <header className={styles.header}>
-      <div className={styles.wrapper}>
-        <div className={styles.innerWrapper}>
+    <header className={styles.headerWrapper}>
+      <div className={styles.headerInner}>
+        <div className={styles.content}>
           <div className={styles.logo}>
             <Link href="/">기술 블로그</Link>
           </div>
-          <div className={styles.navWrapper}>
+          <div className={styles.nav}>
             <Nav
               isTabletNav={false}
               onToggle={handleStateToggle}
               isDarkMode={isDarkMode}
             />
           </div>
-          <div className={styles.tabletButton}>
+          <div className={styles.mobileButton}>
             <button
               type="button"
               onClick={() => setIsSideNavOpen((prev) => !prev)}
@@ -49,7 +49,7 @@ export default function Header() {
         </div>
       </div>
       {isSideNavOpen && (
-        <div className={styles.sideNavWrapper}>
+        <div className={styles.sideNav}>
           <Nav
             isTabletNav
             onToggle={handleStateToggle}

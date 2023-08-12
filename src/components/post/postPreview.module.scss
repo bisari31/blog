@@ -1,53 +1,62 @@
 @use '/src/styles/mixin.scss';
 
-.article {
+.wrapper {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  flex-direction: column;
+  text-align: start;
+  gap: 20px 0px;
   .imgWrapper {
-    min-width: 300px;
-    height: 180px;
-    display: flex;
-    align-items: center;
+    width: 100%;
     position: relative;
-    margin-left: 50px;
+    height: 216px;
     img {
+      box-shadow: 0px 14px 24px 0px rgba(0, 0, 0, 0.07);
       object-fit: cover;
-      border-radius: 5px;
     }
   }
-
-  @include mixin.mobile {
-    flex-direction: column-reverse;
-    margin-left: 0;
-    align-items: start;
-    .imgWrapper {
-      width: 100%;
-      margin-left: 0;
-      margin-bottom: 20px;
-      img {
-        width: 100%;
+  .details {
+    flex: 1;
+    gap: 10px 0;
+    flex-direction: column;
+    time {
+      display: inline-block;
+      color: #6a6a6a;
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+    & > div {
+      display: flex;
+      flex-direction: column;
+      gap: 15px 0;
+      h2 {
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        font-weight: bold;
+        font-size: 22px;
+      }
+      span {
+        color: #6a6a6a;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        font-size: 15px;
       }
     }
   }
-}
 
-.contentWrapper {
-  time {
-    font-weight: 400;
-    color: var(--text-date);
-  }
-  h2 {
-    font-size: 26px;
-    font-weight: 600;
-    margin: 20px 0;
-  }
-  span {
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    color: var(--text-des);
+  @include mixin.tablet {
+    gap: 0 40px;
+    flex-direction: row;
+    align-items: center;
+    .imgWrapper {
+      max-width: 252px;
+      height: 158px;
+    }
   }
 }
