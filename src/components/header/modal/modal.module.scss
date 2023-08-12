@@ -29,7 +29,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: var(--bg);
-  width: 50%;
+  width: 90%;
   border-radius: 10px;
   z-index: 10000;
   box-shadow: rgba(17, 12, 46, 0.2) 0px 0px 40px 0px;
@@ -124,10 +124,10 @@
     }
   }
 
-  @include mixin.mobile {
-    width: 90%;
-  }
   @include mixin.tablet {
     width: 70%;
+  }
+  @include mixin.laptop {
+    width: 50%;
   }
 }
