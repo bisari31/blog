@@ -1,3 +1,7 @@
+$tablet: 640px;
+$laptop: 1024px;
+$desktop: 1280px;
+
 $white: #fff;
 $white2: #f3f3f3;
 $black-100: #343434;
@@ -21,17 +25,17 @@ $misty-blue-400: #94a3b8;
 $misty-blue-500: #64748b;
 $misty-blue-600: #7e848d;
 
+$light-keyword-text-color: #c9c9c9;
+$dark-keyword-text-color: #555555;
+$light-keyword: #cecece;
+$dark-keyword: #232323;
+
 $blue: #348bef;
 
 $white-blur: rgba(255, 255, 255, 0.2);
 $black-blur: rgba(0, 0, 0, 0.2);
-
-$keyword-bg-hover1: darken($misty-blue-100, 3%);
-$keyword-bg-hover2: lighten($black-200, 3%);
+$light-box-shadow: 0px 14px 24px 0px rgba(0, 0, 0, 0.07);
+$dark-box-shadow: 0px 14px 24px 0px rgb(131 131 131 / 7%);
 
 $header-height: 60px;
 $margin-bottom: 150px;
-$main-margin: 0 40px $margin-bottom 40px;
-$header-margin: 0 46px;
-$header-mobile-margin: 0 25px;
-$main-mobile-margin: 0 25px $margin-bottom 25px;

@@ -1,12 +1,13 @@
-@use 'styles/constant.scss';
-@use 'styles/mixin.scss';
+@use 'styles/constant';
+@use 'styles/mixin';
 
 .postWrapper {
+  width: 100%;
   .postInner {
     .header {
       margin: 100px 0;
       time {
-        color: var(--text-date);
+        color: var(--date);
       }
       h1 {
         font-size: 3rem;
@@ -125,7 +126,7 @@
       }
 
       blockquote {
-        border-left: 3px solid var(--text-date);
+        border-left: 3px solid var(--date);
         padding-left: 20px;
         margin-top: 20px;
         display: inline-block;
@@ -161,7 +162,7 @@
         a {
           width: fit-content;
           text-decoration: none;
-          color: var(--text-date);
+          color: var(--date);
           font-size: 14px;
           p {
             text-align: center;

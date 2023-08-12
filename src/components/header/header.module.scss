@@ -1,5 +1,5 @@
-@use '/src/styles/constant.scss';
-@use '/src/styles/mixin.scss';
+@use '/src/styles/constant';
+@use '/src/styles/mixin';
 
 .headerWrapper {
   position: sticky;
@@ -8,7 +8,7 @@
   border-bottom: 1px solid var(--border);
   background-color: var(--bg);
   z-index: 100;
-  color: var(--text-title);
+  color: var(--title);
   svg {
     path,
     circle {
@@ -19,37 +19,25 @@
     margin: 0 auto;
     max-width: 1200px;
     height: constant.$header-height;
-    .content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: 100%;
-      margin: 0 20px;
-      @include mixin.tablet {
-        margin: 0 40px;
-      }
-      @include mixin.desktop {
-        margin: 0;
-      }
-      .logo {
-        font-weight: 500;
-        font-size: 18px;
-      }
-      .mobileButton {
-        @include mixin.tablet {
-          display: none;
-        }
-        display: flex;
-      }
-      .nav {
-        @include mixin.tablet {
-          display: flex;
-        }
-        display: none;
-      }
+  }
+  .content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    margin: 0 20px;
+
+    .logo {
+      font-weight: 500;
+      font-size: 18px;
     }
   }
-
+  .mobileButton {
+    display: flex;
+  }
+  .nav {
+    display: none;
+  }
   .sideNav {
     display: flex;
     border-top: 1px solid var(--border);
@@ -60,8 +48,24 @@
     width: 30%;
     position: absolute;
     padding: 32px;
-    @include mixin.tablet {
+  }
+
+  @include mixin.tablet {
+    .content {
+      margin: 0 40px;
+    }
+    .nav {
+      display: flex;
+    }
+    .sideNav,
+    .mobileButton {
       display: none;
+    }
+  }
+
+  @include mixin.desktop {
+    .content {
+      margin: 0;
     }
   }
 }

@@ -1,0 +1,27 @@
+@use './constant';
+
+@mixin tablet {
+  @media (min-width: constant.$tablet) {
+    @content;
+  }
+}
+
+@mixin laptop {
+  @media (min-width: constant.$laptop) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: constant.$desktop) {
+    @content;
+  }
+}
+
+@mixin ellipsis($col) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $col;
+}
