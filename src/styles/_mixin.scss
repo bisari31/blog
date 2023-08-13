@@ -1,4 +1,5 @@
 @use './constant';
+@use 'sass:map';
 
 @mixin tablet {
   @media (min-width: constant.$tablet) {
@@ -24,4 +25,10 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: $col;
+}
+
+@mixin theme-variables($theme-map) {
+  @each $variable, $value in $theme-map {
+    --#{$variable}: #{map.get($theme-map, $variable)};
+  }
 }

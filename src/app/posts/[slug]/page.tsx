@@ -104,7 +104,7 @@ export default function page({
             {format(parseISO(currentPost.date), 'LLLL d, yyyy')}
           </time>
           <h1>{currentPost.title}</h1>
-          <Keywords keywords={currentPost.keywords} />
+          <Keywords isDetailPage keywords={currentPost.keywords} />
         </div>
         <article>
           <MDXContent components={components} />

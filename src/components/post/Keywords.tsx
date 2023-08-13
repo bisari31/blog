@@ -5,6 +5,7 @@ import styles from './keywords.module.scss';
 
 interface Props {
   isKeywordsPage?: boolean;
+  isDetailPage?: boolean;
   keywords: Post['keywords'];
   currentQuery?: string;
 }
@@ -15,11 +16,13 @@ export default function Keywords({
   keywords,
   currentQuery,
   isKeywordsPage = false,
+  isDetailPage = false,
 }: Props) {
   return (
     <div
       className={cx('keywords', {
         isKeywordsPage,
+        isDetailPage,
       })}
     >
       {keywords?.map((keyword) => (

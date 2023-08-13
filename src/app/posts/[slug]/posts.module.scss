@@ -84,7 +84,7 @@
 
       a {
         text-decoration: none;
-        color: constant.$blue;
+        color: constant.$link;
         transition: 0.2s ease;
         p {
           display: inline-block;
@@ -93,7 +93,7 @@
 
       p > code,
       li > code {
-        background-color: var(--code);
+        background-color: var(--code-bg);
         padding: 2px 7px;
         border-radius: 5px;
         font-size: 0.9rem;
@@ -106,7 +106,7 @@
         font-family: Consolas;
         padding: 15px 0;
         border-radius: 6px;
-        background-color: var(--code);
+        // background-color: var(--code); // 지울 예정 적용 안되는 코드
         margin: 20px 0;
       }
       pre > code {
@@ -144,7 +144,7 @@
       .post_ref {
         margin-top: 150px;
         h3 {
-          margin-bottom: 20px;
+          margin-bottom: 15px;
         }
         p {
           margin-top: 10px;
@@ -183,7 +183,7 @@
       }
       .line.highlighted {
         background: #2b2b31;
-        border-left: 3px solid constant.$blue;
+        border-left: 3px solid constant.$link;
       }
       .line > .word {
         padding: 5px;
