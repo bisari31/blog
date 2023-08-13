@@ -1,41 +1,66 @@
+@use 'sass:map';
+
 $tablet: 640px;
 $laptop: 1024px;
 $desktop: 1280px;
 
-$white: #fff;
-$white2: #f3f3f3;
-$black-100: #343434;
-$black-200: #2a2a2a;
-$black-300: #1e1e1e;
-$black-400: #161616;
-$black-500: #131313;
-$black-600: #060606;
-
-$gray-100: #f3f3f3;
-$gray-200: #e5e7eb;
-$gray-300: #d9d9d9;
-$gray-400: #ababab;
-$gray-500: #919191;
-$gray-600: #838383;
-
-$misty-blue-100: #f5f6f9;
-$misty-blue-200: #f9fafb;
-$misty-blue-300: #afb3b8;
-$misty-blue-400: #94a3b8;
-$misty-blue-500: #64748b;
-$misty-blue-600: #7e848d;
-
-$light-keyword-text-color: #c9c9c9;
-$dark-keyword-text-color: #555555;
-$light-keyword: #cecece;
-$dark-keyword: #232323;
-
-$blue: #348bef;
-
-$white-blur: rgba(255, 255, 255, 0.2);
-$black-blur: rgba(0, 0, 0, 0.2);
-$light-box-shadow: 0px 14px 24px 0px rgba(0, 0, 0, 0.07);
-$dark-box-shadow: 0px 14px 24px 0px rgb(131 131 131 / 7%);
-
 $header-height: 60px;
-$margin-bottom: 150px;
+
+$link: #348bef;
+$title: (
+  'light': #2a2a2a,
+  'dark': #f3f3f3,
+);
+$svg-bg-hover: (
+  'light': #f9fafb,
+  'dark': #0e0e0e,
+);
+$svg: (
+  'light': #94a3b8,
+  'dark': #7e848d,
+);
+$keyword-text: (
+  'light': #bdbdbd,
+  'dark': #595959,
+);
+
+$light: (
+  'bg': #fff,
+  'title': map.get($title, 'light'),
+  'text': map.get($title, 'light'),
+  'des': lighten(map.get($title, 'light'), 30%),
+  'date': lighten(map.get($title, 'light'), 50%),
+  'code-bg': map.get($title, 'dark'),
+  'code-border': #e3e3e3,
+  'border': #e5e7eb,
+  'svg': map.get($svg, 'light'),
+  'svg-hover': darken(map.get($svg, 'light'), 20%),
+  'svg-bg-hover': map.get($svg-bg-hover, 'light'),
+  'keyword-bg': #cecece,
+  'keyword-text': #bdbdbd,
+  'keyword-border': lighten(map.get($keyword-text, 'light'), 20%),
+  'search-btn-bg-hover': darken(map.get($svg-bg-hover, 'light'), 1.5%),
+  'search-list-bg-hover': darken(map.get($svg-bg-hover, 'light'), 1%),
+  'box-shadow': 0px 14px 24px 0px rgba(0, 0, 0, 0.07),
+  'blur': rgba(255, 255, 255, 0.2),
+);
+$dark: (
+  'bg': #131313,
+  'title': map.get($title, 'dark'),
+  'text': #d9d9d9,
+  'des': darken(map.get($title, 'dark'), 30%),
+  'date': darken(map.get($title, 'dark'), 50%),
+  'code-bg': #1e1e1e,
+  'code-border': map.get($title, 'light'),
+  'border': #343434,
+  'svg': map.get($svg, 'dark'),
+  'svg-hover': lighten(map.get($svg, 'dark'), 20%),
+  'svg-bg-hover': map.get($svg-bg-hover, 'dark'),
+  'keyword-bg': #232323,
+  'keyword-text': #595959,
+  'keyword-border': darken(map.get($keyword-text, 'dark'), 20%),
+  'search-btn-bg-hover': lighten(map.get($svg-bg-hover, 'dark'), 3%),
+  'search-list-bg-hover': darken(map.get($svg-bg-hover, 'dark'), 1%),
+  'box-shadow': 0px 14px 24px 0px rgb(131 131 131 / 7%),
+  'blur': rgba(0, 0, 0, 0.2),
+);
