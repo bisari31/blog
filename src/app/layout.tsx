@@ -15,6 +15,9 @@ export const metadata = {
   description: '프론트엔드 개발자 이상원입니다.',
   verification: {
     google: 'e-TNPhd8w4G89P7qHvpbNUMOzmwlO8jX-6zAin2jbK8',
+    other: {
+      'naver-site-verification': 'bd622f8e509823744a83f140397290ee8c2d4c2',
+    },
   },
 };
 
