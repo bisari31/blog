@@ -6,12 +6,19 @@ import styles from './postPreview.module.scss';
 import Keywords from './Keywords';
 import Link from 'next/link';
 
+const KEYWORDS = ['javascript', 'react', 'nextjs'];
+
 export default function PostPreview({ post }: { post: Post }) {
+  const getThumbnailSrc = (keywords?: string[]) => {
+    const keyword = KEYWORDS.find((key) => keywords?.includes(key));
+    return `/imgs/${keyword}.png`;
+  };
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.imgWrapper}>
         <Image
-          src={post.thumbnail ?? `/imgs/nextjs.png`}
+          src={post.thumbnail ?? getThumbnailSrc(post.keywords)}
           alt={post.title}
           fill
           sizes="600px"
