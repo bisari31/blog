@@ -41,6 +41,7 @@ $light: (
   'keyword-border': lighten(map.get($keyword-text, 'light'), 20%),
   'search-btn-bg-hover': darken(map.get($svg-bg-hover, 'light'), 1.5%),
   'search-list-bg-hover': darken(map.get($svg-bg-hover, 'light'), 1%),
+  'search-list': lighten(map.get($title, 'light'), 30%),
   'box-shadow': 0px 14px 24px 0px rgba(0, 0, 0, 0.07),
   'blur': rgba(255, 255, 255, 0.2),
 );
@@ -61,6 +62,7 @@ $dark: (
   'keyword-border': darken(map.get($keyword-text, 'dark'), 20%),
   'search-btn-bg-hover': lighten(map.get($svg-bg-hover, 'dark'), 3%),
   'search-list-bg-hover': darken(map.get($svg-bg-hover, 'dark'), 1%),
+  'search-list': darken(map.get($title, 'dark'), 30%),
   'box-shadow': 0px 14px 24px 0px rgb(131 131 131 / 7%),
   'blur': rgba(0, 0, 0, 0.2),
 );

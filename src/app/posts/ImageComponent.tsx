@@ -15,7 +15,7 @@ export default function ImageComponent(props: any) {
         maxWidth: '100%',
         height: 'auto',
         display: 'block',
-        margin: '0 auto',
+        margin: '20px auto 10px',
       }}
     />
   );

@@ -6,8 +6,8 @@
 
 .caption {
   display: block;
-  margin: 10px auto 0;
-  color: var(--date);
+  margin: 0 auto;
+  color: var(--date) !important;
   font-size: 14px;
 }
 
@@ -20,7 +20,7 @@
     margin-top: 10px;
   }
   &[aria-disabled='true'] {
-    color: var(--text);
+    color: var(--text) !important;
     cursor: text;
   }
 

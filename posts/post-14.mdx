@@ -1,8 +1,8 @@
 ---
 title: 자바스크립트 프로토타입
 date: 2023-08-13
-description: prototype, __proto__, [[Prototype]]의 차이점은 무엇일까
-thumbnail: /imgs/js.png
+description: prototype, **proto**, [[Prototype]]의 차이점은 무엇일까
+thumbnail:
 keywords:
   - javascript
 ---
@@ -97,12 +97,8 @@ console.log(Object.keys(rabbit)); // ['jumps']
 
 다음 그림과 같이 프로토타입이 형성된다. rabbit의 프로토타입은 animal이고 animal의 프로토타입은 Object.prototype이다. Object.prototype의 프로토타입은 null이 된다. Object.prototype의 프로퍼티는 분명 `hasOwnProperty`를 소유하는데 `for..in` 문에서 순회되지 않은 이유는 `hasOwnProperty` 프로퍼티는 내부 슬롯 `enumerable`값이 false이기 때문이다.
 
-<div className="post_img">
-  ![prototype](https://github.com/bisari31/blog/assets/98396758/36b12c81-120d-49c8-993e-cb992221c74b)
-  <a href="https://ko.javascript.info/prototype-inheritance" target="_blank">
-    https://ko.javascript.info/prototype-inheritance
-  </a>
-</div>
+![example1 !!300](/imgs/posts/14/example1.png)
+[https://ko.javascript.info/prototype-inheritance](https://ko.javascript.info/prototype-inheritance)
 
 ## 함수의 prototype 프로퍼티
 
@@ -125,12 +121,8 @@ console.log(rabbit.eats);
 
 Rabbit 생성자 함수를 통해 rabbit 인스턴스를 만들었고 rabbit의 프로토타입을 animal로 지정했다. 함수의 프로퍼티 `prototype`은 위 코드와 같이 인스턴스의 프로토타입을 설정할 수 있다.
 
-<div className="post_img">
-  ![prototype](https://github.com/bisari31/blog/assets/98396758/4f0afa8e-e136-4543-92b1-0698e73667ba)
-  <a href="https://ko.javascript.info/function-prototype" target="_blank">
-    https://ko.javascript.info/function-prototype
-  </a>
-</div>
+![example2 !!600](/imgs/posts/14/example2.png)
+[https://ko.javascript.info/function-prototype](https://ko.javascript.info/function-prototype)
 
 즉 생성자 함수의 `prototype` 프로퍼티는 인스턴스의 프로토타입을 변경하기 위해 존재하며 `__proto__`는 객체 자신의 프로토타입에 접근, 변경하기 위해 존재한다.
 
@@ -147,12 +139,8 @@ const jane = new Person('jane');
 jane.describe();
 ```
 
-<div className="post_img">
-  ![spjs_2103](https://github.com/bisari31/blog/assets/98396758/63eb68eb-36e7-4c49-a538-22d874645422)
-  <a href="https://exploringjs.com/es5/ch17.html" target="_blank">
-    https://exploringjs.com/es5/ch17.html
-  </a>
-</div>
+![example3 !!500](/imgs/posts/14/example3.png)
+[https://exploringjs.com/es5/ch17.html](https://exploringjs.com/es5/ch17.html)
 
 생성자 함수 Person은 jane 객체를 생성했다. jane의 프로토타입은 Person.prototype이 되며 프로토타입 상속을 통해 `jane.describe()`을 실행할 수 있다. 모든 프로토타입은 `constructor` 프로퍼티를 가지게 된다. 이때 Person.prototype의 constructor 참조는 생성자 함수 Person이 된다. 또한 Person의 prototype 프로퍼티를 통해 프로토타입에 접근할 수 있다.
 
@@ -186,12 +174,8 @@ console.log(obj.__proto__ === Object.prototype); // true
 
 모든 내장 프로토타입의 꼭대기엔 `Object.prototype`이 존재하고 `Object.prototype`의 프로토타입은 null이다.
 
-<div className="post_img">
-  ![캡처](https://github.com/bisari31/blog/assets/98396758/78bf1e3f-7c7f-4361-89de-38258625fd0d)
-  <a href="https://ko.javascript.info/prototype-methods" target="_blank">
-    https://ko.javascript.info/prototype-methods
-  </a>
-</div>
+![example4 !!700](/imgs/posts/14/example4.png)
+[https://ko.javascript.info/prototype-methods](https://ko.javascript.info/prototype-methods)
 
 아래 코드와 같이 내장 객체 `prototype` 프로퍼티를 이용하여 메서드를 추가할 수 있다. 하지만 이 방법은 좋지 않다. 프로토타입은 전역으로 영향을 미치기 때문에 기존 코드와 충돌 날 가능성이 크기 때문에 사용해서는 안 된다.
 
@@ -205,13 +189,7 @@ const name = 'string';
 a.hi(); // hi
 ```
 
-<div className="post_ref">
-
 ### 참고
 
-<p>모던 자바스크립트 Deep Dive</p>
-<a href="https://ko.javascript.info/prototypes" target="_blank">
-  https://ko.javascript.info/prototypes
-</a>
-
-</div>
+[모던 자바스크립트 Deep Dive !!ref](#)
+[https://ko.javascript.info/prototypes !!ref](https://ko.javascript.info/prototypes)
