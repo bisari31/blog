@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 export default function ImageComponent(props: any) {
-  const substrings = props.alt?.split(' ');
+  const substrings = props.alt?.split(' !!');
   const alt = substrings[0] ?? '';
   const width = substrings[1] ?? 1000;
   return (
@@ -10,6 +10,7 @@ export default function ImageComponent(props: any) {
       alt={alt}
       width={width}
       height={0}
+      // placeholder="blur"
       style={{
         maxWidth: '100%',
         height: 'auto',

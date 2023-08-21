@@ -1,0 +1,30 @@
+@use 'styles/constant';
+.a {
+  width: fit-content;
+  text-decoration: none;
+}
+
+.caption {
+  display: block;
+  margin: 10px auto 0;
+  color: var(--date);
+  font-size: 14px;
+}
+
+.ref {
+  display: block;
+  font-size: 16px;
+  color: constant.$link;
+
+  & + & {
+    margin-top: 10px;
+  }
+  &[aria-disabled='true'] {
+    color: var(--text);
+    cursor: text;
+  }
+
+  &[aria-disabled='true']:active {
+    pointer-events: none;
+  }
+}

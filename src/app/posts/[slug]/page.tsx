@@ -9,6 +9,8 @@ import PostNavigator from 'components/post/PostNavigator';
 import Utterances from 'components/comment/Utterances';
 import Keywords from 'components/post/Keywords';
 import ImageComponent from '../ImageComponent';
+import AnChorComponent from '../AnChorComponent';
+import Heading3Component from '../Heading3Component';
 
 type PostsResult = {
   previousPost?: Post;
@@ -65,6 +67,8 @@ export default function page({
 }) {
   const components = {
     img: ImageComponent,
+    a: AnChorComponent,
+    h3: Heading3Component,
   };
 
   const decodedSlug = decodeURIComponent(slug);
