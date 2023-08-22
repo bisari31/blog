@@ -10,7 +10,6 @@ export default function ImageComponent(props: any) {
       alt={alt}
       width={width}
       height={0}
-      // placeholder="blur"
       style={{
         maxWidth: '100%',
         height: 'auto',
