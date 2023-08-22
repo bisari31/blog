@@ -10,12 +10,7 @@ export default function PostPreview({ post }: { post: Post }) {
   return (
     <div className={styles.wrapper}>
       <div className={styles.imgWrapper}>
-        <Image
-          src={post.thumbnail ?? `/imgs/nextjs.png`}
-          alt={post.title}
-          fill
-          sizes="600px"
-        />
+        <Image src={post.thumbnail ?? ''} alt={post.title} fill sizes="600px" />
       </div>
       <div className={styles.details}>
         <time dateTime={post.date}>

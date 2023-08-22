@@ -3,6 +3,7 @@
 
 .postWrapper {
   width: 100%;
+  overflow-x: hidden;
   .postInner {
     .header {
       margin: 100px 0;
@@ -19,6 +20,7 @@
 
     article {
       p {
+        position: relative;
         font-size: 1rem;
         line-height: 1.8rem;
         margin-top: 20px;
@@ -31,11 +33,6 @@
       h2 {
         font-size: 1.6rem;
         margin-top: 60px;
-        font-weight: 600;
-      }
-      h3 {
-        font-size: 1.2rem;
-        margin-top: 50px;
         font-weight: 600;
       }
 
@@ -54,6 +51,9 @@
         font-weight: 500;
         font-size: 0.9rem;
         margin-top: 30px;
+      }
+      a {
+        color: constant.$link;
       }
       ul {
         list-style: disc;
@@ -82,15 +82,6 @@
         margin-top: 10px;
       }
 
-      a {
-        text-decoration: none;
-        color: constant.$link;
-        transition: 0.2s ease;
-        p {
-          display: inline-block;
-        }
-      }
-
       p > code,
       li > code {
         background-color: var(--code-bg);
@@ -101,19 +92,15 @@
       }
 
       pre {
-        white-space: pre-wrap;
-        word-wrap: break-word;
         font-family: Consolas;
         padding: 15px 0;
         border-radius: 6px;
-        // background-color: var(--code); // 지울 예정 적용 안되는 코드
         margin: 20px 0;
-      }
-      pre > code {
-        border: none;
-        background-color: inherit;
-        display: flex;
-        flex-direction: column;
+        overflow-x: auto;
+        code {
+          display: flex;
+          flex-direction: column;
+        }
       }
 
       em,
@@ -122,11 +109,11 @@
       }
 
       img {
-        object-fit: cover;
+        object-fit: fill;
       }
 
       blockquote {
-        border-left: 3px solid var(--date);
+        border-left: 3px solid var(--text);
         padding-left: 20px;
         margin-top: 20px;
         display: inline-block;
@@ -140,45 +127,10 @@
     }
 
     :global {
-      .post_ref {
-        margin-top: 150px;
-        h3 {
-          margin-bottom: 15px;
-        }
-        p {
-          margin-top: 10px;
-        }
-      }
-      .post_img {
-        flex-direction: column;
-        display: flex;
-        margin: 30px 0;
-        align-items: center;
-        p {
-          margin: 0;
-        }
-
-        a {
-          width: fit-content;
-          text-decoration: none;
-          color: var(--date);
-          font-size: 14px;
-          p {
-            text-align: center;
-            display: inline-block;
-            font-size: inherit;
-          }
-        }
-      }
       .line {
         font-size: 0.78rem;
-        line-height: 1.5rem;
-        padding: 0px 20px;
-
-        @include mixin.tablet {
-          padding: 5px 20px;
-          line-height: 0.78rem;
-        }
+        padding: 5px 20px;
+        line-height: 0.78rem;
       }
       .line.highlighted {
         background: #2b2b31;

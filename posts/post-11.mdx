@@ -2,27 +2,19 @@
 title: Redux Toolkit 튜토리얼 (4)
 date: 2023-08-07
 description: 상태 관리 압도적 1위 Redux에 대해 알아보자
-thumbnail: /imgs/redux.png
+thumbnail: /imgs/posts/11/redux.png
 keywords:
   - redux
   - 상태 관리
 ---
 
-<div className="post_img">
-  ![redux-logo-landscape](https://github.com/bisari31/blog/assets/98396758/e2aae64f-fe1a-4b92-8588-9cad16c00e93)
-  <a href="https://ko.redux.js.org" target="_blank">
-    https://ko.redux.js.org
-  </a>
-</div>
+![redux](/imgs/posts/11/redux.png)
+[https://ko.redux.js.org](https://ko.redux.js.org)
 
 비동기 로직은 스토어 외부에서 발생해야 한다. 스토어 안에서 비동기 코드를 작성하기 위해서는 미들웨어를 사용해야 하는데 redux toolkit의 `configureStore`는 기본적으로 `thunk` 미들웨어를 자동으로 설정한다. 리덕스는 비동기 로직을 작성할 때 `thunk`를 사용하는 것을 권장한다고 한다.
 
-<div className="post_img">
-  ![ReduxAsyncDataFlowDiagram-d97ff38a0f4da0f327163170ccc13e80](https://github.com/bisari31/blog/assets/98396758/af5685bf-018c-47a8-8865-99bd444f589d)
-  <a href="https://ko.redux.js.org" target="_blank">
-    https://ko.redux.js.org
-  </a>
-</div>
+![Redux middleware logic !!500](/imgs/posts/11/af5685bf-018c-47a8-8865-99bd444f589d.gif)
+[https://ko.redux.js.org](https://ko.redux.js.org)
 
 ## Thunk
 
@@ -192,9 +184,7 @@ export default function PostList() {
 
 `dispatch(fetchPosts())`를 호출하면 thunk는 먼저 `posts/fetchPosts/pending` action type을 dispatch 한다.
 
-<div className="post_img">
-  ![캡처](https://github.com/bisari31/blog/assets/98396758/253e7a0c-4679-41f4-9f9d-110ded25a4f0)
-</div>
+![DevTools !!700](/imgs/posts/11/253e7a0c-4679-41f4-9f9d-110ded25a4f0.png)
 
 프로미스가 완료되면 `fetchPosts thunk`는 콜백에서 반환한 data 배열을 가져와 `action.payload`에 포함하여 `posts/fetchPosts/fuifilled` 액션을 디스패치한다. (dispatch가 두 번 실행되는
 이유는 react의 StrictMode 때문이다.)
@@ -341,20 +331,8 @@ export default function PostForm({ isEditPage }: { isEditPage?: boolean }) {
   };
 ```
 
-<div className="post_img">
-  ![GIF 2023-08-09 오전
-  4-39-39](https://github.com/bisari31/blog/assets/98396758/f9e9ec85-b8b8-4a0e-a155-2f8e1cbce0f1)
-</div>
-
-<div className="post_ref">
+![gif !!500](/imgs/posts/11/f9e9ec85-b8b8-4a0e-a155-2f8e1cbce0f1.gif)
 
 ### 참고
 
-<a
-  href="https://ko.redux.js.org/tutorials/essentials/part-5-async-logic"
-  target="_blank"
->
-  https://ko.redux.js.org/tutorials/essentials/part-5-async-logic
-</a>
-
-</div>
+[https://ko.redux.js.org/tutorials/essentials/part-5-async-logic !!ref](https://ko.redux.js.org/tutorials/essentials/part-5-async-logic)

@@ -6,11 +6,11 @@
   flex-direction: column;
   align-items: center;
   margin-top: 150px;
-  h1 {
+  p:nth-child(1) {
     font-size: 160px;
     font-weight: 600;
   }
-  h2 {
+  p:nth-child(2) {
     font-size: 30px;
     font-weight: 600;
   }
@@ -22,6 +22,6 @@
     width: 120px;
     height: 50px;
     color: var(--bg);
-    background-color: var(--title);
+    background-color: var(--text);
   }
 }

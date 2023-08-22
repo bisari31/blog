@@ -91,7 +91,7 @@
         @include mixin.ellipsis(2);
       }
       font-weight: 300;
-      color: var(--date);
+      color: var(--search-list);
       font-size: 14px;
       padding: 0 0.5em;
       border-radius: 10px;
@@ -109,7 +109,7 @@
       }
     }
     .isActive {
-      color: var(--text);
+      color: var(--title);
       background-color: var(--search-list-bg-hover);
       svg {
         path {

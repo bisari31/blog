@@ -1,5 +1,4 @@
 import { format, parseISO } from 'date-fns';
-import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { getMDXComponent } from 'next-contentlayer/hooks';
 
@@ -9,6 +8,9 @@ import styles from './posts.module.scss';
 import PostNavigator from 'components/post/PostNavigator';
 import Utterances from 'components/comment/Utterances';
 import Keywords from 'components/post/Keywords';
+import ImageComponent from '../ImageComponent';
+import AnChorComponent from '../AnChorComponent';
+import Heading3Component from '../Heading3Component';
 
 type PostsResult = {
   previousPost?: Post;
@@ -39,7 +41,7 @@ export const generateMetadata = ({
       title: currentPost?.title,
       description: currentPost?.description,
       url: currentPost?.url,
-      siteName: '기술 블로그',
+      siteName: '이상원 기술 블로그',
       images: [
         {
           url: currentPost?.thumbnail,
@@ -63,18 +65,10 @@ export default function page({
 }: {
   params: { slug: string };
 }) {
-  const ResponsiveImage = (props: any) => (
-    <Image
-      src={props.src}
-      alt={props.alt}
-      width={900}
-      height={500}
-      style={{ width: '100%', height: 'auto' }}
-    />
-  );
-
   const components = {
-    img: ResponsiveImage,
+    img: ImageComponent,
+    a: AnChorComponent,
+    h3: Heading3Component,
   };
 
   const decodedSlug = decodeURIComponent(slug);
@@ -95,7 +89,6 @@ export default function page({
     return notFound();
   }
   const MDXContent = getMDXComponent(currentPost.body.code);
-
   return (
     <div className={styles.postWrapper}>
       <div className={styles.postInner}>

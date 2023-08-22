@@ -2,7 +2,7 @@
 title: 브라우저의 렌더링 과정
 date: 2023-07-27
 description: 브라우저는 화면을 어떻게 그릴까
-thumbnail: /imgs/rendering.png
+thumbnail: /imgs/posts/02/ff031746-bae5-4b75-87c9-fcc75a474038.png
 keywords:
   - rendering
 ---
@@ -14,12 +14,8 @@ keywords:
 
 렌더링 엔진은 HTML을 처음부터 한 줄씩 직렬적으로 파싱 한다. HTML을 파싱 중 `<link>` 태그나 `<style>` 태그를 만나면 DOM 트리 생성을 중단 후 CSS 파싱을 시작해 CSSOM 트리를 생성하는 식으로 진행된다.
 
-<div className="post_img">
-  ![rendering](https://github.com/bisari31/blog/assets/98396758/ff031746-bae5-4b75-87c9-fcc75a474038)
-  <a href="https://web.dev/howbrowserswork/#Layout" target="_blank">
-    https://web.dev/howbrowserswork/#Layout
-  </a>
-</div>
+![rendering !!700](/imgs/posts/02/ff031746-bae5-4b75-87c9-fcc75a474038.png)
+[https://web.dev/howbrowserswork/#Layout](https://web.dev/howbrowserswork/#Layout)
 
 ## 브라우저의 렌더링 과정
 
@@ -38,7 +34,6 @@ keywords:
 리플로우는 레이아웃을 다시 계산하는 것을 의미하며 노드의 추가, 삭제, 위치변경, 윈도우 리사이징에 한하여 실행된다. 리페인트는 재결합된 렌더 트리를 다시 페인트 하는 것을 의미한다.
 레이아웃의 변경사항이 없다면 리페인트만 실행될 수 있다.
 
-<div className="post_ref">
-  ### 참고
-  <p>모던 자바스크립트 Deep Dive</p>
-</div>
+### 참고
+
+[모던 자바스크립트 Deep Dive !!ref](#)
