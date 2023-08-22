@@ -42,6 +42,8 @@ export const generateMetadata = ({
       description: currentPost?.description,
       url: currentPost?.url,
       siteName: '이상원 기술 블로그',
+      locale: 'ko_KR',
+      type: 'website',
       images: [
         {
           url: currentPost?.thumbnail,
@@ -54,8 +56,6 @@ export const generateMetadata = ({
           height: 1600,
         },
       ],
-      locale: 'ko_KR',
-      type: 'website',
     },
   };
 };
