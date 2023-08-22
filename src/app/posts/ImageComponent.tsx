@@ -3,7 +3,7 @@ import Image from 'next/image';
 export default function ImageComponent(props: any) {
   const substrings = props.alt?.split(' !!');
   const alt = substrings[0] ?? '';
-  const width = substrings[1] ?? 1000;
+  const width = substrings[1] ?? 1100;
   return (
     <Image
       src={props.src}
@@ -15,7 +15,7 @@ export default function ImageComponent(props: any) {
         maxWidth: '100%',
         height: 'auto',
         display: 'block',
-        margin: '20px auto 10px',
+        margin: '40px auto 10px',
       }}
     />
   );

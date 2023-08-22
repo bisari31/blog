@@ -1,4 +1,7 @@
 import styles from './heading3Component.module.scss';
+import cn from 'classnames/bind';
+
+const cx = cn.bind(styles);
 
 export default function Heading3Component({
   children,
@@ -6,9 +9,5 @@ export default function Heading3Component({
   children?: React.ReactNode;
 }) {
   const isRefWrapper = children?.toString().startsWith('참고');
-  return (
-    <h3 className={`${isRefWrapper ? styles.ref : ''}  ${styles.h3}`}>
-      {children}
-    </h3>
-  );
+  return <h3 className={cx('h3', isRefWrapper && 'ref')}>{children}</h3>;
 }

@@ -41,7 +41,7 @@ export const generateMetadata = ({
       title: currentPost?.title,
       description: currentPost?.description,
       url: currentPost?.url,
-      siteName: '기술 블로그',
+      siteName: '이상원 기술 블로그',
       images: [
         {
           url: currentPost?.thumbnail,

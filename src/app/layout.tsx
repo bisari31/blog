@@ -6,8 +6,8 @@ import 'styles/style.scss';
 import Header from 'components/header/Header';
 
 const notoSans = Noto_Sans_KR({
-  subsets: ['latin'],
   weight: ['400', '500'],
+  subsets: ['latin'],
 });
 
 export const metadata = {

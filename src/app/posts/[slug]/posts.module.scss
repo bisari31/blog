@@ -3,6 +3,7 @@
 
 .postWrapper {
   width: 100%;
+  overflow-x: hidden;
   .postInner {
     .header {
       margin: 100px 0;
@@ -91,18 +92,15 @@
       }
 
       pre {
-        white-space: pre-wrap;
-        word-wrap: break-word;
         font-family: Consolas;
         padding: 15px 0;
         border-radius: 6px;
         margin: 20px 0;
-      }
-      pre > code {
-        border: none;
-        background-color: inherit;
-        display: flex;
-        flex-direction: column;
+        overflow-x: auto;
+        code {
+          display: flex;
+          flex-direction: column;
+        }
       }
 
       em,
@@ -131,13 +129,8 @@
     :global {
       .line {
         font-size: 0.78rem;
-        line-height: 1.5rem;
-        padding: 0px 20px;
-
-        @include mixin.tablet {
-          padding: 5px 20px;
-          line-height: 0.78rem;
-        }
+        padding: 5px 20px;
+        line-height: 0.78rem;
       }
       .line.highlighted {
         background: #2b2b31;

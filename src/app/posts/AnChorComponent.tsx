@@ -1,4 +1,7 @@
 import styles from './anChorComponent.module.scss';
+import cn from 'classnames/bind';
+
+const cx = cn.bind(styles);
 
 export default function AnChorComponent({
   href,
@@ -11,7 +14,7 @@ export default function AnChorComponent({
   const isRef = childrenArray && childrenArray.length > 1;
   return (
     <a
-      className={`${styles.a} ${isRef ? styles.ref : styles.caption} `}
+      className={cx('a', isRef ? 'ref' : 'caption')}
       href={href}
       target="_blank"
       rel="noreferrer"
