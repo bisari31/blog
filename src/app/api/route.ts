@@ -16,7 +16,6 @@ export const GET = async () => {
     `;
       })
       .join('')}
-  }
   </urlset>
 `;
 
