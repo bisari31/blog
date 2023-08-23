@@ -1,11 +1,12 @@
 'use client';
 
-import Link from 'next/link';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
+import { setKeyword } from 'redux/slices/keywordSlice';
 import styles from './header.module.scss';
 import { CloseIcon, MenuIcon } from 'assets';
-import { useTheme, useModalOpen } from 'hooks';
+import { useTheme, useModalOpen, useAppDispatch } from 'hooks';
 
 import Nav from './Nav';
 import Modal from './modal/Modal';
@@ -15,9 +16,15 @@ export default function Header() {
   const [isSideNavOpen, setIsSideNavOpen] = useState(false);
   const { isDarkMode, handleThemeToggle } = useTheme();
   const { isModalOpen, setIsModalOpen } = useModalOpen();
-
+  const dispatch = useAppDispatch();
+  const router = useRouter();
   const handleStateToggle = (state: 'dark' | 'modal') => {
     state === 'dark' ? handleThemeToggle() : setIsModalOpen((prev) => !prev);
+  };
+
+  const handleLogoClick = () => {
+    dispatch(setKeyword('all'));
+    router.push('/');
   };
 
   return (
@@ -25,7 +32,9 @@ export default function Header() {
       <div className={styles.headerInner}>
         <div className={styles.content}>
           <div className={styles.logo}>
-            <Link href="/">기술 블로그</Link>
+            <button type="button" onClick={handleLogoClick}>
+              기술 블로그
+            </button>
           </div>
           <div className={styles.nav}>
             <Nav

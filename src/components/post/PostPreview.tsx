@@ -1,26 +1,26 @@
 import Image from 'next/image';
 import { format, parseISO } from 'date-fns';
+import Link from 'next/link';
 
 import styles from './postPreview.module.scss';
 
 import Keywords from './Keywords';
-import Link from 'next/link';
 
 export default function PostPreview({ post }: { post: Post }) {
   return (
     <div className={styles.wrapper}>
-      <div className={styles.imgWrapper}>
+      <Link href={post.url} className={styles.imgWrapper}>
         <Image src={post.thumbnail ?? ''} alt={post.title} fill sizes="600px" />
-      </div>
+      </Link>
       <div className={styles.details}>
         <time dateTime={post.date}>
           {format(parseISO(post.date), 'LLL d, yyyy')}
         </time>
         <div>
-          <Link className={styles.title} href={post.url}>
+          <Link href={post.url} className={styles.title}>
             {post.title}
           </Link>
-          <Link className={styles.desc} href={post.url}>
+          <Link href={post.url} className={styles.desc}>
             {post.description}
           </Link>
           <Keywords keywords={post.keywords} />
