@@ -5,8 +5,8 @@ import 'styles/style.scss';
 
 import Header from 'components/header/Header';
 
-const notoSans = Noto_Sans_KR({
-  weight: ['400', '500'],
+const noto_sans_kr = Noto_Sans_KR({
+  weight: ['400', '500', '700', '900'],
   subsets: ['latin'],
 });
 
@@ -28,7 +28,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
-      <body className={notoSans.className}>
+      <body className={noto_sans_kr.className}>
         <Header />
         <main>{children}</main>
         <div id="portal" />
