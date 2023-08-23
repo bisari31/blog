@@ -12,7 +12,7 @@ const noto_sans_kr = Noto_Sans_KR({
 
 const title = '이상원 기술 블로그';
 const description = '프론트엔드 개발자 이상원의 기술 블로그입니다.';
-
+const url = process.env.SITE_URL;
 export const metadata = {
   title,
   description,
@@ -25,16 +25,21 @@ export const metadata = {
   openGraph: {
     title,
     description,
-    url: process.env.SITE_URL,
+    url,
     locale: 'ko_KR',
     type: 'website',
-    images: ['/imgs/og.jpg'],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title,
-    description,
-    images: ['/imgs/og.jpg'],
+    images: [
+      {
+        url: '/imgs/og.jpg',
+        width: 800,
+        height: 600,
+      },
+      {
+        url: '/imgs/og.jpg',
+        width: 1800,
+        height: 1600,
+      },
+    ],
   },
 };
 
