@@ -41,21 +41,15 @@ export const generateMetadata = ({
       title: currentPost?.title,
       description: currentPost?.description,
       url: currentPost?.url,
-      siteName: '이상원 기술 블로그',
       locale: 'ko_KR',
       type: 'website',
-      images: [
-        {
-          url: currentPost?.thumbnail,
-          width: 800,
-          height: 600,
-        },
-        {
-          url: currentPost?.thumbnail,
-          width: 1800,
-          height: 1600,
-        },
-      ],
+      images: [currentPost?.thumbnail],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: currentPost?.title,
+      description: currentPost?.description,
+      images: ['/imgs/og.jpg'],
     },
   };
 };
