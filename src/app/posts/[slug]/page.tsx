@@ -43,13 +43,18 @@ export const generateMetadata = ({
       url: currentPost?.url,
       locale: 'ko_KR',
       type: 'website',
-      images: [currentPost?.thumbnail],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: currentPost?.title,
-      description: currentPost?.description,
-      images: ['/imgs/og.jpg'],
+      images: [
+        {
+          url: currentPost?.thumbnail,
+          width: 800,
+          height: 600,
+        },
+        {
+          url: currentPost?.thumbnail,
+          width: 1800,
+          height: 1600,
+        },
+      ],
     },
   };
 };
