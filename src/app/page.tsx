@@ -17,12 +17,6 @@ export default function Home({
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.title}>
-        <h1>
-          {keyword ? 'Filtered' : 'All'} Posts{' '}
-          <small>({filtedPosts.length})</small>
-        </h1>
-      </div>
       <Keywords
         keywords={sortedUniqueKeywords}
         currentQuery={keyword || 'All'}

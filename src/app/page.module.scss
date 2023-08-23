@@ -1,18 +1,10 @@
 @use '/src/styles/mixin';
 
 .wrapper {
-  .title {
-    h1 {
-      font-size: 25px;
-      font-weight: 600;
-      margin: 52px 0;
-      small {
-        font-size: 60%;
-      }
-    }
-  }
+  margin-top: 52px;
+
   .postWarpper {
-    padding: 60px 0;
+    padding: 60px 0 100px;
     display: flex;
     flex-direction: column;
     gap: 60px 0;
