@@ -56,6 +56,12 @@ export const generateMetadata = ({
         },
       ],
     },
+    twitter: {
+      card: 'summary_large_image',
+      title: currentPost?.title,
+      description: currentPost?.description,
+      images: [currentPost?.thumbnail],
+    },
   };
 };
 

@@ -41,6 +41,12 @@ export const metadata = {
       },
     ],
   },
+  twitter: {
+    card: 'summary_large_image',
+    title,
+    description,
+    images: ['/imgs/og.jpg'],
+  },
 };
 
 export default function RootLayout({
