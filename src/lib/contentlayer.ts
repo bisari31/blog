@@ -20,7 +20,7 @@ const getSortedUniqueKeywords = (posts: Post[]) => {
   const sortedKeywords = uniqueKeywords.sort(
     (a, b) => keywordCounts[b] - keywordCounts[a],
   );
-  sortedKeywords.unshift('All');
+  sortedKeywords.unshift('all');
   return sortedKeywords;
 };
 

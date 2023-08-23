@@ -11,7 +11,6 @@ import Keywords from 'components/post/Keywords';
 import ImageComponent from '../ImageComponent';
 import AnChorComponent from '../AnChorComponent';
 import Heading3Component from '../Heading3Component';
-import { url } from 'inspector';
 
 type PostsResult = {
   previousPost?: Post;

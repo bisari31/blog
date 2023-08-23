@@ -4,6 +4,7 @@ import React from 'react';
 import 'styles/style.scss';
 
 import Header from 'components/header/Header';
+import { Providers } from 'redux/providers';
 
 const noto_sans_kr = Noto_Sans_KR({
   weight: ['400', '500', '700', '900'],
@@ -49,12 +50,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ko">
-      <body className={noto_sans_kr.className}>
-        <Header />
-        <main>{children}</main>
-        <div id="portal" />
-      </body>
-    </html>
+    <Providers>
+      <html lang="ko">
+        <body className={noto_sans_kr.className}>
+          <Header />
+          <main>{children}</main>
+          <div id="portal" />
+        </body>
+      </html>
+    </Providers>
   );
 }

@@ -1,9 +1,8 @@
 .keywords {
-  // margin: 25px 0;
   gap: 10px;
   display: flex;
   flex-wrap: wrap;
-  a {
+  button {
     padding: 3px 10px;
     color: #fff;
     font-size: 14px;
@@ -17,7 +16,7 @@
   }
 
   &.isKeywordsPage {
-    a {
+    button {
       color: var(--keyword-text);
       background-color: var(--bg);
       border: 1px solid var(--keyword-border);
