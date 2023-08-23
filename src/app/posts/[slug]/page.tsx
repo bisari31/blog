@@ -11,6 +11,7 @@ import Keywords from 'components/post/Keywords';
 import ImageComponent from '../ImageComponent';
 import AnChorComponent from '../AnChorComponent';
 import Heading3Component from '../Heading3Component';
+import { url } from 'inspector';
 
 type PostsResult = {
   previousPost?: Post;
@@ -55,12 +56,6 @@ export const generateMetadata = ({
           height: 1600,
         },
       ],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: currentPost?.title,
-      description: currentPost?.description,
-      images: [currentPost?.thumbnail],
     },
   };
 };
