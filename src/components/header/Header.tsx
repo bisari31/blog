@@ -2,15 +2,18 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import cn from 'classnames/bind';
 
-import { setKeyword } from 'redux/slices/keywordSlice';
 import styles from './header.module.scss';
+import { setKeyword } from 'redux/slices/keywordSlice';
 import { CloseIcon, MenuIcon } from 'assets';
 import { useTheme, useModalOpen, useAppDispatch } from 'hooks';
 
 import Nav from './Nav';
 import Modal from './modal/Modal';
 import Portal from 'components/common/Portal';
+
+const cx = cn.bind(styles);
 
 export default function Header() {
   const [isSideNavOpen, setIsSideNavOpen] = useState(false);
@@ -57,15 +60,9 @@ export default function Header() {
           </div>
         </div>
       </div>
-      {isSideNavOpen && (
-        <div className={styles.sideNav}>
-          <Nav
-            isTabletNav
-            onToggle={handleStateToggle}
-            isDarkMode={isDarkMode}
-          />
-        </div>
-      )}
+      <div className={cx('sideNav', isSideNavOpen && 'on')}>
+        <Nav isTabletNav onToggle={handleStateToggle} isDarkMode={isDarkMode} />
+      </div>
       {isModalOpen && (
         <Portal>
           <Modal
