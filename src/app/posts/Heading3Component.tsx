@@ -8,6 +8,6 @@ export default function Heading3Component({
 }: {
   children?: React.ReactNode;
 }) {
-  const isRefWrapper = children?.toString().startsWith('참고');
+  const isRefWrapper = children?.toString().startsWith('Reference');
   return <h3 className={cx('h3', isRefWrapper && 'ref')}>{children}</h3>;
 }
