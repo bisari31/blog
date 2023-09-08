@@ -30,9 +30,7 @@ const Post = defineDocumentType(() => ({
     url: {
       type: 'string',
       resolve: (post) =>
-        `/posts/${post.title
-          .replace(/[^a-zA-Z0-9가-힣]+/g, '-')
-          .toLowerCase()}`,
+        post.title.replace(/[^a-zA-Z0-9가-힣]+/g, '-').toLowerCase(),
     },
   },
 }));

@@ -11,7 +11,7 @@ export const GET = async () => {
       .map(({ url }) => {
         return `
       <url>
-          <loc>${SITE_URL}${encodeURI(url)}</loc>
+          <loc>${SITE_URL}/${encodeURI(url)}</loc>
       </url>
     `;
       })

@@ -8,9 +8,9 @@ import styles from './posts.module.scss';
 import PostNavigator from 'components/post/PostNavigator';
 import Utterances from 'components/comment/Utterances';
 import Keywords from 'components/post/Keywords';
-import ImageComponent from '../ImageComponent';
-import AnChorComponent from '../AnChorComponent';
-import Heading3Component from '../Heading3Component';
+import ImageComponent from 'components/mdxComponents/ImageComponent';
+import AnChorComponent from 'components/mdxComponents/AnChorComponent';
+import Heading3Component from 'components/mdxComponents/Heading3Component';
 
 type PostsResult = {
   previousPost?: Post;
@@ -32,7 +32,7 @@ export const generateMetadata = ({
 }) => {
   const decodedSlug = decodeURIComponent(slug);
   const currentPost = sortedPosts.find(
-    (post: Post) => post.url === `/posts/${decodedSlug}`,
+    (post: Post) => post.url === decodedSlug,
   );
   return {
     title: currentPost?.title,
@@ -74,7 +74,7 @@ export default function page({
 
   const { currentPost, nextPost, previousPost } = sortedPosts.reduce(
     (acc: PostsResult, cur, idx, src) => {
-      if (cur.url === `/posts/${decodedSlug}`) {
+      if (cur.url === decodedSlug) {
         acc.currentPost = cur;
         if (idx) acc.nextPost = src[idx - 1];
         if (src.length - 1 > idx) acc.previousPost = src[idx + 1];
