@@ -11,7 +11,7 @@ const noto_sans_kr = Noto_Sans_KR({
   subsets: ['latin'],
 });
 
-const title = '이상원 기술 블로그';
+export const title = '이상원 기술 블로그';
 const description = '프론트엔드 개발자 이상원의 기술 블로그입니다.';
 const url = process.env.SITE_URL;
 export const metadata = {

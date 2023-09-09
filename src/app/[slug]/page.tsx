@@ -4,6 +4,7 @@ import { getMDXComponent } from 'next-contentlayer/hooks';
 
 import { sortedPosts } from 'lib/contentlayer';
 import styles from './posts.module.scss';
+import { title } from 'app/layout';
 
 import PostNavigator from 'components/post/PostNavigator';
 import Utterances from 'components/comment/Utterances';
@@ -35,10 +36,10 @@ export const generateMetadata = ({
     (post: Post) => post.url === decodedSlug,
   );
   return {
-    title: currentPost?.title,
+    title: `${currentPost?.title} - ${title}`,
     description: currentPost?.description,
     openGraph: {
-      title: currentPost?.title,
+      title: `${currentPost?.title} - ${title}`,
       description: currentPost?.description,
       url: currentPost?.url,
       locale: 'ko_KR',
