@@ -25,6 +25,9 @@
         color: var(--bg);
         background-color: var(--title);
       }
+      small {
+        font-size: 12px;
+      }
     }
   }
   &.isDetailPage {

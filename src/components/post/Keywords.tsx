@@ -5,6 +5,7 @@ import cn from 'classnames/bind';
 import styles from './keywords.module.scss';
 import { useAppDispatch, useAppSelector } from 'hooks';
 import { setKeyword } from 'redux/slices/keywordSlice';
+import { keywordCounts } from 'lib/contentlayer';
 
 interface Props {
   isKeywordsPage?: boolean;
@@ -41,7 +42,8 @@ export default function Keywords({
           key={keyword}
           className={cx(keyword === selectedKeyword && 'isActive')}
         >
-          {keyword}
+          {keyword}{' '}
+          {isKeywordsPage && <small>({keywordCounts[keyword]})</small>}
         </button>
       ))}
     </div>
