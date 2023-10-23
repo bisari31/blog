@@ -11,7 +11,7 @@ import Utterances from 'components/comment/Utterances';
 import Keywords from 'components/post/Keywords';
 import ImageComponent from 'components/mdxComponents/ImageComponent';
 import AnChorComponent from 'components/mdxComponents/AnChorComponent';
-import Heading3Component from 'components/mdxComponents/Heading3Component';
+import Heading4Component from 'components/mdxComponents/Heading4Component';
 
 type PostsResult = {
   previousPost?: Post;
@@ -68,7 +68,7 @@ export default function page({
   const components = {
     img: ImageComponent,
     a: AnChorComponent,
-    h3: Heading3Component,
+    h4: Heading4Component,
   };
 
   const decodedSlug = decodeURIComponent(slug);
