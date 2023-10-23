@@ -1,14 +1,14 @@
 ---
 title: Next.js, Typescript 환경에서 Kakao Maps API 사용하기
 date: 2023-08-20
-description: 공식 문서를 따라 진행했더니 kakao.maps에서 타입 에러가 발생했다.
+description: 라이브러리 없이 Nextjs, Typescript 환경에서 kakao map api를 사용하는 방법에 대해 알아보겠습니다.
 thumbnail: /imgs/posts/15/kakaomap.png
 keywords:
   - nextjs
   - kakao api
 ---
 
-카카오 MAP API를 사용하기 위해선 다음과 같이 코드를 작성해야 한다.
+카카오 MAP API를 사용하기 위해선 다음과 같이 코드를 작성해야 합니다.
 
 ```html
 <!DOCTYPE html>
@@ -36,7 +36,7 @@ keywords:
 </html>
 ```
 
-위 코드를 jsx 문법에 맞게 작성해야 한다. 다양한 방법들이 존재하지만 `<div>`에 `id`를 지정하는 대신에 `useRef`를 이용했고, next의 `<Script>`를 사용하여 api를 호출했다.
+위 코드를 jsx 문법에 맞게 작성해야 합니다. 다양한 방법들이 존재하지만 `<div>`에 `id`를 지정하는 대신에 `useRef`를 이용했고, next의 `<Script>`를 사용하여 api를 호출하겠습니다.
 
 ```tsx
 'use client';
@@ -67,7 +67,7 @@ export default function Map() {
 }
 ```
 
-이렇게 작성하면 전역 객체에서 kakao를 찾을 수 없어 참조 에러가 발생한다. 전역 객체에 kakao 타입을 추가한 후에 다음과 같이 코드를 수정해야 한다.
+이렇게 작성하면 전역 객체에서 kakao를 찾을 수 없어 참조 에러가 발생합니다. 전역 객체에 kakao 타입을 추가한 후에 다음과 같이 코드를 수정해야 합니다.
 
 ```ts
 declare global {
@@ -77,7 +77,7 @@ declare global {
 }
 ```
 
-기존 `kakao.maps`에서 `window.kakao.maps`로 변경한다.
+기존 `kakao.maps`에서 `window.kakao.maps`로 변경
 
 ```tsx {4,8}
 useEffect(() => {
@@ -91,10 +91,10 @@ useEffect(() => {
 }, []);
 ```
 
-지도가 생성될 것 같지만 오류가 발생한다.
+지도가 생성될 것 같지만 오류가 발생합니다.
 ![error1 !!700](/imgs/posts/15/error1.png)
 
-이 오류는 스크립트보다 useEffect 코드가 먼저 실행되어 maps 프로퍼티를 찾을 수 없기 때문에 발생하는 오류다. 카카오 API는 스크립트를 동적으로 불러오기 위한 정적 메서드를 제공하고 있다. 코드를 수정하고 api key 뒤에 `autoload=false`를 추가해야 한다.
+이 오류는 스크립트보다 useEffect 코드가 먼저 실행되어 maps 프로퍼티를 찾을 수 없기 때문에 발생하는 오류입니다. 카카오 API는 스크립트를 동적으로 불러오기 위한 정적 메서드를 제공하고 있습니다. 코드를 수정하고 api key 뒤에 `autoload=false`를 추가해야 합니다.
 
 ```html {3}
 <script
@@ -109,7 +109,7 @@ useEffect(() => {
 </script>
 ```
 
-script 컴포넌트에 `strategy` 옵션에 `beforeInteractive`를 주어 hydration 이전에 실행시키게 만든다. `beforeInteractive`를 주게 되면 해당 스크립트를 루트 레이아웃으로 빼야 한다. 그 이유는 `beforeInteractive`를 설정한 스크립트는 루트 레이아웃 내에서만 작동한다고 공식 문서는 설명하고 있다.
+script 컴포넌트에 `strategy` 옵션에 `beforeInteractive`를 주어 hydration 이전에 실행시키게 만듭니다. `beforeInteractive`를 주게 되면 해당 스크립트를 루트 레이아웃으로 빼야 합니다. `beforeInteractive`를 설정한 스크립트는 루트 레이아웃 내에서만 작동한다고 공식 문서는 설명하고 있습니다.
 
 ```tsx
 // layout.tsx
@@ -161,6 +161,6 @@ export default function Map() {
 }
 ```
 
-이제 카카오 맵이 정상적으로 생성된다. 이 방법 밖에도 `document.createElement`를 이용해 script를 생성하는 방법과 `<Script>` 컴포넌트에 `onLoad` prop을 이용해 하는 방법, 라이브러리를 이용한 방법 등 다양한 방법들이 있다.
+이제 카카오 맵이 정상적으로 생성됩니다. 이 방법 밖에도 `document.createElement`를 이용해 script를 생성하는 방법과 `<Script>` 컴포넌트에 `onLoad` prop을 이용해 하는 방법, 라이브러리를 이용한 방법 등 다양한 방법들이 있습니다.
 
 ![kakao_map !!500](/imgs/posts/15/kakaomap.png)

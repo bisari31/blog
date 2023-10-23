@@ -1,0 +1,388 @@
+---
+title: Sass 공식 문서 해석
+date: 2023-10-19
+description: Sass에서 use와 import의 차이, 그리고 mixin과 extend의 차이 등 Scss 기능들에 대해 살펴보겠습니다.
+thumbnail: /imgs/posts/16/sass-image.jpg
+keywords:
+  - css
+  - sass
+  - scss
+---
+
+## Variables
+
+다음과 같이 변수를 사용하여 반복을 줄일 수 있습니다.
+
+```scss
+$font_size: 100px;
+.circle {
+  width: $font_size;
+  height: $font_size;
+  border-radius: $font_size * 0.5;
+}
+```
+
+`$font_size` 와 `$font-size`는 동일한 변수를 참조하게 됩니다.
+
+## Parent Selector
+
+상위 선택자 `&`를 통해 외부 선택자를 참조할 수 있습니다.
+
+```scss
+.alert {
+  &:hover {
+    font-weight: bold;
+  }
+  :not(&) {
+    opacity: 0.8;
+  }
+}
+```
+
+상위 선택자를 통해 텍스트를 추가할 수도 있습니다.
+
+```scss
+.accordion {
+  // .accordion__copy
+  &__copy {
+    // .accordion--copy
+    &--open {
+      //...
+    }
+  }
+}
+```
+
+## At(@) Rules
+
+### @use
+
+`@use`를 사용하여 mixin, function 및 변수를 불러오고 다른 스타일시트를 결합할 수 있습니다.
+
+```scss
+// src/_corners.scss
+$radius: 3px;
+
+@mixin rounded {
+  border-radius: $radius;
+}
+
+// style.scss
+@use 'src/corners';
+
+.button {
+  @include corners.rounded;
+  padding: 5px + corners.$radius;
+}
+```
+
+`@use`를 통해 불러온 모듈은 확장자명을 생략할 수 있습니다. `@use 'variables'`는 `variables.scss`, `variables.sass`, `variables.css`를 자동으로 불러옵니다. 해당 모듈을 사용하기 위해선 네임스페이스를 앞에 사용해야 합니다. 임의의 이름으로 변경도 가능합니다. `as *`을 통해 네임스페이스를 생략할 수도 있지만 다른 멤버(mixin, function, 변수 등)와 충돌 위험이 있기 때문에 본인이 작성한 스타일시트에 한해서 사용해야 합니다.
+
+```scss
+@use 'src/corners' as c;
+.button {
+  @include c.rounded;
+  padding: 5px + c.$radius;
+}
+
+@use 'src/corners' as *;
+.button {
+  @include rounded;
+  padding: 5px + $radius;
+}
+```
+
+#### Private Members
+
+다음과 같이 `-` 또는 `_` 을 이용하여 스타일시트 내에서 정의한 멤버를 비공개로 전환할 수 있습니다. 비공개로 전환된 멤버는 해당 스타일시트 내에서만 참조 가능합니다.
+
+```scss
+// _variables.scss
+$violet: violet;
+
+@mixin background {
+  background: $violet;
+}
+
+// page.scss
+@use '@/foundation/variables';
+
+.main {
+  @include variables.background; // ⭕
+
+  color: variables.$-violet; // ❌ SassError: Private members can't be accessed from outside their modules.
+}
+```
+
+#### Partials
+
+자체적으로 컴파일되지 않고 모듈로만 로드되는 파일은 `_variables.scss`와 같이 `_`를 앞에 추가하여 파일명을 작성합니다. `_`가 앞에 작성된 해당 파일은 자체적으로 컴파일하지 않도록 지시합니다. 모듈을 가져올 때도 `_`를 생략할 수 있습니다.
+
+### @import
+
+@import 규칙은 모든 것이 전역적이기 때문에 각 파일에서 참조하는 멤버의 출처를 알기 어려우며, 이름 충돌이 일어날 확률이 매우 높기에 Sass 팀은 @import 규칙의 사용을 권장하지 않습니다. 해당 규칙은 향후 폐지할 계획이라고 공식 문서에는 설명하고 있습니다.
+
+### @forward
+
+@forward는 여러 스타일시트를 한 곳에 모아 다른 스타일시트에서 한 번에 불러 사용할 때 유용합니다.
+
+```scss
+// _variables.scss
+$red: #b42525;
+
+// _index.scss
+@forward './variables';
+
+// page.scss
+@use 'foundation/index';
+
+p {
+  color: index.$red;
+}
+```
+
+만약 `_index.scss`에서 @use를 통해 `variables.scss`를 불러올 경우 `page.scss`에서는 variables 멤버를 사용할 수 없습니다.
+
+### @mixin and @include
+
+@mixin을 사용하면 재사용할 수 있는 스타일을 정의할 수 있습니다. @mixin은 @include를 통해 사용할 수 있습니다.
+
+```scss
+@mixin reset-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@mixin horizontal-list {
+  @include reset-list;
+
+  li {
+    display: inline-block;
+    margin: {
+      left: -2px;
+      right: 2em;
+    }
+  }
+}
+
+nav ul {
+  @include horizontal-list;
+}
+```
+
+#### Arguments
+
+인수를 받아 다음과 같이 동작을 정의할 수 있습니다.
+
+```scss
+@mixin rtl($property, $ltr-value, $rtl-value) {
+  #{$property}: $ltr-value;
+
+  [dir='rtl'] & {
+    #{$property}: $rtl-value;
+  }
+}
+
+.sidebar {
+  @include rtl(float, left, right);
+}
+```
+
+#### Optional Arguments
+
+다음과 같이 인수의 기본 값을 지정할 수 있습니다.
+
+```scss
+@mixin replace-text($image, $x: 50%, $y: 50%) {
+  text-indent: -99999em;
+  overflow: hidden;
+  text-align: left;
+
+  background: {
+    image: $image;
+    repeat: no-repeat;
+    position: $x $y;
+  }
+}
+
+.mail-icon {
+  @include replace-text(url('/images/mail.svg'), 0);
+}
+```
+
+### @function
+
+@function를 사용하여 복잡한 작업을 정의할 수 있습니다.
+
+```scss
+@function sum($numbers...) {
+  $sum: 0;
+  @each $number in $numbers {
+    $sum: $sum + $number;
+  }
+  @return $sum;
+}
+
+.micro {
+  width: sum(50px, 30px, 100px); // 180px
+}
+
+$widths: 50px, 30px, 100px;
+.micro {
+  width: min($widths...); // 30px
+}
+```
+
+위와 같이 인수의 개수를 정확하게 파악하지 못할 때 마지막에 `...`를 추가하면 자바스크립트의 Rest parameters와 같이 여러 개의 인수를 전달받을 수 있습니다.
+
+#### @return
+
+@return은 @function 내에서만 사용 가능하며 @function은 @return으로 끝나야 합니다. return이 발생되면 즉시 함수를 종료하고 결과를 반환합니다.
+
+### @extend
+
+페이지를 디자인할 때 해당 클래스의 고유한 스타일이 모두 필요한 경우가 있습니다.
+
+```tsx
+<main className={styles.main}>
+  <input type="text" className={styles.input} />
+  <input type="text" className={`${styles.pwd} ${styles.input}`} />
+</main>
+```
+
+@extend를 사용하여 다음과 같이 클래스 명의 복잡도를 해결할 수 있습니다.
+
+```tsx
+<main className={styles.main}>
+  <input type="text" className={styles.input} />
+  <input type="text" className={styles.pwd} />
+</main>
+```
+
+```scss
+.input {
+  display: flex;
+  padding: 10px;
+}
+
+.pwd {
+  @extend .input;
+  border-color: blue;
+}
+```
+
+@extend는 해당 클래스의 모든 스타일을 확장하게 됩니다. `:hover`와 같이 CSS 의사 클래스의 경우도 이에 해당됩니다.
+
+```scss
+.input {
+  display: flex;
+  padding: 10px;
+  &:hover {
+    border-color: red;
+  }
+}
+
+.pwd {
+  @extend .input;
+  border-color: blue;
+}
+```
+
+#### Placeholder Selectors
+
+확장만을 목적으로 하는 스타일을 생성할 때 자리 유용하게 사용할 수 있습니다. 해당 선택자는 css에 컴파일되지 않지만 확장한 클래스에는 포함됩니다.
+
+```scss
+%input {
+  display: flex;
+  padding: 10px;
+  border: 1px solid green;
+  &:hover {
+    border-color: red;
+  }
+}
+
+.main {
+  .input {
+    @extend %input;
+  }
+}
+```
+
+#### Extends or Mixins?
+
+mixin과 extend 모두 스타일을 캡슐화하여 재사용하는 방법입니다. 공식 문서에서는 `.error--serious` 와 같이 관계를 가진 경우 `.error` 클래스를 확장하는 것을 권장하며 그 외에 인수를 받아 스타일을 정의하거나 관계가 없는 경우 mixin을 권장하고 있습니다.
+
+### @if and @else
+
+else는 생략할 수 있으며 @else if를 사용하여 원하는 개수의 조건을 추가할 수 있습니다. 자바스크립트와 다르게 false와 null의 경우에만 거짓으로 간주됩니다.
+
+```scss
+@mixin theme-colors($light-theme: true) {
+  @if $light-theme {
+    background-color: $light-background;
+    color: $light-text;
+  } @else {
+    background-color: $dark-background;
+    color: $dark-text;
+  }
+}
+
+.banner {
+  @include theme-colors($light-theme: true);
+  body.dark & {
+    @include theme-colors($light-theme: false);
+  }
+}
+```
+
+### @each
+
+@each 규칙은 각각의 요소들에 대해 스타일을 쉽게 구현할 수 있습니다. 주로 반복적인 스타일에 유용합니다.
+
+```scss
+$sizes: 40px, 50px, 80px;
+
+@each $size in $sizes {
+  .icon-#{$size} {
+    font-size: $size;
+    height: $size;
+    width: $size;
+  }
+}
+
+// 실제 적용 클래스명
+
+.icon-40px {
+...
+}
+.icon-50px {
+...
+}
+.icon-80px {
+...
+}
+```
+
+다음과 같이 키와 값을 지정하여 반복적인 작업을 할 수도 있습니다.
+
+```scss
+$icons: (
+  'eye': '\f112',
+  'start': '\f12e',
+  'stop': '\f12f',
+);
+
+@each $name, $glyph in $icons {
+  .icon-#{$name}:before {
+    display: inline-block;
+    font-family: 'Icon Font';
+    content: $glyph;
+  }
+}
+```
+
+#### Reference
+
+[Sass 공식 문서 !!ref](https://sass-lang.com/documentation)
