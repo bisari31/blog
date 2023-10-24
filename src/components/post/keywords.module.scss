@@ -10,8 +10,7 @@
     background-color: var(--keyword-bg);
     border-radius: 9px;
     &:hover {
-      color: var(--bg);
-      background-color: var(--title);
+      background-color: var(--keyword-bg-hover);
     }
   }
 
@@ -22,8 +21,8 @@
       border: 1px solid var(--keyword-border);
       &.isActive {
         border: none;
-        color: var(--bg);
-        background-color: var(--title);
+        color: var(--keyword-text-active);
+        background-color: var(--keyword-bg-active);
       }
       small {
         font-size: 12px;
