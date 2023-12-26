@@ -23,6 +23,10 @@ $keyword-text: (
   'light': #bdbdbd,
   'dark': #595959,
 );
+$keyword-bg-active: (
+  'light': map.get($title, 'light'),
+  'dark': #272727,
+);
 
 $light: (
   'bg': #fff,
@@ -37,7 +41,10 @@ $light: (
   'svg-hover': darken(map.get($svg, 'light'), 20%),
   'svg-bg-hover': map.get($svg-bg-hover, 'light'),
   'keyword-bg': #cecece,
+  'keyword-bg-active': map-get($keyword-bg-active, 'light'),
+  'keyword-bg-hover': darken(#cecece, 20%),
   'keyword-text': #bdbdbd,
+  'keyword-text-active': map-get($title, 'dark'),
   'keyword-border': lighten(map.get($keyword-text, 'light'), 20%),
   'search-btn-bg-hover': darken(map.get($svg-bg-hover, 'light'), 1.5%),
   'search-list-bg-hover': darken(map.get($svg-bg-hover, 'light'), 1%),
@@ -58,7 +65,10 @@ $dark: (
   'svg-hover': lighten(map.get($svg, 'dark'), 20%),
   'svg-bg-hover': map.get($svg-bg-hover, 'dark'),
   'keyword-bg': #232323,
+  'keyword-bg-active': map-get($keyword-bg-active, 'dark'),
+  'keyword-bg-hover': lighten(#232323, 10%),
   'keyword-text': #595959,
+  'keyword-text-active': map-get($title, 'dark'),
   'keyword-border': darken(map.get($keyword-text, 'dark'), 20%),
   'search-btn-bg-hover': lighten(map.get($svg-bg-hover, 'dark'), 3%),
   'search-list-bg-hover': darken(map.get($svg-bg-hover, 'dark'), 1%),

@@ -5,6 +5,7 @@ import 'styles/style.scss';
 
 import Header from 'components/header/Header';
 import { Providers } from 'redux/providers';
+import { Metadata } from 'next';
 
 const noto_sans_kr = Noto_Sans_KR({
   weight: ['400', '500', '700', '900'],
@@ -14,7 +15,7 @@ const noto_sans_kr = Noto_Sans_KR({
 export const title = '이상원 기술 블로그';
 const description = '프론트엔드 개발자 이상원의 기술 블로그입니다.';
 const url = process.env.SITE_URL;
-export const metadata = {
+export const metadata: Metadata = {
   title,
   description,
   verification: {
