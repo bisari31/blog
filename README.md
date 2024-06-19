@@ -1,4 +1,4 @@
-<!-- ### 기술 스택
+### 기술 스택
 
 <div>
 <img src="https://img.shields.io/badge/Next.js-v13.4-000000"/>
@@ -10,4 +10,4 @@
 
 ### 배포 주소
 
-<https://leesangwondev.vercel.app/> -->
+<https://leesangwondev.vercel.app/>
