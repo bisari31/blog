@@ -10,8 +10,6 @@ keywords:
 
 ![tailwindcss](/imgs/posts/12/10c23809-d46c-4111-9ba4-15dca3b63dd8.png)
 
-이전에 tailwind(이하 테일윈드)의 존재를 알았지만 클래스명을 더럽힌다는 이유로 기피했다. nextjs를 접하면서 테일윈드를 사용하게 되었는데 단점도 존재하지만 장점이 참 많은 프레임워크 같다. 테일윈드를 좀 더 똑똑하게 사용하기 위해 알면 좋은 정보들과 개념들을 익혀보자.
-
 ## Code Editor 설정
 
 ### Tailwind CSS IntelliSense 익스텐션
@@ -63,8 +61,6 @@ module.exports = {
 };
 ```
 
-`font-size`의 경우 테일윈드는 `text-sm: 14px`, `text-base: 16px`, `text-lg: 18px`을 제공하기에 15px을 추가하여 사용했다.
-
 ```tsx /bg-primary/ /text-15px/
 <button type="button" className="rounded-md bg-primary text-15px">
   로그인
@@ -73,7 +69,7 @@ module.exports = {
 
 ### 임의의 값 사용
 
-한번 사용하는 색상이 있는데 해당 색상은 테일윈드 팔레트에서 지원하지 않는다. 또한 특정 px을 한 번씩 사용해야 하는데 해당 px을 지원하지 않아 `theme`에 추가하는 건 별로 좋지 않은 생각 같다. 이럴 땐 다음과 같이 사용할 수 있다.
+만약 한번 사용하는 색상이 있는데 해당 색상은 테일윈드 팔레트에서 지원하지 않는다면, 또한 특정 px을 한 번씩 사용해야 하는데 해당 px을 지원하지 않는다면 아래와 같이 사용할 수 있다.
 
 ```tsx /rounded-[50px] bg-[#702ddc] text-[15px]/
 <button type="button" className="rounded-[50px] bg-[#702ddc] text-[15px]">
