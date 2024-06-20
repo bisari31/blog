@@ -9,10 +9,10 @@ keywords:
 
 ## [[Prototype]]
 
-자바스크립트의 모든 객체는 `[[Prototype]]` 내부 슬롯을 가진다. 이 내부 슬롯이 가리키는 값은 null이나 다른 객체를 참조하게 되는데 참조되는 객체를 *프로토타입*이라 부른다. 일반 객체를 만들었을 때 객체 메서드를 쓸 수 있는 이유가 바로 이 프로토타입을 통해 상속을 받기 때문이다. 내부 슬롯 `[[Prototype]]`에 직접 접근할 수는 없지만(객체 간에 상속 관계를 무너뜨리지 않기 위해 직접 접근을 허용하고 있지 않다.) 접근자 프로퍼티 `__proto__`를 통해 접근이 가능하다.
+자바스크립트의 모든 객체는 `[[Prototype]]` 내부 슬롯을 가집니다. 이 내부 슬롯이 가리키는 값은 null이나 다른 객체를 참조하게 되는데 참조되는 객체를 *프로토타입*이라 부릅니다. 일반 객체를 만들었을 때 객체 메서드를 쓸 수 있는 이유가 바로 이 프로토타입을 통해 상속 받기 때문입니다. 내부 슬롯 `[[Prototype]]`에 직접 접근할 수는 없지만(객체 간에 상속 관계를 무너뜨리지 않기 위해 직접 접근을 허용 X) 접근자 프로퍼티 `__proto__`를 통해 접근이 가능합니다.
 
 > _내부 슬롯이란?_  
-> 이중 대괄호(`[[...]]`)로 감싸져 있으며 주로 객체의 내부 상태나 동작을 관리하기 위해 사용된다. 실제로 접근할 수 없고 일부에 한해서 접근자 프로퍼티를 제공한다.
+> 이중 대괄호(`[[...]]`)로 감싸져 있으며 주로 객체의 내부 상태나 동작을 관리하기 위해 사용됩니다. 실제로 접근할 수 없고 일부에 한해서 접근자 프로퍼티(`__proto__`)를 제공합니다.
 
 ```js
 const iphone = {
@@ -27,7 +27,7 @@ galaxy.__proto__ = iphone;
 console.log(galaxy.siri); // true
 ```
 
-갤럭시는 아이폰의 시리를 사용할 수 없다. 하지만 접근자 프로퍼티 `__proto__`를 통해 아이폰은 갤럭시의 프로토타입이 되었고 갤럭시는 아이폰으로부터 상속받을 수 있다. 이제 갤럭시는 시리를 쓸 수 있게 된 것이다.
+갤럭시는 아이폰의 시리를 사용할 수 없습니다. 하지만 접근자 프로퍼티 `__proto__`를 통해 아이폰은 갤럭시의 프로토타입이 되었고 갤럭시는 아이폰으로부터 상속받게 됩니다. 이제 갤럭시는 아이폰의 시리 기능을 사용할 수 있습니다.
 
 ### 프로토타입 체인
 
@@ -49,11 +49,11 @@ galaxy.__proto__ = iphone;
 console.log(galaxy.airDrop); //true
 ```
 
-아이폰의 프로토타입은 애플이다. 아이폰은 애플에게 에어드랍을 상속받아 사용할 수 있다. 갤럭시 또한 에어드랍을 사용할 수 있다. 이렇게 프로토타입은 서로 연결되어 있으며 부모의 부모 프로퍼티까지 참조할 수 있게 된다. 이것을 프로토타입 체이닝이라 한다. 프로토타입은 오직 객체나 null만 가능하다. 오직 하나의 객체만 존재할 수 있으며 단방향 링크드 리스트로 구현되어야 한다.
+아이폰의 프로토타입은 애플인데요. 아이폰은 애플에게 에어드랍을 상속받아 사용할 수 있습니다. 갤럭시 또한 아이폰이 프로토타입이므로 에어드랍을 사용할 수 있습니다. 이렇게 프로토타입은 서로 연결되어 있으며 부모의 부모 프로퍼티까지 참조할 수 있습니다. 이것이 프로토타입 체이닝입니다. 프로토타입은 오직 객체나 null만 가능한데요. 오직 하나의 객체만 존재할 수 있으며 단방향 링크드 리스트로 구현되어야 합니다.
 
 ### for..in
 
-for..in 문은 상속 프로퍼티도 순회 대상에 포함된다.
+for..in 문은 상속 프로퍼티도 순회 대상에 포함됩니다.
 
 ```js
 let animal = {
@@ -72,7 +72,7 @@ for (const prop in rabbit) {
 console.log(Object.keys(rabbit)); // ['jumps']
 ```
 
-`Object.keys`는 자신의 키만 반환한다. `obj.hasOwnProperty(key)` 메서드를 이용하면 상속 프로퍼티를 순회 대상에서 제외할 수 있다.
+`Object.keys`는 자신의 키만 반환합니다. `obj.hasOwnProperty(key)` 메서드를 이용하면 상속 프로퍼티를 순회 대상에서 제외할 수 있습니다.
 
 ```js
 let animal = {
@@ -95,14 +95,14 @@ for (const prop in rabbit) {
 console.log(Object.keys(rabbit)); // ['jumps']
 ```
 
-다음 그림과 같이 프로토타입이 형성된다. rabbit의 프로토타입은 animal이고 animal의 프로토타입은 Object.prototype이다. Object.prototype의 프로토타입은 null이 된다. Object.prototype의 프로퍼티는 분명 `hasOwnProperty`를 소유하는데 `for..in` 문에서 순회되지 않은 이유는 `hasOwnProperty` 프로퍼티는 내부 슬롯 `enumerable`값이 false이기 때문이다.
+아래 그림과 같이 프로토타입이 형성되고 있습니다. rabbit의 프로토타입은 animal이고 animal의 프로토타입은 Object.prototype입니다. Object.prototype의 프로토타입은 null이 됩니다. Object.prototype의 프로퍼티는 분명 `hasOwnProperty`를 소유하는데 `for..in` 문에서 순회되지 않은 이유는 `hasOwnProperty` 프로퍼티는 내부 슬롯 `enumerable`값이 false이기 때문입니다.
 
 ![example1 !!300](/imgs/posts/14/example1.png)
 [https://ko.javascript.info/prototype-inheritance](https://ko.javascript.info/prototype-inheritance)
 
 ## 함수의 prototype 프로퍼티
 
-인스턴스를 생성할 수 있는 함수는 `prototype` 프로퍼티를 가진다. 이 `prototype` 프로퍼티는 내부 슬롯 `[[Prototype]]`과 다르다.
+인스턴스를 생성할 수 있는 함수는 `prototype` 프로퍼티를 가집니다. 이 `prototype` 프로퍼티는 내부 슬롯 `[[Prototype]]`과 다릅니다.
 
 ```js
 let animal = {
@@ -119,12 +119,12 @@ let rabbit = new Rabbit('흰 토끼'); //  rabbit.__proto__ === animal
 console.log(rabbit.eats);
 ```
 
-Rabbit 생성자 함수를 통해 rabbit 인스턴스를 만들었고 rabbit의 프로토타입을 animal로 지정했다. 함수의 프로퍼티 `prototype`은 위 코드와 같이 인스턴스의 프로토타입을 설정할 수 있다.
+위 코드에서 Rabbit 생성자 함수를 통해 rabbit 인스턴스를 만들었고 rabbit의 프로토타입을 animal로 지정했습니다. 함수의 프로퍼티 `prototype`은 위 코드와 같이 인스턴스의 프로토타입을 설정할 수 있습니다.
 
 ![example2 !!600](/imgs/posts/14/example2.png)
 [https://ko.javascript.info/function-prototype](https://ko.javascript.info/function-prototype)
 
-즉 생성자 함수의 `prototype` 프로퍼티는 인스턴스의 프로토타입을 변경하기 위해 존재하며 `__proto__`는 객체 자신의 프로토타입에 접근, 변경하기 위해 존재한다.
+즉 생성자 함수의 `prototype` 프로퍼티는 인스턴스의 프로토타입을 변경하기 위해 존재하며 `__proto__`는 객체 자신의 프로토타입에 접근, 변경하기 위해 존재합니다.
 
 ```js
 function Person(name) {
@@ -142,9 +142,9 @@ jane.describe();
 ![example3 !!500](/imgs/posts/14/example3.png)
 [https://exploringjs.com/es5/ch17.html](https://exploringjs.com/es5/ch17.html)
 
-생성자 함수 Person은 jane 객체를 생성했다. jane의 프로토타입은 Person.prototype이 되며 프로토타입 상속을 통해 `jane.describe()`을 실행할 수 있다. 모든 프로토타입은 `constructor` 프로퍼티를 가지게 된다. 이때 Person.prototype의 constructor 참조는 생성자 함수 Person이 된다. 또한 Person의 prototype 프로퍼티를 통해 프로토타입에 접근할 수 있다.
+생성자 함수 Person은 jane 객체를 생성했습니다. jane의 프로토타입은 Person.prototype이 되며 프로토타입 상속을 통해 describe 함수를 실행할 수 있게 됩니다. 모든 프로토타입은 `constructor` 프로퍼티를 가지고 있습니다. 이때 Person.prototype의 constructor 참조는 생성자 함수 Person이 된다. 또한 Person의 prototype 프로퍼티를 통해 프로토타입에 접근할 수 있습니다.
 
-모든 함수가 `prototype` 프로퍼티를 소유하는 것은 아니다. 생성자 함수로 호출할 수 없는 함수는 `prototype` 프로퍼티를 소유하지 않으며 프로토타입도 생성하지 않는다. 이러한 함수를 `non-constructor`라고 하며 화살표 함수와 es6의 메서드가 해당된다.
+모든 함수가 `prototype` 프로퍼티를 소유하는 것은 아닌데요. 생성자 함수로 호출할 수 없는 함수는 `prototype` 프로퍼티를 소유하지 않으며 프로토타입도 생성하지 않습니다. 이러한 함수를 `non-constructor`라고 하며 화살표 함수와 es6의 메서드가 이에 해당됩니다.
 
 ## 내장 객체의 프로토타입
 
@@ -153,7 +153,7 @@ const arr = [1, 2, 3];
 console.log(arr.filter((n) => !(n % 2))); // 2
 ```
 
-arr가 `filter` 메서드를 사용할 수 있는 이유는 `Array.prototype`의 메서드를 상속받기 때문이다. 위 코드는 리터럴을 사용해 생성했지만 사실 아래 코드와 같다.
+arr가 `filter` 메서드를 사용할 수 있는 이유는 `Array.prototype`의 메서드를 상속받기 때문이다. 위 코드는 리터럴을 사용해 생성했지만 사실 아래 코드와 같습니다.
 
 ```js
 const arr = new Array([1, 2, 3]);
@@ -172,12 +172,12 @@ const obj = {};
 console.log(obj.__proto__ === Object.prototype); // true
 ```
 
-모든 내장 프로토타입의 꼭대기엔 `Object.prototype`이 존재하고 `Object.prototype`의 프로토타입은 null이다.
+모든 내장 프로토타입의 꼭대기엔 `Object.prototype`이 존재하고 `Object.prototype`의 프로토타입은 null입니다.
 
 ![example4 !!700](/imgs/posts/14/example4.png)
 [https://ko.javascript.info/prototype-methods](https://ko.javascript.info/prototype-methods)
 
-아래 코드와 같이 내장 객체 `prototype` 프로퍼티를 이용하여 메서드를 추가할 수 있다. 하지만 이 방법은 좋지 않다. 프로토타입은 전역으로 영향을 미치기 때문에 기존 코드와 충돌 날 가능성이 크기 때문에 사용해서는 안 된다.
+아래 코드와 같이 내장 객체 `prototype` 프로퍼티를 이용하여 메서드를 추가할 수 있습니다. 하지만 이 방법은 좋지 않은데요. 프로토타입은 전역으로 영향을 미치기 때문에 기존 코드와 충돌 날 가능성이 크기 때문에 사용해서는 안 됩니다.
 
 ```js
 // ❌
