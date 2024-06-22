@@ -36,7 +36,7 @@ export default function Header() {
         <div className={styles.content}>
           <div className={styles.logo}>
             <button type="button" onClick={handleLogoClick}>
-              기술 블로그
+              이상원 기술 블로그
             </button>
           </div>
           <div className={styles.nav}>
