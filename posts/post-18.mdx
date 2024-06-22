@@ -1,0 +1,141 @@
+---
+title: tailwind에서 재사용 가능한 button 컴포넌트 만들기 (with class-variance-authority)
+date: 2024-06-21
+description:
+thumbnail: /imgs/posts/18/recycle-237874_1920.jpg
+keywords:
+  - tailwind
+  - class-variance-authority
+---
+
+![recyle-button](/imgs/posts/18/recycle-237874_1920.jpg)
+
+씨네톡(영화 리뷰 서비스) 프로젝트에서는 반응형 디자인을 제공하기 때문에 다양한 크기의 버튼 디자인이 있습니다.
+
+![guide1 !!500](/imgs/posts/18/guide1.png)
+
+위 디자인 가이드의 경우 size와 varint 두 개의 객체로 분리한 후 size에는 크기 관련 클래스를, varint 객체에는 색상 관련 클래스를 넣어 객체 맵핑으로 간결하게 코드를 작성할 수 있습니다.
+
+```tsx
+import { ButtonHTMLAttributes } from 'react';
+
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+  size: 'XL' | 'L' | 'M' | 'S' | 'XS';
+  variant: 'bg-orange' | 'bg-gray';
+  children: React.ReactNode;
+}
+const SIZE_MAP: { [k in Props['size']]: string } = {
+  XL: 'w-[360px] rounded-xl py-3 px-5 Text-m-Medium',
+  L: 'w-[180px] rounded-xl py-3 px-5 Text-m-Medium',
+  M: 'w-fit rounded-lg py-2 px-4 Text-m-Medium',
+  S: 'w-fit rounded-lg py-1 px-3 Text-s-Medium',
+  XS: 'w-fit rounded-md py-1 px-2 Text-xs-Regular',
+};
+const VARIANT_MAP: { [k in Props['variant']]: string } = {
+  'bg-gray':
+    'bg-D2_Gray text-Gray hover:bg-D3_Gray hover:text-Gray_Orange active:bg-Gray active:text-Silver disabled:bg-D2_Gray disabled:text-Gray',
+  'bg-orange':
+    'bg-Primary text-Silver hover:bg-Shade_1 active:bg-Shade_3 disabled:bg-D2_Gray disabled:text-Gray',
+};
+
+export default function Button({ size, variant, children, ...rest }: Props) {
+  return (
+    <button
+      className={`flex justify-center ${SIZE_MAP[size]} ${VARIANT_MAP[variant]}`}
+      {...rest}
+    >
+      {children}
+    </button>
+  );
+}
+```
+
+BG 버튼 외에 또 다른 버튼들이 존재하는데요.
+
+![guide1 !!900](/imgs/posts/18/guide3.png)
+
+Line 버튼의 경우 사이즈는 L, M, S 3개의 사이즈를 제공하는데 문제는 BG Button과는 사이즈가 다릅니다. 또한 Text 버튼과 Icon 버튼도 독자적인 사이즈를 갖고 있습니다. 그렇다면 SIZE_MAP의 클래스를 사용할 수 없게 되는데요. 이제 고민에 빠지게 됩니다. 각각의 버튼 컴포넌트를 만들 것인지. 하나만 작성하되 클린하게 코드를 작성할 수는 없는지. 저는 팀원들이 하나의 컴포넌트 사용으로 편하게 버튼 컴포넌트를 사용하게 하고 싶은데요.  
+이러한 고민 끝에 class-variance-authority (이하 cva)를 도입하기로 합니다. cva는 이러한 고민을 해결해주며 타입스크립트를 지원하고 있습니다.
+
+```html
+npm i class-variance-authority
+```
+
+cva는 cva함수를 사용하여 클래스를 정의하는데요. 첫 번째 인수에는 공통 class를 넣어줍니다. 두 번째 인수는 객체를 받는데요. variants 객체에는 기본 구성 요소를, compoundVariants 객체에는 해당 변수들의 조건이 충족될 때 적용될 클래스를 넣어줍니다.
+
+```tsx
+import { cva, VariantProps } from 'class-variance-authority';
+import { ButtonHTMLAttributes } from 'react';
+
+interface Props
+  extends ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof ButtonVariants> {
+  children: React.ReactNode;
+}
+
+const ButtonVariants = cva(`flex justify-center whitespace-nowrap`, {
+  variants: {
+    variant: {
+      grey: 'bg-D2_Gray text-Gray hover:bg-D3_Gray hover:text-Gray_Orange active:bg-Gray active:text-Silver disabled:bg-D2_Gray disabled:text-Gray',
+      orange:
+        'bg-Primary text-Silver hover:bg-Shade_1 active:bg-Shade_3 disabled:bg-D2_Gray disabled:text-Gray',
+      line: 'inner-gray bg-transparent text-Gray_Orange hover:inner-silver hover:text-Silver active:bg-D1_Gray',
+    },
+    size: {
+      XL: 'w-[360px] rounded-xl py-3 px-5 Text-m-Medium',
+      L: 'w-[180px] rounded-xl py-3 px-5 Text-m-Medium',
+      M: 'w-fit rounded-lg py-2 px-4 Text-m-Medium',
+      S: 'w-fit rounded-lg py-1 px-3 Text-s-Medium',
+      XS: 'w-fit rounded-md py-1 px-2 Text-xs-Regular',
+    },
+  },
+  compoundVariants: [
+    {
+      variant: 'line',
+      size: 'L',
+      className: 'py-3 px-5 w-[180px]',
+    },
+    {
+      variant: 'line',
+      size: 'M',
+      className: 'py-3 px-5 w-[120px]',
+    },
+    {
+      variant: 'line',
+      size: 'S',
+      className: 'py-3 px-5 w-fit',
+    },
+  ],
+});
+
+export default function Button({ size, variant, children, ...rest }: Props) {
+  return (
+    <button className={ButtonVariants({ size, variant })} {...rest}>
+      {children}
+    </button>
+  );
+}
+```
+
+compoundVariants의 경우 variant에는 line이, size는 L, M, S의 경우 해당 클래스가 적용된다로 해석됩니다.
+
+settings.json파일에 아래 코드를 추가하면 객체에 클래스를 입력할 때에도 Tailwind CSS IntelliSense가 적용됩니다.
+
+```ts
+{
+  "tailwindCSS.experimental.classRegex": [
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+  ]
+}
+```
+
+완성된 Button 컴포넌트는 아래와 같이 사용할 수 있습니다.
+
+```ts
+return (
+  <Button size="S" variant="line" onClick={handleButtonClick}>
+    로그인
+  </Button>
+);
+```
