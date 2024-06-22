@@ -6,7 +6,6 @@ export default function useModalOpen() {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-        console.log('ddd');
         e.preventDefault();
         setIsModalOpen(true);
       }
