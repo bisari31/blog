@@ -9,9 +9,9 @@ import { setKeyword } from 'redux/slices/keywordSlice';
 import { CloseIcon, MenuIcon } from 'assets';
 import { useTheme, useModalOpen, useAppDispatch } from 'hooks';
 
-import Nav from './Nav';
-import Modal from './modal/Modal';
-import Portal from 'components/common/Portal';
+import Modal from './modal/modal';
+import Nav from 'components/header/nav';
+import Portal from 'components/common/portal';
 
 const cx = cn.bind(styles);
 

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import styles from './postNavigator.module.scss';
+import styles from './post-navigator.module.scss';
 import cn from 'classnames/bind';
 
 interface Props {

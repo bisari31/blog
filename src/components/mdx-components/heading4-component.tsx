@@ -1,4 +1,4 @@
-import styles from './heading4Component.module.scss';
+import styles from './heading4-component.module.scss';
 import cn from 'classnames/bind';
 
 const cx = cn.bind(styles);

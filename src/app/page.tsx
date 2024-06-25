@@ -2,9 +2,9 @@
 import { sortedPosts, sortedUniqueKeywords } from 'lib/contentlayer';
 import styles from './page.module.scss';
 
-import Keywords from 'components/post/Keywords';
-import PostPreview from 'components/post/PostPreview';
+import PostPreview from 'components/post/post-preview';
 import { useAppSelector } from 'hooks';
+import Keywords from 'components/post/keywords';
 
 export default function Home() {
   const { selectedKeyword } = useAppSelector((state) => state.keyword);

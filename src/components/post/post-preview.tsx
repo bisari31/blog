@@ -2,9 +2,9 @@ import Image from 'next/image';
 import { format, parseISO } from 'date-fns';
 import Link from 'next/link';
 
-import styles from './postPreview.module.scss';
+import styles from './post-preview.module.scss';
 
-import Keywords from './Keywords';
+import Keywords from './keywords';
 
 export default function PostPreview({ post }: { post: Post }) {
   return (

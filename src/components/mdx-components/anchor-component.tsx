@@ -1,4 +1,4 @@
-import styles from './anChorComponent.module.scss';
+import styles from './anchor-component.module.scss';
 import cn from 'classnames/bind';
 
 const cx = cn.bind(styles);

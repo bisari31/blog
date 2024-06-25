@@ -6,12 +6,12 @@ import { sortedPosts } from 'lib/contentlayer';
 import styles from './posts.module.scss';
 import { title } from 'app/layout';
 
-import PostNavigator from 'components/post/PostNavigator';
-import Utterances from 'components/comment/Utterances';
-import Keywords from 'components/post/Keywords';
-import ImageComponent from 'components/mdxComponents/ImageComponent';
-import AnChorComponent from 'components/mdxComponents/AnChorComponent';
-import Heading4Component from 'components/mdxComponents/Heading4Component';
+import PostNavigator from 'components/post/post-navigator';
+import Utterances from 'components/comment/utterances';
+import Keywords from 'components/post/keywords';
+import AnChorComponent from 'components/mdx-components/anchor-component';
+import Heading4Component from 'components/mdx-components/heading4-component';
+import ImageComponent from 'components/mdx-components/image-component';
 
 type PostsResult = {
   previousPost?: Post;

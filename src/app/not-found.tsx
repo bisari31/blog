@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 
-import styles from './notFound.module.scss';
+import styles from './not-found.module.scss';
 import { useScrollHidden } from 'hooks';
 
 export default function NotFound() {
