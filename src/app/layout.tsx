@@ -3,7 +3,7 @@ import React from 'react';
 
 import 'styles/style.scss';
 
-import Header from 'components/header/Header';
+import Header from 'components/header/header';
 import { Providers } from 'redux/providers';
 import { Metadata } from 'next';
 
@@ -44,7 +44,6 @@ export const metadata: Metadata = {
     ],
   },
 };
-
 export default function RootLayout({
   children,
 }: {
