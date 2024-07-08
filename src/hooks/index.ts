@@ -5,24 +5,13 @@ import {
 } from 'react-redux';
 import { AppDispatch, RootState } from 'redux/store';
 
-import useKeyboardSelection from './useKeyboardSelection';
-import useOutsideClick from './useOutsideClick';
-import useModalOpen from './useModalOpen';
-import useTheme from './useTheme';
-import useFocus from './useFocus';
-import useScrollHidden from './useScrollHidden';
-
 type DispatchFunc = () => AppDispatch;
-const useAppDispatch: DispatchFunc = useDispatch;
-const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+export { default as useKeyboardSelection } from './useKeyboardSelection';
+export { default as useOutsideClick } from './useOutsideClick';
+export { default as useModalOpen } from './useModalOpen';
+export { default as useTheme } from './useTheme';
+export { default as useFocus } from './useFocus';
+export { default as useScrollHidden } from './useScrollHidden';
 
-export {
-  useAppDispatch,
-  useAppSelector,
-  useKeyboardSelection,
-  useOutsideClick,
-  useModalOpen,
-  useTheme,
-  useFocus,
-  useScrollHidden,
-};
+export const useAppDispatch: DispatchFunc = useDispatch;
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
