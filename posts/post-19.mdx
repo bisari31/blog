@@ -1,0 +1,53 @@
+---
+title: git alias 사용하기
+date: 2024-07-17
+description:
+thumbnail: /imgs/git.png
+keywords:
+  - git
+---
+
+깃을 사용하다 보면 매번 커맨드를 입력하기가 번거로운데요. git alias를 사용하여 긴 커맨드를 줄여서 사용할 수 있습니다.
+
+## alias 등록하기
+
+```git
+$ git config --global alias.<alias> '<command>'
+```
+
+만약 `git rebase -i`를 `rbi`로 등록하고 싶다면 다음과 같이 등록할 수 있습니다.
+
+```git
+$ git config --global alias.rbi 'rebase -i'
+```
+
+사용시에는 다음과 같이 사용할 수 있습니다.
+
+```git
+$ git rbi HEAD~3
+```
+
+## alias 조회하기
+
+등록된 alias 목록을 조회하는 방법은 다음과 같습니다.
+
+```git
+// 전체 환경
+$ git config --get-regexp alias
+// global
+$ git config --global --get-regexp alias
+```
+
+이 커맨드 또한 다음과 같이 등록하여 사용할 수 있습니다.
+
+```git
+$ git config --global alias.alias 'config --get-regexp alias'
+```
+
+## alias 삭제하기
+
+```git
+$ git config --global --unset alias.<alias>
+```
+
+설정 파일을 변경할시 `--global` 대신 `--local` or `--system`으로 사용할 수 있습니다.
