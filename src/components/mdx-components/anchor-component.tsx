@@ -1,7 +1,6 @@
-import styles from './anchor-component.module.scss';
-import cn from 'classnames/bind';
 
-const cx = cn.bind(styles);
+import styles from './anchor-component.module.scss';
+
 
 export default function AnChorComponent({
   href,
@@ -14,7 +13,7 @@ export default function AnChorComponent({
   const isRef = childrenArray && childrenArray.length > 1;
   return (
     <a
-      className={cx('a', isRef ? 'ref' : 'caption')}
+      // className={cx('a', isRef ? 'ref' : 'caption')}
       href={href}
       target="_blank"
       rel="noreferrer"

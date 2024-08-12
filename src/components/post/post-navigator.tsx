@@ -1,23 +1,22 @@
-import Link from 'next/link';
 import Image from 'next/image';
+import Link from 'next/link';
+
 import styles from './post-navigator.module.scss';
-import cn from 'classnames/bind';
 
 interface Props {
   nextPost?: Post;
   previousPost?: Post;
 }
 
-const cx = cn.bind(styles);
 
 export default function PostNavigator({ nextPost, previousPost }: Props) {
   return (
     <div
-      className={cx(
-        'wrapper',
-        !previousPost && 'noPrevPost',
-        !nextPost && 'noNextPost',
-      )}
+      // className={cx(
+      //   'wrapper',
+      //   !previousPost && 'noPrevPost',
+      //   !nextPost && 'noNextPost',
+      // )}
     >
       {previousPost && (
         <Link className={styles.previous} href={previousPost?.url}>

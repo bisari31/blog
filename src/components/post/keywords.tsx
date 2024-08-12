@@ -1,11 +1,10 @@
 'use client';
+import { useAppDispatch, useAppSelector } from 'hooks';
+import { keywordCounts } from 'lib/contentlayer';
 import { useRouter } from 'next/navigation';
-import cn from 'classnames/bind';
+import { setKeyword } from 'redux/slices/keywordSlice';
 
 import styles from './keywords.module.scss';
-import { useAppDispatch, useAppSelector } from 'hooks';
-import { setKeyword } from 'redux/slices/keywordSlice';
-import { keywordCounts } from 'lib/contentlayer';
 
 interface Props {
   isKeywordsPage?: boolean;
@@ -13,7 +12,6 @@ interface Props {
   keywords: Post['keywords'];
 }
 
-const cx = cn.bind(styles);
 
 export default function Keywords({
   keywords,
@@ -30,17 +28,17 @@ export default function Keywords({
   };
   return (
     <div
-      className={cx('keywords', {
-        isKeywordsPage,
-        isDetailPage,
-      })}
+      // className={cx('keywords', {
+      //   isKeywordsPage,
+      //   isDetailPage,
+      // })}
     >
       {keywords?.map((keyword) => (
         <button
           type="button"
           onClick={(e) => handleNavigation(e, keyword)}
           key={keyword}
-          className={cx(keyword === selectedKeyword && 'isActive')}
+          // className={cx(keyword === selectedKeyword && 'isActive')}
         >
           {keyword}{' '}
           {isKeywordsPage && <small>({keywordCounts[keyword]})</small>}
