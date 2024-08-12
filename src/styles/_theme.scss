@@ -1,9 +1,0 @@
-@use './constant.scss';
-@use './mixin';
-
-html[data-theme='light'] {
-  @include mixin.theme-variables(constant.$light);
-}
-html[data-theme='dark'] {
-  @include mixin.theme-variables(constant.$dark);
-}

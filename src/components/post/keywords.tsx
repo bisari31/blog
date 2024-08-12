@@ -4,14 +4,11 @@ import { keywordCounts } from 'lib/contentlayer';
 import { useRouter } from 'next/navigation';
 import { setKeyword } from 'redux/slices/keywordSlice';
 
-import styles from './keywords.module.scss';
-
 interface Props {
   isKeywordsPage?: boolean;
   isDetailPage?: boolean;
   keywords: Post['keywords'];
 }
-
 
 export default function Keywords({
   keywords,
@@ -28,10 +25,10 @@ export default function Keywords({
   };
   return (
     <div
-      // className={cx('keywords', {
-      //   isKeywordsPage,
-      //   isDetailPage,
-      // })}
+    // className={cx('keywords', {
+    //   isKeywordsPage,
+    //   isDetailPage,
+    // })}
     >
       {keywords?.map((keyword) => (
         <button

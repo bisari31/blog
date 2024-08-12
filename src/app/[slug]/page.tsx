@@ -1,17 +1,14 @@
-import { format, parseISO } from 'date-fns';
-import { notFound } from 'next/navigation';
-import { getMDXComponent } from 'next-contentlayer/hooks';
-
-import { sortedPosts } from 'lib/contentlayer';
-import styles from './posts.module.scss';
-
-import PostNavigator from 'components/post/post-navigator';
+import { title } from 'app/metadata';
 import Utterances from 'components/comment/utterances';
-import Keywords from 'components/post/keywords';
 import AnChorComponent from 'components/mdx-components/anchor-component';
 import Heading4Component from 'components/mdx-components/heading4-component';
 import ImageComponent from 'components/mdx-components/image-component';
-import { title } from 'app/metadata';
+import Keywords from 'components/post/keywords';
+import PostNavigator from 'components/post/post-navigator';
+import { format, parseISO } from 'date-fns';
+import { sortedPosts } from 'lib/contentlayer';
+import { notFound } from 'next/navigation';
+import { getMDXComponent } from 'next-contentlayer/hooks';
 
 type PostsResult = {
   previousPost?: Post;
@@ -90,9 +87,9 @@ export default function page({
   }
   const MDXContent = getMDXComponent(currentPost.body.code);
   return (
-    <div className={styles.postWrapper}>
-      <div className={styles.postInner}>
-        <div className={styles.header}>
+    <div className="">
+      <div className="">
+        <div className="">
           <time dateTime={currentPost.date}>
             {format(parseISO(currentPost.date), 'LLLL d, yyyy')}
           </time>

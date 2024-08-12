@@ -4,8 +4,6 @@ import PostPreview from 'components/post/post-preview';
 import { useAppSelector } from 'hooks';
 import { sortedPosts, sortedUniqueKeywords } from 'lib/contentlayer';
 
-import styles from './page.module.scss';
-
 export default function Home() {
   const { selectedKeyword } = useAppSelector((state) => state.keyword);
   const getFilterPosts = (keyword: string) => {
@@ -15,9 +13,9 @@ export default function Home() {
   const filtedPosts = getFilterPosts(selectedKeyword);
 
   return (
-    <div className={styles.wrapper}>
+    <div>
       <Keywords keywords={sortedUniqueKeywords} isKeywordsPage />
-      <div className={styles.postWarpper}>
+      <div>
         {filtedPosts.map((post) => (
           <PostPreview post={post} key={post._id} />
         ))}

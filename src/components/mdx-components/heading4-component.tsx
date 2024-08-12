@@ -1,6 +1,4 @@
-
 import styles from './heading4-component.module.scss';
-
 
 export default function Heading4Component({
   children,

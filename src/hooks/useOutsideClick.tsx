@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+
 import useScrollHidden from './useScrollHidden';
 
 export default function useOutsideClick(

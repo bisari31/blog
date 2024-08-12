@@ -1,6 +1,4 @@
-
 import styles from './anchor-component.module.scss';
-
 
 export default function AnChorComponent({
   href,
@@ -13,7 +11,6 @@ export default function AnChorComponent({
   const isRef = childrenArray && childrenArray.length > 1;
   return (
     <a
-      // className={cx('a', isRef ? 'ref' : 'caption')}
       href={href}
       target="_blank"
       rel="noreferrer"

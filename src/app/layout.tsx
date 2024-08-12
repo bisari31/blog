@@ -1,4 +1,3 @@
-import 'styles/style.scss';
 import './globals.css';
 
 import { title } from 'app/metadata';

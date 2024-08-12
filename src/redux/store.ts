@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+
 import keywordSlice from './slices/keywordSlice';
 
 export const store = configureStore({ reducer: { keyword: keywordSlice } });

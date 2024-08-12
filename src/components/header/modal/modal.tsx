@@ -1,12 +1,10 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
-import { useRouter } from 'next/navigation';
-
-import styles from './modal.module.scss';
-import { SearchIcon, DocumentIcon } from 'assets/icons';
+import { DocumentIcon, SearchIcon } from 'assets/icons';
 import { useFocus, useKeyboardSelection, useOutsideClick } from 'hooks';
 import { sortedPosts } from 'lib/contentlayer';
+import { useRouter } from 'next/navigation';
+import React, { useMemo, useState } from 'react';
 
 type SetState = React.Dispatch<React.SetStateAction<boolean>>;
 
@@ -54,9 +52,9 @@ export default function SearchModal({
     );
 
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.modal} ref={modalRef}>
-        <div className={styles.inputWrapper}>
+    <div>
+      <div ref={modalRef}>
+        <div>
           <SearchIcon width={20} height={20} />
           <input
             onKeyDown={handleKeyDown}
@@ -70,11 +68,10 @@ export default function SearchModal({
             Esc
           </button>
         </div>
-        <div className={styles.list} ref={listRef}>
+        <div ref={listRef}>
           {filteredPosts.map((post, index) => (
             <div
               onMouseOver={() => setSelectedIndex(index)}
-              className={selectedIndex === index ? styles.isActive : ''}
               key={post._id}
               onClick={() => handleNavitation(post.url)}
             >
@@ -82,9 +79,7 @@ export default function SearchModal({
               <p>{post.title}</p>
             </div>
           ))}
-          {!filteredPosts.length && (
-            <div className={styles.noResults}>No results for your search</div>
-          )}
+          {!filteredPosts.length && <div>No results for your search</div>}
         </div>
       </div>
     </div>

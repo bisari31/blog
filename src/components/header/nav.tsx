@@ -1,7 +1,5 @@
-import { GithubIcon, MoonIcon, SearchIcon,SunIcon } from 'assets/icons';
+import { GithubIcon, MoonIcon, SearchIcon, SunIcon } from 'assets/icons';
 import Link from 'next/link';
-
-import styles from './nav.module.scss';
 
 interface Props {
   onToggle: (state: 'dark' | 'modal') => void;
@@ -9,19 +7,17 @@ interface Props {
   isTabletNav: boolean;
 }
 
-
 export default function Nav({ isDarkMode, onToggle, isTabletNav }: Props) {
   return (
     <nav>
-    {/* <nav className={cx('wrapper', { isTabletNav })}> */}
-      <div className={styles.search}>
+      <div>
         <button type="button" onClick={() => onToggle('modal')}>
           <SearchIcon width={15} height={15} />
-          <span className={styles.placeholder}>Search..</span>
-          <span className={styles.shortcut}>⌘K</span>
+          <span>Search..</span>
+          <span>⌘K</span>
         </button>
       </div>
-      <div className={styles.buttons}>
+      <div>
         <button type="button" onClick={() => onToggle('dark')}>
           {isDarkMode ? (
             <MoonIcon width={20} height={20} viewBox="1 1 22 22" />
