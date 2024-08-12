@@ -26,7 +26,7 @@ export default function Header() {
   };
 
   return (
-    <header>
+    <header className="h-[84px] bg-red-500">
       <div>
         <div>
           <div>

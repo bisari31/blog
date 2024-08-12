@@ -1,20 +1,12 @@
 import './globals.css';
 
-import { title } from 'app/metadata';
 import Header from 'components/header/header';
+import { description, title } from 'constants/metadata';
+import { pretendard } from 'lib/font';
 import { Metadata } from 'next';
-import localFont from 'next/font/local';
 import React from 'react';
 import { Providers } from 'redux/providers';
 
-const pretendard = localFont({
-  src: '../assets/fonts/PretendardVariable.woff2',
-  display: 'swap',
-  weight: '45 920',
-  variable: '--font-pretendard',
-});
-const description = '프론트엔드 개발자 이상원의 기술 블로그입니다.';
-const url = process.env.SITE_URL;
 export const metadata: Metadata = {
   title,
   description,
@@ -27,7 +19,7 @@ export const metadata: Metadata = {
   openGraph: {
     title,
     description,
-    url,
+    url: process.env.SITE_URL,
     locale: 'ko_KR',
     type: 'website',
     images: [
@@ -44,6 +36,7 @@ export const metadata: Metadata = {
     ],
   },
 };
+
 export default function RootLayout({
   children,
 }: {

@@ -1,10 +1,10 @@
-import { title } from 'app/metadata';
 import Utterances from 'components/comment/utterances';
 import AnChorComponent from 'components/mdx-components/anchor-component';
 import Heading4Component from 'components/mdx-components/heading4-component';
 import ImageComponent from 'components/mdx-components/image-component';
 import Keywords from 'components/post/keywords';
 import PostNavigator from 'components/post/post-navigator';
+import { title } from 'constants/metadata';
 import { format, parseISO } from 'date-fns';
 import { sortedPosts } from 'lib/contentlayer';
 import { notFound } from 'next/navigation';
