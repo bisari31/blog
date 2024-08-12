@@ -4,7 +4,7 @@ import React, { useState, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 
 import styles from './modal.module.scss';
-import { SearchIcon, DocumentIcon } from 'assets';
+import { SearchIcon, DocumentIcon } from 'assets/icons';
 import { useFocus, useKeyboardSelection, useOutsideClick } from 'hooks';
 import { sortedPosts } from 'lib/contentlayer';
 

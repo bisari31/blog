@@ -1,26 +1,19 @@
-import { Noto_Sans_KR } from 'next/font/google';
-import React from 'react';
-
 import 'styles/style.scss';
-
-
-
-
-
-
-
-
 import './globals.css';
-import Header from 'components/header/header';
-import { Providers } from 'redux/providers';
-import { Metadata } from 'next';
+
 import { title } from 'app/metadata';
+import Header from 'components/header/header';
+import { Metadata } from 'next';
+import localFont from 'next/font/local';
+import React from 'react';
+import { Providers } from 'redux/providers';
 
-const noto_sans_kr = Noto_Sans_KR({
-  weight: ['400', '500', '700', '900'],
-  subsets: ['latin'],
+const pretendard = localFont({
+  src: '../assets/fonts/PretendardVariable.woff2',
+  display: 'swap',
+  weight: '45 920',
+  variable: '--font-pretendard',
 });
-
 const description = '프론트엔드 개발자 이상원의 기술 블로그입니다.';
 const url = process.env.SITE_URL;
 export const metadata: Metadata = {
@@ -60,7 +53,7 @@ export default function RootLayout({
   return (
     <Providers>
       <html lang="ko">
-        <body className={noto_sans_kr.className}>
+        <body className={pretendard.variable}>
           <Header />
           <main>{children}</main>
           <div id="portal" />

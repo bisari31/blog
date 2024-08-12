@@ -1,4 +1,4 @@
-import { GithubIcon, MoonIcon, SearchIcon,SunIcon } from 'assets';
+import { GithubIcon, MoonIcon, SearchIcon,SunIcon } from 'assets/icons';
 import Link from 'next/link';
 
 import styles from './nav.module.scss';

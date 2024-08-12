@@ -1,6 +1,6 @@
 'use client';
 
-import { CloseIcon, MenuIcon } from 'assets';
+import { CloseIcon, MenuIcon } from 'assets/icons';
 import Portal from 'components/common/portal';
 import Nav from 'components/header/nav';
 import { useAppDispatch,useModalOpen, useTheme } from 'hooks';
