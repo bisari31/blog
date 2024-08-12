@@ -1,11 +1,10 @@
 import './globals.css';
 
-import Header from 'components/header/header';
+import Header from 'components/header';
 import { description, title } from 'constants/metadata';
 import { pretendard } from 'lib/font';
 import { Metadata } from 'next';
 import React from 'react';
-import { Providers } from 'redux/providers';
 
 export const metadata: Metadata = {
   title,
@@ -43,14 +42,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <Providers>
-      <html lang="ko">
-        <body className={pretendard.variable}>
-          <Header />
-          <main>{children}</main>
-          <div id="portal" />
-        </body>
-      </html>
-    </Providers>
+    <html lang="ko">
+      <body className={`${pretendard.variable} bg-bg`}>
+        <Header />
+        <main className="mx-auto max-w-[1100px] px-4 pb-[100px] pt-14 md:px-[37px]">
+          {children}
+        </main>
+      </body>
+    </html>
   );
 }

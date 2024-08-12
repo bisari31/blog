@@ -1,45 +1,22 @@
-'use client';
-import { useAppDispatch, useAppSelector } from 'hooks';
 import { keywordCounts } from 'lib/contentlayer';
-import { useRouter } from 'next/navigation';
-import { setKeyword } from 'redux/slices/keywordSlice';
+import Link from 'next/link';
 
 interface Props {
-  isKeywordsPage?: boolean;
-  isDetailPage?: boolean;
+  isMainPage?: boolean;
   keywords: Post['keywords'];
 }
 
-export default function Keywords({
-  keywords,
-  isKeywordsPage = false,
-  isDetailPage = false,
-}: Props) {
-  const dispatch = useAppDispatch();
-  const router = useRouter();
-  const { selectedKeyword } = useAppSelector((state) => state.keyword);
-  const handleNavigation = (e: React.MouseEvent, keyword: string) => {
-    e.preventDefault();
-    if (isDetailPage) router.push('/');
-    dispatch(setKeyword(keyword));
-  };
+export default function Keywords({ keywords, isMainPage = false }: Props) {
   return (
-    <div
-    // className={cx('keywords', {
-    //   isKeywordsPage,
-    //   isDetailPage,
-    // })}
-    >
+    <div className="flex gap-2">
       {keywords?.map((keyword) => (
-        <button
-          type="button"
-          onClick={(e) => handleNavigation(e, keyword)}
+        <Link
+          href={{ query: { keyword } }}
           key={keyword}
-          // className={cx(keyword === selectedKeyword && 'isActive')}
+          className="bg-bg rounded-lg px-2 py-2 text-xs font-medium text-gray-600"
         >
-          {keyword}{' '}
-          {isKeywordsPage && <small>({keywordCounts[keyword]})</small>}
-        </button>
+          {keyword} {isMainPage && <small>({keywordCounts[keyword]})</small>}
+        </Link>
       ))}
     </div>
   );
