@@ -2,7 +2,7 @@ import { Noto_Sans_KR } from 'next/font/google';
 import React from 'react';
 
 import 'styles/style.scss';
-
+import './globals.css';
 import Header from 'components/header/header';
 import { Providers } from 'redux/providers';
 import { Metadata } from 'next';
