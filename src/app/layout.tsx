@@ -43,9 +43,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
-      <body className={`${pretendard.variable} bg-bg text-gray-800`}>
+      <body
+        className={`${pretendard.variable} bg-bg flex min-h-screen flex-col text-gray-800`}
+      >
         <Header />
-        <main className="mx-auto max-w-[1100px] px-4 pb-[100px] pt-14 sm:px-[37px]">
+        <main className="mx-auto flex min-h-full max-w-[1100px] flex-1 px-4 pb-[100px] pt-14 sm:px-[37px]">
           {children}
         </main>
       </body>
