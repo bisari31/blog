@@ -1,41 +1,40 @@
+import KeywordButton from 'components/keyword/keyword-button';
 import { format, parseISO } from 'date-fns';
 import Image from 'next/image';
 import Link from 'next/link';
-
-import Keywords from './keywords';
+import { Suspense } from 'react';
 
 export default function PostPreview({ post }: { post: Post }) {
   return (
     <Link
       href={post.url}
-      className="group flex w-full items-center gap-5 rounded-[28px] bg-white py-6 pl-[30px] pr-5"
+      className="group flex w-full flex-col rounded-[20px] bg-white sm:flex-row sm:items-center sm:gap-5 sm:rounded-[28px] sm:py-6 sm:pl-[30px] sm:pr-5"
     >
-      <div className="flex-1">
+      <div className="flex-1 px-4 pb-4 pt-5 sm:p-0">
         <time
           dateTime={post.date}
-          className="text-[13px] font-medium text-gray-500"
+          className="text-xs font-medium text-gray-500 sm:text-[13px]"
         >
           {format(parseISO(post.date), 'LLLL d, yyyy')}
         </time>
         <div className="mt-5 flex flex-1 flex-col gap-4">
-          <p className="line-clamp-2 min-h-16 text-[22px] font-semibold text-gray-800">
+          <p className="line-clamp-2 text-lg font-semibold text-gray-800 sm:text-[22px]">
             {post.title}
           </p>
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             {post.keywords?.map((keyword) => (
-              <button
+              <KeywordButton
                 key={keyword}
-                className="bg-bg rounded-lg px-2 py-2 text-xs font-medium text-gray-600"
+                keyword={keyword}
+                className="outline-none"
               >
                 {keyword}
-              </button>
+              </KeywordButton>
             ))}
           </div>
-          {/* <Link href={post.url}>{post.description}</Link> */}
-          {/* <Keywords keywords={post.keywords} /> */}
         </div>
       </div>
-      <div className="relative h-[150px] w-[210px] overflow-hidden rounded-[10px] shadow">
+      <div className="relative h-[180px] w-full overflow-hidden rounded-[10px] rounded-t-none shadow sm:h-[100px] sm:w-[150px] sm:rounded-t-[10px] md:h-[150px] md:w-[210px]">
         <Image
           fill
           className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"

@@ -1,6 +1,10 @@
+import KeywordLinkButton from 'components/keyword/keyword-link-button';
 import PostPreview from 'components/post/post-preview';
-import { latestPost, sortedUniqueKeywords } from 'lib/contentlayer';
-import Link from 'next/link';
+import {
+  keywordCounts,
+  latestPost,
+  sortedUniqueKeywords,
+} from 'lib/contentlayer';
 
 interface MainPageProps {
   searchParams?: { [key: string]: string | undefined };
@@ -14,23 +18,24 @@ export default function Main({ searchParams }: MainPageProps) {
   const filtedPosts = getFilterPosts(searchParams?.keyword);
 
   return (
-    <div className="flex">
-      <section className="flex flex-1 flex-col gap-8">
+    <div className="flex flex-col-reverse sm:flex-row">
+      <section className="flex flex-1 flex-col gap-4 sm:gap-7">
         {filtedPosts.map((post) => (
           <PostPreview post={post} key={post._id} />
         ))}
       </section>
-      <section className="ml-6 hidden border-l border-l-gray-300 pl-6 md:block">
+      <section className="mb-6 border-b border-l-0 border-l-gray-300 pb-6 sm:mb-0 sm:ml-6 sm:border-b-0 sm:border-l sm:pb-0 sm:pl-6">
         <h2 className="font-semibold">Keywords</h2>
-        <ul className="mt-5 flex w-full max-w-72 flex-wrap gap-2">
-          {sortedUniqueKeywords.map((i) => (
-            <li key={i}>
-              <Link
-                className="inline-block rounded-lg border bg-white px-2 py-2 text-xs font-medium text-gray-600"
-                href={{ query: { keyword: i } }}
+        <ul className="mt-5 flex flex-wrap gap-x-2 gap-y-3 sm:max-w-72">
+          {sortedUniqueKeywords.map((keyword) => (
+            <li key={keyword}>
+              <KeywordLinkButton
+                isActive={keyword === (searchParams?.keyword || 'all')}
+                keyword={keyword}
+                className="bg-white outline outline-1 outline-gray-200 hover:outline-none"
               >
-                {i}
-              </Link>
+                {keyword} ({keywordCounts[keyword]})
+              </KeywordLinkButton>
             </li>
           ))}
         </ul>

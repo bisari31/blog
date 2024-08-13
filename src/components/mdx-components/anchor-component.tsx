@@ -1,5 +1,3 @@
-import styles from './anchor-component.module.scss';
-
 export default function AnChorComponent({
   href,
   children,

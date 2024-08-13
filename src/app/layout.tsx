@@ -43,9 +43,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
-      <body className={`${pretendard.variable} bg-bg`}>
+      <body className={`${pretendard.variable} bg-bg text-gray-800`}>
         <Header />
-        <main className="mx-auto max-w-[1100px] px-4 pb-[100px] pt-14 md:px-[37px]">
+        <main className="mx-auto max-w-[1100px] px-4 pb-[100px] pt-14 sm:px-[37px]">
           {children}
         </main>
       </body>

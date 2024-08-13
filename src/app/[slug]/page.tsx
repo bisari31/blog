@@ -1,8 +1,8 @@
 import Utterances from 'components/comment/utterances';
+import KeywordLinkButton from 'components/keyword/keyword-link-button';
 import AnChorComponent from 'components/mdx-components/anchor-component';
 import Heading4Component from 'components/mdx-components/heading4-component';
 import ImageComponent from 'components/mdx-components/image-component';
-import Keywords from 'components/post/keywords';
 import PostNavigator from 'components/post/post-navigator';
 import { title } from 'constants/metadata';
 import { format, parseISO } from 'date-fns';
@@ -85,21 +85,35 @@ export default function page({
   }
   const MDXContent = getMDXComponent(currentPost.body.code);
   return (
-    <div className="">
-      <div className="">
-        <div className="">
-          <time dateTime={currentPost.date}>
-            {format(parseISO(currentPost.date), 'LLLL d, yyyy')}
-          </time>
-          <h1>{currentPost.title}</h1>
-          <Keywords keywords={currentPost.keywords} />
-        </div>
-        <article>
-          <MDXContent components={components} />
-        </article>
-        <PostNavigator nextPost={nextPost} previousPost={previousPost} />
-        <Utterances />
+    <article>
+      <div className="flex flex-col gap-5 pb-20 pt-[64px]">
+        <h1 className="text-6xl font-bold leading-tight text-gray-800">
+          {currentPost.title}
+        </h1>
+        <time
+          dateTime={currentPost.date}
+          className="text-sm font-semibold text-gray-600"
+        >
+          {format(parseISO(currentPost.date), 'LLLL d, yyyy')}
+        </time>
+        <ul className="flex gap-[10px]">
+          {currentPost.keywords?.map((keyword) => (
+            <li key={keyword}>
+              <KeywordLinkButton
+                keyword={keyword}
+                className="bg-white outline outline-1 outline-gray-200 hover:outline-none"
+              >
+                {keyword}
+              </KeywordLinkButton>
+            </li>
+          ))}
+        </ul>
       </div>
-    </div>
+      <div className="">
+        <MDXContent components={components} />
+      </div>
+      <PostNavigator nextPost={nextPost} previousPost={previousPost} />
+      <Utterances />
+    </article>
   );
 }
