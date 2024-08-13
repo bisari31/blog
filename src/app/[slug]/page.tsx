@@ -9,6 +9,7 @@ import { format, parseISO } from 'date-fns';
 import { latestPost } from 'lib/contentlayer';
 import { notFound } from 'next/navigation';
 import { getMDXComponent } from 'next-contentlayer/hooks';
+import MorePost from 'components/post/more-post';
 
 type PostsResult = {
   previousPost?: Post;
@@ -85,8 +86,8 @@ export default function page({
   }
   const MDXContent = getMDXComponent(currentPost.body.code);
   return (
-    <article>
-      <div className="flex flex-col gap-5 pb-20 pt-[64px]">
+    <article className="mx-auto max-w-3xl">
+      <div className="flex flex-col gap-5 pb-20 pt-5">
         <h1 className="text-6xl font-bold leading-tight text-gray-800">
           {currentPost.title}
         </h1>
@@ -112,8 +113,9 @@ export default function page({
       <div className="">
         <MDXContent components={components} />
       </div>
-      <PostNavigator nextPost={nextPost} previousPost={previousPost} />
-      <Utterances />
+      <MorePost />
+      {/* <PostNavigator nextPost={nextPost} previousPost={previousPost} />
+      <Utterances /> */}
     </article>
   );
 }

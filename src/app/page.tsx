@@ -18,15 +18,15 @@ export default function Main({ searchParams }: MainPageProps) {
   const filtedPosts = getFilterPosts(searchParams?.keyword);
 
   return (
-    <div className="flex flex-col-reverse sm:flex-row">
-      <section className="flex flex-1 flex-col gap-4 sm:gap-7">
+    <div className="flex flex-1 flex-col-reverse md:flex-row">
+      <section className="flex flex-1 flex-col gap-4 md:gap-7">
         {filtedPosts.map((post) => (
           <PostPreview post={post} key={post._id} />
         ))}
       </section>
-      <section className="mb-6 border-b border-l-0 border-l-gray-300 pb-6 sm:mb-0 sm:ml-6 sm:border-b-0 sm:border-l sm:pb-0 sm:pl-6">
+      <section className="mb-6 border-b border-l-0 pb-6 md:mb-0 md:ml-6 md:border-b-0 md:border-l md:pb-0 md:pl-6">
         <h2 className="font-semibold">Keywords</h2>
-        <ul className="mt-5 flex flex-wrap gap-x-2 gap-y-3 sm:max-w-72">
+        <ul className="mt-5 flex w-full flex-wrap gap-x-2 gap-y-3 md:w-56">
           {sortedUniqueKeywords.map((keyword) => (
             <li key={keyword}>
               <KeywordLinkButton
@@ -40,7 +40,6 @@ export default function Main({ searchParams }: MainPageProps) {
           ))}
         </ul>
       </section>
-      {/* <Keywords keywords={sortedUniqueKeywords} isKeywordsPage /> */}
     </div>
   );
 }

@@ -7,7 +7,7 @@ export default function NotFound() {
   const router = useRouter();
 
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex flex-1 flex-col items-center justify-center">
       <p className="text-[100px] font-black sm:text-[150px]">404</p>
       <p className="text-2xl font-black sm:text-4xl">Page Not Found</p>
       <button

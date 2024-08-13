@@ -4,10 +4,10 @@ import Link from 'next/link';
 
 export default function Header() {
   return (
-    <header className="sticky top-0 z-50 bg-white px-4 shadow-sm sm:px-[37px]">
-      <div className="mx-auto flex h-[64px] max-w-[1200px] items-center">
+    <header className="bg-bg sticky top-0 z-50 border-b px-4 sm:px-[37px]">
+      <div className="mx-auto flex h-14 max-w-5xl items-center">
         <div className="flex flex-1 items-center justify-between">
-          <Link href="/" className="text-lg font-medium text-gray-800">
+          <Link href="/" className="font-medium text-gray-800">
             {title}
           </Link>
           <Link href="https://github.com/bisari31" target="_blank">

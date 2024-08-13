@@ -2,7 +2,6 @@ import KeywordButton from 'components/keyword/keyword-button';
 import { format, parseISO } from 'date-fns';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Suspense } from 'react';
 
 export default function PostPreview({ post }: { post: Post }) {
   return (
@@ -34,7 +33,7 @@ export default function PostPreview({ post }: { post: Post }) {
           </div>
         </div>
       </div>
-      <div className="relative h-[180px] w-full overflow-hidden rounded-[10px] rounded-t-none shadow sm:h-[100px] sm:w-[150px] sm:rounded-t-[10px] md:h-[150px] md:w-[210px]">
+      <div className="relative h-[180px] w-full overflow-hidden rounded-[10px] rounded-t-none shadow sm:h-[100px] sm:w-[150px] sm:rounded-t-[10px]">
         <Image
           fill
           className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
