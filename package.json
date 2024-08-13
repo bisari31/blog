@@ -16,7 +16,8 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "rehype-pretty-code": "^0.9.6",
-    "shiki": "^0.14.2"
+    "shiki": "^0.14.2",
+    "tailwind-merge": "^2.5.2"
   },
   "devDependencies": {
     "@svgr/webpack": "^8.0.1",
