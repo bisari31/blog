@@ -47,7 +47,7 @@ export default function RootLayout({
         className={`${pretendard.variable} bg-bg flex min-h-screen flex-col text-gray-800`}
       >
         <Header />
-        <main className="px-4 pb-[100px] pt-14 sm:px-[37px]">
+        <main className="flex flex-1 px-4 pb-[100px] pt-10 sm:px-[37px] md:pt-14">
           <div className="mx-auto flex min-h-full w-full max-w-4xl flex-1">
             {children}
           </div>

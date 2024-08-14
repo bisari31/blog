@@ -88,24 +88,19 @@ export default function page({
   return (
     <article className="mx-auto max-w-3xl">
       <div className="flex flex-col gap-5 pb-20 pt-5">
-        <h1 className="text-6xl font-bold leading-tight text-gray-800">
+        <h1 className="text-4xl font-bold leading-tight text-gray-800">
           {currentPost.title}
         </h1>
         <time
           dateTime={currentPost.date}
-          className="text-sm font-semibold text-gray-600"
+          className="text-sm font-medium text-gray-600"
         >
           {format(parseISO(currentPost.date), 'LLLL d, yyyy')}
         </time>
         <ul className="flex gap-[10px]">
           {currentPost.keywords?.map((keyword) => (
             <li key={keyword}>
-              <KeywordLinkButton
-                keyword={keyword}
-                className="bg-white outline outline-1 outline-gray-200 hover:outline-none"
-              >
-                {keyword}
-              </KeywordLinkButton>
+              <KeywordLinkButton keyword={keyword}>{keyword}</KeywordLinkButton>
             </li>
           ))}
         </ul>

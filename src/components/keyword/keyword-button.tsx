@@ -2,13 +2,8 @@
 
 import { LinkProps, styles } from 'components/keyword/keyword-link-button';
 import { useRouter } from 'next/navigation';
-import { twMerge } from 'tailwind-merge';
 
-export default function KeywordButton({
-  children,
-  className,
-  keyword,
-}: LinkProps) {
+export default function KeywordButton({ children, keyword }: LinkProps) {
   const router = useRouter();
   return (
     <button
@@ -17,7 +12,7 @@ export default function KeywordButton({
         e.preventDefault();
         router.push(`/?keyword=${keyword}`);
       }}
-      className={twMerge(styles, className)}
+      className={styles}
     >
       {children}
     </button>

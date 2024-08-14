@@ -12,10 +12,7 @@ module.exports = {
       },
       colors: {
         bg: '#F2F4F7',
-        gray200: '#E4E7EC',
-        gray500: '#667085',
-        gray600: '#475467',
-        gray800: '#1D2939',
+        primary: '#3574b9',
       },
     },
   },
