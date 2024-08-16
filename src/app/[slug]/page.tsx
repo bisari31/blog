@@ -96,7 +96,7 @@ export default function page({
           ))}
         </ul>
       </div>
-      <div className="prose">
+      <div className="prose grid grid-cols-1">
         <MDXContent />
       </div>
       <MorePost nextPost={nextPost} previousPost={previousPost} />
