@@ -1,9 +1,15 @@
 'use client';
 
-import { LinkProps, styles } from 'components/keyword/keyword-link-button';
+import {
+  KeywordLinkButtonProps,
+  styles,
+} from 'components/keyword/keyword-link-button';
 import { useRouter } from 'next/navigation';
 
-export default function KeywordButton({ children, keyword }: LinkProps) {
+export default function KeywordButton({
+  children,
+  keyword,
+}: KeywordLinkButtonProps) {
   const router = useRouter();
   return (
     <button

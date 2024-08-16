@@ -1,15 +1,12 @@
 import Utterances from 'components/comment/utterances';
 import KeywordLinkButton from 'components/keyword/keyword-link-button';
-import AnChorComponent from 'components/mdx-components/anchor-component';
-import Heading4Component from 'components/mdx-components/heading4-component';
-import ImageComponent from 'components/mdx-components/image-component';
+import MorePost from 'components/post/more-post';
 import PostNavigator from 'components/post/post-navigator';
 import { title } from 'constants/metadata';
 import { format, parseISO } from 'date-fns';
 import { latestPost } from 'lib/contentlayer';
 import { notFound } from 'next/navigation';
 import { getMDXComponent } from 'next-contentlayer/hooks';
-import MorePost from 'components/post/more-post';
 
 type PostsResult = {
   previousPost?: Post;
@@ -61,12 +58,6 @@ export default function page({
 }: {
   params: { slug: string };
 }) {
-  const components = {
-    // img: ImageComponent,
-    // a: AnChorComponent,
-    // h4: Heading4Component,
-  };
-
   const decodedSlug = decodeURIComponent(slug);
 
   const { currentPost, nextPost, previousPost } = latestPost.reduce(
@@ -88,7 +79,7 @@ export default function page({
   return (
     <article className="mx-auto max-w-3xl">
       <div className="flex flex-col gap-5 pb-20 pt-5">
-        <h1 className="text-4xl font-bold leading-tight text-gray-800">
+        <h1 className="text-4xl font-bold leading-tight text-gray-700">
           {currentPost.title}
         </h1>
         <time
@@ -105,8 +96,8 @@ export default function page({
           ))}
         </ul>
       </div>
-      <div className="">
-        <MDXContent components={components} />
+      <div className="prose">
+        <MDXContent />
       </div>
       <MorePost />
       {/* <PostNavigator nextPost={nextPost} previousPost={previousPost} />

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { twMerge } from 'tailwind-merge';
 
-export interface LinkProps {
+export interface KeywordLinkButtonProps {
   children: React.ReactNode;
   keyword: string;
   isActive?: boolean;
@@ -14,7 +14,7 @@ export default function KeywordLinkButton({
   children,
   keyword,
   isActive,
-}: LinkProps) {
+}: KeywordLinkButtonProps) {
   return (
     <Link
       href={{ query: { keyword } }}

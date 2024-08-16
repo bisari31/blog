@@ -1,4 +1,5 @@
 import { defineDocumentType, makeSource } from 'contentlayer/source-files';
+import rehypeFigure from 'rehype-figure';
 import rehypePrettyCode from 'rehype-pretty-code';
 
 const Post = defineDocumentType(() => ({
@@ -57,6 +58,6 @@ export default makeSource({
   contentDirPath: 'posts',
   documentTypes: [Post],
   mdx: {
-    rehypePlugins: [[rehypePrettyCode, rehypeoptions]],
+    rehypePlugins: [[rehypePrettyCode, rehypeoptions], rehypeFigure],
   },
 });
