@@ -76,7 +76,6 @@ export default function page({
   }
   const MDXContent = getMDXComponent(currentPost.body.code);
 
-  console.log({ nextPost, previousPost });
   return (
     <article className="mx-auto max-w-3xl">
       <div className="flex flex-col gap-5 pb-20 pt-5">
