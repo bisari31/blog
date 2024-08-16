@@ -1,7 +1,7 @@
 import { defineDocumentType, makeSource } from 'contentlayer/source-files';
 import rehypeFigure from 'rehype-figure';
+import rehypeImgSize from 'rehype-img-size';
 import rehypePrettyCode from 'rehype-pretty-code';
-
 const Post = defineDocumentType(() => ({
   name: 'Post',
   filePathPattern: `**/*.mdx`,
@@ -58,6 +58,10 @@ export default makeSource({
   contentDirPath: 'posts',
   documentTypes: [Post],
   mdx: {
-    rehypePlugins: [[rehypePrettyCode, rehypeoptions], rehypeFigure],
+    rehypePlugins: [
+      [rehypePrettyCode, rehypeoptions],
+      rehypeFigure,
+      [rehypeImgSize, { dir: 'public' }],
+    ],
   },
 });

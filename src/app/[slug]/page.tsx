@@ -4,9 +4,9 @@ import MorePost from 'components/post/more-post';
 import { title } from 'constants/metadata';
 import { format, parseISO } from 'date-fns';
 import { latestPost } from 'lib/contentlayer';
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { getMDXComponent } from 'next-contentlayer/hooks';
-
 type PostsResult = {
   previousPost?: Post;
   nextPost?: Post;
@@ -97,7 +97,18 @@ export default function page({
         </ul>
       </div>
       <div className="prose grid grid-cols-1">
-        <MDXContent />
+        <MDXContent
+          components={{
+            img: (props) => (
+              <Image
+                src={props.src ?? ''}
+                alt={props.alt ?? 'image'}
+                width={props.width ? +props.width : 900}
+                height={props.height ? +props.height : 300}
+              />
+            ),
+          }}
+        />
       </div>
       <MorePost nextPost={nextPost} previousPost={previousPost} />
       {/* <PostNavigator nextPost={nextPost} previousPost={previousPost} />
