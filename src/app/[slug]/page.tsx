@@ -7,6 +7,7 @@ import { latestPost } from 'lib/contentlayer';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { getMDXComponent } from 'next-contentlayer/hooks';
+
 type PostsResult = {
   previousPost?: Post;
   nextPost?: Post;
@@ -111,8 +112,7 @@ export default function page({
         />
       </div>
       <MorePost nextPost={nextPost} previousPost={previousPost} />
-      {/* <PostNavigator nextPost={nextPost} previousPost={previousPost} />
-      <Utterances /> */}
+      <Utterances />
     </article>
   );
 }
