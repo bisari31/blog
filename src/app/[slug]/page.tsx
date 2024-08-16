@@ -1,7 +1,6 @@
 import Utterances from 'components/comment/utterances';
 import KeywordLinkButton from 'components/keyword/keyword-link-button';
 import MorePost from 'components/post/more-post';
-import PostNavigator from 'components/post/post-navigator';
 import { title } from 'constants/metadata';
 import { format, parseISO } from 'date-fns';
 import { latestPost } from 'lib/contentlayer';
@@ -76,6 +75,8 @@ export default function page({
     return notFound();
   }
   const MDXContent = getMDXComponent(currentPost.body.code);
+
+  console.log({ nextPost, previousPost });
   return (
     <article className="mx-auto max-w-3xl">
       <div className="flex flex-col gap-5 pb-20 pt-5">
@@ -99,7 +100,7 @@ export default function page({
       <div className="prose">
         <MDXContent />
       </div>
-      <MorePost />
+      <MorePost nextPost={nextPost} previousPost={previousPost} />
       {/* <PostNavigator nextPost={nextPost} previousPost={previousPost} />
       <Utterances /> */}
     </article>
