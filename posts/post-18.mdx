@@ -8,11 +8,11 @@ keywords:
   - class-variance-authority
 ---
 
-![recyle-button](/imgs/posts/18/recycle-237874_1920.jpg)
+![](/imgs/posts/18/recycle-237874_1920.jpg)
 
 씨네톡(영화 리뷰 서비스) 프로젝트에서는 반응형 디자인을 제공하기 때문에 다양한 크기의 버튼 디자인이 있습니다.
 
-![guide1 !!500](/imgs/posts/18/guide1.png)
+![](/imgs/posts/18/guide1.png)
 
 위 디자인 가이드의 경우 size와 varint 두 개의 객체로 분리한 후 size에는 크기 관련 클래스를, varint 객체에는 색상 관련 클래스를 넣어 객체 맵핑으로 간결하게 코드를 작성할 수 있습니다.
 
@@ -52,7 +52,7 @@ export default function Button({ size, variant, children, ...rest }: Props) {
 
 BG 버튼 외에 또 다른 버튼들이 존재하는데요.
 
-![guide1 !!900](/imgs/posts/18/guide3.png)
+![](/imgs/posts/18/guide3.png)
 
 Line 버튼의 경우 사이즈는 L, M, S 3개의 사이즈를 제공하는데 문제는 BG Button과는 사이즈가 다릅니다. 또한 Text 버튼과 Icon 버튼도 독자적인 사이즈를 갖고 있습니다. 그렇다면 SIZE_MAP의 클래스를 사용할 수 없게 되는데요. 이제 고민에 빠지게 됩니다. 각각의 버튼 컴포넌트를 만들 것인지. 하나만 작성하되 클린하게 코드를 작성할 수는 없는지. 저는 팀원들이 하나의 컴포넌트 사용으로 편하게 버튼 컴포넌트를 사용하게 하고 싶은데요.  
 이러한 고민 끝에 class-variance-authority (이하 cva)를 도입하기로 합니다. cva는 이러한 고민을 해결해주며 타입스크립트를 지원하고 있습니다.
