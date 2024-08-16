@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import cn from 'lib/cn';
 import Link from 'next/link';
 
 interface MorePostProps {
@@ -25,10 +26,9 @@ function MorePostItem({ post, type }: MorePostItemProps) {
         {type} 글
       </span>
       <span
-        className={clsx(
-          { 'text-[#a9a9a9]': !post },
-          'line-clamp-2 text-gray-800',
-        )}
+        className={cn('line-clamp-2 text-gray-800', {
+          'text-[#a9a9a9]': !post,
+        })}
       >
         {post?.title ?? `${type} 글이 존재하지 않습니다.`}
       </span>
