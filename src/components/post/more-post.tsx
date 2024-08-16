@@ -18,7 +18,7 @@ function MorePostItem({ post, type }: MorePostItemProps) {
       className={clsx(
         { 'pointer-events-none': !post },
         { 'text-right': type === '다음' },
-        'flex flex-1 flex-col gap-1 rounded-lg bg-[#ebedf1] p-4 text-gray-500',
+        'group flex flex-1 flex-col gap-1 rounded-lg bg-[#ebedf1] p-4 text-gray-500',
       )}
       href={post?.url ?? '#'}
     >
@@ -27,6 +27,7 @@ function MorePostItem({ post, type }: MorePostItemProps) {
       </span>
       <span
         className={cn('line-clamp-2 text-gray-800', {
+          'group-hover:text-primary': post,
           'text-[#a9a9a9]': !post,
         })}
       >
