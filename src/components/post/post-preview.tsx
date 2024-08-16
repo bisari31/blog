@@ -1,31 +1,33 @@
-import Image from 'next/image';
+import KeywordButton from 'components/keyword/keyword-button';
 import { format, parseISO } from 'date-fns';
 import Link from 'next/link';
 
-import styles from './post-preview.module.scss';
-
-import Keywords from './keywords';
-
 export default function PostPreview({ post }: { post: Post }) {
   return (
-    <div className={styles.wrapper}>
-      <Link href={post.url} className={styles.imgWrapper}>
-        <Image src={post.thumbnail ?? ''} alt={post.title} fill sizes="600px" />
-      </Link>
-      <div className={styles.details}>
-        <time dateTime={post.date}>
-          {format(parseISO(post.date), 'LLL d, yyyy')}
+    <Link href={post.url} className="group flex w-full flex-col">
+      <div className="flex flex-1 flex-col gap-2 py-3">
+        <time
+          dateTime={post.date}
+          className="text-xs text-gray-600 sm:text-[13px]"
+        >
+          {format(parseISO(post.date), 'LLLL d, yyyy')}
         </time>
-        <div>
-          <Link href={post.url} className={styles.title}>
+        <div className="flex flex-1 flex-col gap-3">
+          <p className="line-clamp-2 text-lg font-semibold text-gray-700 group-hover:text-primary sm:text-[22px]">
             {post.title}
-          </Link>
-          <Link href={post.url} className={styles.desc}>
+          </p>
+          <p className="text-sm text-gray-600 sm:text-base">
             {post.description}
-          </Link>
-          <Keywords keywords={post.keywords} />
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {post.keywords?.map((keyword) => (
+              <KeywordButton key={keyword} keyword={keyword}>
+                {keyword}
+              </KeywordButton>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }

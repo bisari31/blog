@@ -1,20 +1,11 @@
-import { Noto_Sans_KR } from 'next/font/google';
+import './globals.css';
+
+import Header from 'components/header';
+import { description, title } from 'constants/metadata';
+import { pretendard } from 'lib/font';
+import { Metadata } from 'next';
 import React from 'react';
 
-import 'styles/style.scss';
-
-import Header from 'components/header/header';
-import { Providers } from 'redux/providers';
-import { Metadata } from 'next';
-import { title } from 'app/metadata';
-
-const noto_sans_kr = Noto_Sans_KR({
-  weight: ['400', '500', '700', '900'],
-  subsets: ['latin'],
-});
-
-const description = '프론트엔드 개발자 이상원의 기술 블로그입니다.';
-const url = process.env.SITE_URL;
 export const metadata: Metadata = {
   title,
   description,
@@ -27,7 +18,7 @@ export const metadata: Metadata = {
   openGraph: {
     title,
     description,
-    url,
+    url: process.env.SITE_URL,
     locale: 'ko_KR',
     type: 'website',
     images: [
@@ -44,20 +35,24 @@ export const metadata: Metadata = {
     ],
   },
 };
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <Providers>
-      <html lang="ko">
-        <body className={noto_sans_kr.className}>
-          <Header />
-          <main>{children}</main>
-          <div id="portal" />
-        </body>
-      </html>
-    </Providers>
+    <html lang="ko">
+      <body
+        className={`${pretendard.variable} flex min-h-screen flex-col bg-bg text-gray-800`}
+      >
+        <Header />
+        <main className="flex flex-1 px-4 pb-[100px] pt-10 sm:px-[37px] md:pt-14">
+          <div className="mx-auto flex min-h-full w-full max-w-4xl flex-1">
+            {children}
+          </div>
+        </main>
+      </body>
+    </html>
   );
 }

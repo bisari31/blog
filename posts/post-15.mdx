@@ -11,7 +11,7 @@ keywords:
 카카오 MAP API를 사용하기 위해선 다음과 같이 코드를 작성해야 합니다.
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <meta charset="utf-8" />
@@ -92,7 +92,7 @@ useEffect(() => {
 ```
 
 지도가 생성될 것 같지만 오류가 발생합니다.
-![error1 !!700](/imgs/posts/15/error1.png)
+![](/imgs/posts/15/error1.png)
 
 이 오류는 스크립트보다 useEffect 코드가 먼저 실행되어 maps 프로퍼티를 찾을 수 없기 때문에 발생하는 오류입니다. 카카오 API는 스크립트를 동적으로 불러오기 위한 정적 메서드를 제공하고 있기에 코드를 수정하고 api key 뒤에 `autoload=false`를 추가했습니다.
 
@@ -163,4 +163,4 @@ export default function Map() {
 
 이제 카카오 맵이 정상적으로 생성됩니다. 이 방법 밖에도 `document.createElement`를 이용해 script를 생성하는 방법과 `<Script>` 컴포넌트에 `onLoad` prop을 이용해 하는 방법, 라이브러리를 이용한 방법 등 다양한 방법들이 있습니다.
 
-![kakao_map !!500](/imgs/posts/15/kakaomap.png)
+![](/imgs/posts/15/kakaomap.png)

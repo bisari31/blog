@@ -1,27 +1,44 @@
-'use client';
-import { sortedPosts, sortedUniqueKeywords } from 'lib/contentlayer';
-import styles from './page.module.scss';
-
+import KeywordLinkButton from 'components/keyword/keyword-link-button';
 import PostPreview from 'components/post/post-preview';
-import { useAppSelector } from 'hooks';
-import Keywords from 'components/post/keywords';
+import {
+  keywordCounts,
+  latestPost,
+  sortedUniqueKeywords,
+} from 'lib/contentlayer';
 
-export default function Home() {
-  const { selectedKeyword } = useAppSelector((state) => state.keyword);
-  const getFilterPosts = (keyword: string) => {
-    if (keyword === 'all') return sortedPosts;
-    return sortedPosts.filter((post) => post.keywords?.includes(keyword));
+interface MainPageProps {
+  searchParams?: { [key: string]: string | undefined };
+}
+
+export default function Main({ searchParams }: MainPageProps) {
+  const getFilterPosts = (keyword?: string) => {
+    if (keyword === 'all' || !keyword) return latestPost;
+    return latestPost.filter((post) => post.keywords?.includes(keyword));
   };
-  const filtedPosts = getFilterPosts(selectedKeyword);
+  const filtedPosts = getFilterPosts(searchParams?.keyword);
 
   return (
-    <div className={styles.wrapper}>
-      <Keywords keywords={sortedUniqueKeywords} isKeywordsPage />
-      <div className={styles.postWarpper}>
+    <div className="flex flex-1 flex-col-reverse md:flex-row">
+      <section className="flex flex-1 flex-col gap-4 md:gap-7">
         {filtedPosts.map((post) => (
           <PostPreview post={post} key={post._id} />
         ))}
-      </div>
+      </section>
+      <section className="mb-6 border-b border-l-0 pb-6 md:mb-0 md:ml-6 md:border-b-0 md:border-l md:pb-0 md:pl-6">
+        <h2 className="font-semibold text-gray-600">Keywords</h2>
+        <ul className="mt-5 flex w-full flex-wrap gap-x-2 gap-y-4 md:w-72">
+          {sortedUniqueKeywords.map((keyword) => (
+            <li key={keyword}>
+              <KeywordLinkButton
+                isActive={keyword === (searchParams?.keyword || 'all')}
+                keyword={keyword}
+              >
+                {keyword} ({keywordCounts[keyword]})
+              </KeywordLinkButton>
+            </li>
+          ))}
+        </ul>
+      </section>
     </div>
   );
 }

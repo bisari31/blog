@@ -1,4 +1,4 @@
-import { sortedPosts } from 'lib/contentlayer';
+import { latestPost } from 'lib/contentlayer';
 
 export const GET = async () => {
   const SITE_URL = process.env.SITE_URL;
@@ -7,7 +7,7 @@ export const GET = async () => {
 	  <url>
 	    <loc>${SITE_URL}</loc>
 	  </url>
-    ${sortedPosts
+    ${latestPost
       .map(({ url }) => {
         return `
       <url>

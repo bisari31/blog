@@ -97,8 +97,7 @@ console.log(Object.keys(rabbit)); // ['jumps']
 
 아래 그림과 같이 프로토타입이 형성되고 있습니다. rabbit의 프로토타입은 animal이고 animal의 프로토타입은 Object.prototype입니다. Object.prototype의 프로토타입은 null이 됩니다. Object.prototype의 프로퍼티는 분명 `hasOwnProperty`를 소유하는데 `for..in` 문에서 순회되지 않은 이유는 `hasOwnProperty` 프로퍼티는 내부 슬롯 `enumerable`값이 false이기 때문입니다.
 
-![example1 !!300](/imgs/posts/14/example1.png)
-[https://ko.javascript.info/prototype-inheritance](https://ko.javascript.info/prototype-inheritance)
+![https://ko.javascript.info/prototype-inheritance](/imgs/posts/14/example1.png)
 
 ## 함수의 prototype 프로퍼티
 
@@ -121,8 +120,7 @@ console.log(rabbit.eats);
 
 위 코드에서 Rabbit 생성자 함수를 통해 rabbit 인스턴스를 만들었고 rabbit의 프로토타입을 animal로 지정했습니다. 함수의 프로퍼티 `prototype`은 위 코드와 같이 인스턴스의 프로토타입을 설정할 수 있습니다.
 
-![example2 !!600](/imgs/posts/14/example2.png)
-[https://ko.javascript.info/function-prototype](https://ko.javascript.info/function-prototype)
+![https://ko.javascript.info/function-prototype](/imgs/posts/14/example2.png)
 
 즉 생성자 함수의 `prototype` 프로퍼티는 인스턴스의 프로토타입을 변경하기 위해 존재하며 `__proto__`는 객체 자신의 프로토타입에 접근, 변경하기 위해 존재합니다.
 
@@ -139,8 +137,7 @@ const jane = new Person('jane');
 jane.describe();
 ```
 
-![example3 !!500](/imgs/posts/14/example3.png)
-[https://exploringjs.com/es5/ch17.html](https://exploringjs.com/es5/ch17.html)
+![https://exploringjs.com/es5/ch17.html](/imgs/posts/14/example3.png)
 
 생성자 함수 Person은 jane 객체를 생성했습니다. jane의 프로토타입은 Person.prototype이 되며 프로토타입 상속을 통해 describe 함수를 실행할 수 있게 됩니다. 모든 프로토타입은 `constructor` 프로퍼티를 가지고 있습니다. 이때 Person.prototype의 constructor 참조는 생성자 함수 Person이 된다. 또한 Person의 prototype 프로퍼티를 통해 프로토타입에 접근할 수 있습니다.
 
@@ -174,8 +171,7 @@ console.log(obj.__proto__ === Object.prototype); // true
 
 모든 내장 프로토타입의 꼭대기엔 `Object.prototype`이 존재하고 `Object.prototype`의 프로토타입은 null입니다.
 
-![example4 !!700](/imgs/posts/14/example4.png)
-[https://ko.javascript.info/prototype-methods](https://ko.javascript.info/prototype-methods)
+![https://ko.javascript.info/prototype-methods](/imgs/posts/14/example4.png)
 
 아래 코드와 같이 내장 객체 `prototype` 프로퍼티를 이용하여 메서드를 추가할 수 있습니다. 하지만 이 방법은 좋지 않은데요. 프로토타입은 전역으로 영향을 미치기 때문에 기존 코드와 충돌 날 가능성이 크기 때문에 사용해서는 안 됩니다.
 
@@ -189,7 +185,7 @@ const name = 'string';
 a.hi(); // hi
 ```
 
-#### Reference
+### 참조
 
-[모던 자바스크립트 Deep Dive !!ref](#)
-[https://ko.javascript.info/prototypes !!ref](https://ko.javascript.info/prototypes)
+- 모던 자바스크립트 Deep Dive
+- [https://ko.javascript.info/prototypes ](https://ko.javascript.info/prototypes)

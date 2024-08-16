@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
-import useScrollHidden from './useScrollHidden';
+
+import useScrollHidden from './use-scroll-hidden';
 
 export default function useOutsideClick(
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>,

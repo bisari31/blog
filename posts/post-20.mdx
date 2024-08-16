@@ -13,12 +13,11 @@ keywords:
 type MyInputProps = ComponentPropsWithoutRef<'input'>;
 type MyInputRef = HTMLInputElement;
 
-const MyInput = forwardRef<MyInputRef, MyInputProps>(function MyInput(
-  props,
-  ref,
-) {
-  return <input css={{ border: '1px solid black' }} {...props} ref={ref} />;
-});
+const MyInput = forwardRef<MyInputRef, MyInputProps>(
+  function MyInput(props, ref) {
+    return <input css={{ border: '1px solid black' }} {...props} ref={ref} />;
+  },
+);
 
 export default function ParentComponent() {
   const ref = useRef<HTMLInputElement>(null);
@@ -48,19 +47,14 @@ export default function ParentComponent() {
 해당 요소 대신 사용자 지정 메서드를 노출시켜 로직을 커스텀할 수 있는데, 이때 사용하는 훅이 바로 useImperativeHandle 입니다. 자식 요소에서 useImperativeHandle를 사용하여 전달받은 ref를 첫 번째 인자로 넣으면 버튼을 클릭했을 때 이전과 다르게 빈 객체가 찍히게 됩니다.
 
 ```tsx
-const MyInput = forwardRef<MyInputRef, MyInputProps>(function MyInput(
-  props,
-  ref,
-) {
-  useImperativeHandle(
-    ref,
-    () => {
+const MyInput = forwardRef<MyInputRef, MyInputProps>(
+  function MyInput(props, ref) {
+    useImperativeHandle(ref, () => {
       return {};
-    },
-    [],
-  );
-  // ...
-});
+    }, []);
+    // ...
+  },
+);
 
 export default function ParentComponent() {
   const ref = useRef<HTMLInputElement>(null);
@@ -89,32 +83,27 @@ export default function ParentComponent() {
 ```
 
 ref 참조는 다음과 같이 focus만을 추론하게 됩니다.
-![useImperativeHandle](/imgs/posts/20/2024-08-06-2.22.11.png)
+![](/imgs/posts/20/2024-08-06-2.22.11.png)
 
 다음으로는 자식 컴포넌트에서 useImperativeHandle 콜백 함수의 반환 값을 수정하고,
 ref를 새로 추가하여 참조하고자 하는 dom에 연결해 주어야 합니다.
 
 ```tsx
-const MyInput = forwardRef<MyInputRef, MyInputProps>(function MyInput(
-  props,
-  ref,
-) {
-  const inputRef = useRef<HTMLInputElement>(null);
-  useImperativeHandle(
-    ref,
-    () => {
+const MyInput = forwardRef<MyInputRef, MyInputProps>(
+  function MyInput(props, ref) {
+    const inputRef = useRef<HTMLInputElement>(null);
+    useImperativeHandle(ref, () => {
       return {
         focus() {
           inputRef.current?.focus();
         },
       };
-    },
-    [],
-  );
-  return (
-    <input css={{ border: '1px solid black' }} {...props} ref={inputRef} />
-  );
-});
+    }, []);
+    return (
+      <input css={{ border: '1px solid black' }} {...props} ref={inputRef} />
+    );
+  },
+);
 ```
 
 이제 input 요소의 권한이 없어지고, focus 메서드를 호출할 수 있습니다.
@@ -130,15 +119,11 @@ type MyInputRef = {
   focusAndScroll: () => void;
 };
 
-const MyInput = forwardRef<MyInputRef, MyInputProps>(function MyInput(
-  props,
-  ref,
-) {
-  const divRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
-  useImperativeHandle(
-    ref,
-    () => {
+const MyInput = forwardRef<MyInputRef, MyInputProps>(
+  function MyInput(props, ref) {
+    const divRef = useRef<HTMLDivElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
+    useImperativeHandle(ref, () => {
       return {
         focusAndScroll() {
           inputRef.current?.focus();
@@ -148,22 +133,21 @@ const MyInput = forwardRef<MyInputRef, MyInputProps>(function MyInput(
           }
         },
       };
-    },
-    [],
-  );
-  return (
-    <>
-      <div css={{ overflowY: 'scroll', height: '100px' }} ref={divRef}>
-        {Array(18)
-          .fill('Comment')
-          .map((content, i) => (
-            <div key={content}>comment {i}</div>
-          ))}
-      </div>
-      <input css={{ border: '1px solid black' }} {...props} ref={inputRef} />
-    </>
-  );
-});
+    }, []);
+    return (
+      <>
+        <div css={{ overflowY: 'scroll', height: '100px' }} ref={divRef}>
+          {Array(18)
+            .fill('Comment')
+            .map((content, i) => (
+              <div key={content}>comment {i}</div>
+            ))}
+        </div>
+        <input css={{ border: '1px solid black' }} {...props} ref={inputRef} />
+      </>
+    );
+  },
+);
 
 export default function ParentComponent() {
   const ref = useRef<MyInputRef>(null);
@@ -191,6 +175,6 @@ export default function ParentComponent() {
 
 공식 문서에서는 ref를 props로 표현할 수 없는 필수적인 행동(특정 노드로 스크롤 하기, 노드에 초점 맞추기, 애니메이션 촉발하기, 텍스트 선택하기 등)에서만 사용해야 한다고 합니다.
 
-#### Reference
+### 참조
 
-[React 공식 문서 !!ref](https://ko.react.dev/reference/react/useImperativeHandle)
+- [React 공식 문서](https://ko.react.dev/reference/react/useImperativeHandle)

@@ -9,7 +9,6 @@ keywords:
 ---
 
 ![redux](/imgs/posts/11/redux.png)
-[https://ko.redux.js.org](https://ko.redux.js.org)
 
 본격적으로 redux toolkit을 이용하여 간단한 sns 앱을 만들어보겠습니다.  
 redux와 redux toolkit을 먼저 설치합니다. react와 typescript를 사용했으며 css는 라이브러리는 tailwind를 사용했습니다.
@@ -78,10 +77,10 @@ export const useAppSelector = useSelector.withTypes<RootState>();
 
 이제 `App` 컴포넌트를 provider로 감싼 후에 store를 전달하면 브라우저에서 Redux DevTools Extension을 통해 posts 상태를 확인할 수 있습니다.
 
-![캡처 !!500](/imgs/posts/10/aed2382c-6566-4c93-b33a-e73ebd79f0bb.png)
+![](/imgs/posts/10/aed2382c-6566-4c93-b33a-e73ebd79f0bb.png)
 
 지금까지 렌더링 화면은 다음과 같습니다.
-![캡처 !!500](/imgs/posts/10/7dd36e16-4d77-4397-9251-9edd095831d2.png)
+![](/imgs/posts/10/7dd36e16-4d77-4397-9251-9edd095831d2.png)
 
 게시글을 등록하기 위해서는 postsSlice에서 게시글 등록 액션을 추가해야 합니다. postAdded 함수는 state와 action 두 개의 매개변수를 받고 `action.payload`에는 생성할 post의 정보가 전달됩니다. `createSlice` 안에서 push를 사용하여 불변성을 지키지 않아도 되는 이유는 내부적으로 immer 라이브러리를 사용하여 안전하게 불변성을 지키기 때문입니다.
 
@@ -127,7 +126,7 @@ export default function PostForm() {
 
 데이터베이스는 id 값이 자동으로 증가되지만, 현재는 로컬 상태이므로 id 값을 넣어주어야 합니다. redux toolkit의 nanoid는 유니크한 값을 생성하기 때문에 nanoid를 사용하여 id 값을 추가하였습니다.
 
-![캡처 !!500](/imgs/posts/10/a5b1cfe8-3d8b-45b2-b75a-407534a8b29f.png)
+![](/imgs/posts/10/a5b1cfe8-3d8b-45b2-b75a-407534a8b29f.png)
 
 submit하면 `posts/postAdded` 액션이 정상적으로 디스패치되는 걸 확인할 수 있습니다.
 
@@ -320,11 +319,11 @@ export default function ReactionButtons({ post }: { post: Post }) {
   };
 
   return (
-    <div className="flex gap-x-2 mt-2">
+    <div className="mt-2 flex gap-x-2">
       {Object.entries(reactionEmoji).map(([name, emoji]) => (
         <button
           onClick={() => handleReactionAdd(name)}
-          className="border p-1 rounded"
+          className="rounded border p-1"
           type="button"
           key={name}
         >
@@ -403,9 +402,9 @@ const postsSlice = createSlice({
 });
 ```
 
-![gif !!400](/imgs/posts/10/3d7360a7-eaef-4be9-bce2-1a2bd33510ee.gif)
+![](/imgs/posts/10/3d7360a7-eaef-4be9-bce2-1a2bd33510ee.gif)
 
-#### Reference
+### 참조
 
-[https://ko.redux.js.org/tutorials/essentials/part-3-data-flow !!ref](https://ko.redux.js.org/tutorials/essentials/part-3-data-flow)
-[https://ko.redux.js.org/tutorials/essentials/part-4-using-data !!ref](https://ko.redux.js.org/tutorials/essentials/part-4-using-data)
+- [https://ko.redux.js.org/tutorials/essentials/part-3-data-flow ](https://ko.redux.js.org/tutorials/essentials/part-3-data-flow)
+- [https://ko.redux.js.org/tutorials/essentials/part-4-using-data ](https://ko.redux.js.org/tutorials/essentials/part-4-using-data)

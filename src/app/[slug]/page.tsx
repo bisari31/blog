@@ -1,17 +1,11 @@
+import Utterances from 'components/comment/utterances';
+import KeywordLinkButton from 'components/keyword/keyword-link-button';
+import MorePost from 'components/post/more-post';
+import { title } from 'constants/metadata';
 import { format, parseISO } from 'date-fns';
+import { latestPost } from 'lib/contentlayer';
 import { notFound } from 'next/navigation';
 import { getMDXComponent } from 'next-contentlayer/hooks';
-
-import { sortedPosts } from 'lib/contentlayer';
-import styles from './posts.module.scss';
-
-import PostNavigator from 'components/post/post-navigator';
-import Utterances from 'components/comment/utterances';
-import Keywords from 'components/post/keywords';
-import AnChorComponent from 'components/mdx-components/anchor-component';
-import Heading4Component from 'components/mdx-components/heading4-component';
-import ImageComponent from 'components/mdx-components/image-component';
-import { title } from 'app/metadata';
 
 type PostsResult = {
   previousPost?: Post;
@@ -20,7 +14,7 @@ type PostsResult = {
 };
 
 export const generateStaticParams = async () =>
-  sortedPosts.map((post: Post) => {
+  latestPost.map((post: Post) => {
     return {
       slug: post.url,
     };
@@ -32,9 +26,7 @@ export const generateMetadata = ({
   params: { slug: string };
 }) => {
   const decodedSlug = decodeURIComponent(slug);
-  const currentPost = sortedPosts.find(
-    (post: Post) => post.url === decodedSlug,
-  );
+  const currentPost = latestPost.find((post: Post) => post.url === decodedSlug);
   return {
     title: `${currentPost?.title} - ${title}`,
     description: currentPost?.description,
@@ -65,15 +57,9 @@ export default function page({
 }: {
   params: { slug: string };
 }) {
-  const components = {
-    img: ImageComponent,
-    a: AnChorComponent,
-    h4: Heading4Component,
-  };
-
   const decodedSlug = decodeURIComponent(slug);
 
-  const { currentPost, nextPost, previousPost } = sortedPosts.reduce(
+  const { currentPost, nextPost, previousPost } = latestPost.reduce(
     (acc: PostsResult, cur, idx, src) => {
       if (cur.url === decodedSlug) {
         acc.currentPost = cur;
@@ -89,22 +75,34 @@ export default function page({
     return notFound();
   }
   const MDXContent = getMDXComponent(currentPost.body.code);
+
+  console.log({ nextPost, previousPost });
   return (
-    <div className={styles.postWrapper}>
-      <div className={styles.postInner}>
-        <div className={styles.header}>
-          <time dateTime={currentPost.date}>
-            {format(parseISO(currentPost.date), 'LLLL d, yyyy')}
-          </time>
-          <h1>{currentPost.title}</h1>
-          <Keywords isDetailPage keywords={currentPost.keywords} />
-        </div>
-        <article>
-          <MDXContent components={components} />
-        </article>
-        <PostNavigator nextPost={nextPost} previousPost={previousPost} />
-        <Utterances />
+    <article className="mx-auto max-w-3xl">
+      <div className="flex flex-col gap-5 pb-20 pt-5">
+        <h1 className="text-4xl font-bold leading-tight text-gray-700">
+          {currentPost.title}
+        </h1>
+        <time
+          dateTime={currentPost.date}
+          className="text-sm font-medium text-gray-600"
+        >
+          {format(parseISO(currentPost.date), 'LLLL d, yyyy')}
+        </time>
+        <ul className="flex gap-[10px]">
+          {currentPost.keywords?.map((keyword) => (
+            <li key={keyword}>
+              <KeywordLinkButton keyword={keyword}>{keyword}</KeywordLinkButton>
+            </li>
+          ))}
+        </ul>
       </div>
-    </div>
+      <div className="prose">
+        <MDXContent />
+      </div>
+      <MorePost nextPost={nextPost} previousPost={previousPost} />
+      {/* <PostNavigator nextPost={nextPost} previousPost={previousPost} />
+      <Utterances /> */}
+    </article>
   );
 }
