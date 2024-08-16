@@ -96,7 +96,7 @@ export default function page({
           ))}
         </ul>
       </div>
-      <div className="prose grid grid-cols-1">
+      <div className="prose">
         <MDXContent
           components={{
             img: (props) => (

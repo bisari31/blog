@@ -26,21 +26,23 @@ module.exports = {
             img: {
               margin: 'auto',
             },
-            'pre code': {
+            pre: {
+              whiteSpace: 'pre-wrap',
+              wordBreak: 'break-all',
               fontSize: '12px',
-              lineHeight: '18px',
+              lineHeight: '22px',
             },
             a: {
-              color: 'theme(colors.primary)',
+              color: theme('colors.primary'),
             },
             h2: {
-              color: 'theme(colors.gray.700)',
+              color: theme('colors.gray[700]'),
             },
             h3: {
-              color: 'theme(colors.gray.700)',
+              color: theme('colors.gray[700]'),
             },
             h4: {
-              color: 'theme(colors.gray.700)',
+              color: theme('colors.gray[700]'),
             },
             figcaption: {
               textAlign: 'center',
