@@ -31,6 +31,8 @@ module.exports = {
               wordBreak: 'break-all',
               fontSize: '12px',
               lineHeight: '22px',
+              backgroundColor: '#1e1e1e',
+              color: '#d4d4d4',
             },
             a: {
               color: theme('colors.primary'),

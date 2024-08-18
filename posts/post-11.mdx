@@ -17,7 +17,7 @@ keywords:
 
 ## Thunk
 
-```js
+```ts
 const getRepoDetailsStarted = () => ({
   type: 'repoDetails/fetchStarted',
 });
@@ -45,7 +45,7 @@ thunk를 직접 작성한다면 코드는 위와 같습니다. 하지만 redux t
 <br />
 비동기 thunk 코드 작성을 위해 기존 더미 데이터를 json-server로 이동시킵니다.
 
-```html
+```
 npm i json-server
 ```
 
@@ -58,7 +58,7 @@ npm i json-server
 - succeeded (요청 성공)
 - failed (요청 실패)
 
-```ts
+```js
 {
   status: 'idle' | 'loading' | 'succeeded' | 'failed',
   error: string | null
