@@ -80,6 +80,7 @@ export const useAppSelector = useSelector.withTypes<RootState>();
 ![](/imgs/posts/10/aed2382c-6566-4c93-b33a-e73ebd79f0bb.png)
 
 지금까지 렌더링 화면은 다음과 같습니다.
+
 ![](/imgs/posts/10/7dd36e16-4d77-4397-9251-9edd095831d2.png)
 
 게시글을 등록하기 위해서는 postsSlice에서 게시글 등록 액션을 추가해야 합니다. postAdded 함수는 state와 action 두 개의 매개변수를 받고 `action.payload`에는 생성할 post의 정보가 전달됩니다. `createSlice` 안에서 push를 사용하여 불변성을 지키지 않아도 되는 이유는 내부적으로 immer 라이브러리를 사용하여 안전하게 불변성을 지키기 때문입니다.
