@@ -49,6 +49,7 @@ module.exports = {
             figcaption: {
               textAlign: 'center',
             },
+            maxWidth: null,
           },
         },
       }),
