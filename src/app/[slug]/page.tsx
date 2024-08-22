@@ -78,7 +78,7 @@ export default function page({
   const MDXContent = getMDXComponent(currentPost.body.code);
 
   return (
-    <article className="mx-auto max-w-3xl">
+    <article className="mx-auto max-w-3xl break-all">
       <div className="flex flex-col gap-5 pb-20 pt-5">
         <h1 className="text-4xl font-bold leading-tight text-gray-700">
           {currentPost.title}
