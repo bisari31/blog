@@ -27,8 +27,6 @@ module.exports = {
               margin: 'auto',
             },
             pre: {
-              whiteSpace: 'pre-wrap',
-              wordBreak: 'break-all',
               fontSize: '12px',
               lineHeight: '22px',
               backgroundColor: '#1e1e1e',
