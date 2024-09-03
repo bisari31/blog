@@ -9,6 +9,7 @@ import React from 'react';
 export const metadata: Metadata = {
   title,
   description,
+  keywords: ['bisari31', '개발자', '프론트엔드'],
   verification: {
     google: 'e-TNPhd8w4G89P7qHvpbNUMOzmwlO8jX-6zAin2jbK8',
     other: {
