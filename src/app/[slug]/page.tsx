@@ -5,6 +5,7 @@ import { title } from 'constants/metadata';
 import { format, parseISO } from 'date-fns';
 import { latestPost } from 'lib/contentlayer';
 import Image from 'next/image';
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getMDXComponent } from 'next-contentlayer/hooks';
 
@@ -72,9 +73,8 @@ export default function page({
     {},
   );
 
-  if (!currentPost) {
-    return notFound();
-  }
+  if (!currentPost) return notFound();
+
   const MDXContent = getMDXComponent(currentPost.body.code);
 
   return (
@@ -107,6 +107,11 @@ export default function page({
                 width={props.width ? +props.width : 900}
                 height={props.height ? +props.height : 300}
               />
+            ),
+            a: (props) => (
+              <Link target="_blank" href={props.href || ''}>
+                {props.children}
+              </Link>
             ),
           }}
         />
