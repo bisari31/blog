@@ -1,22 +1,21 @@
-import KeywordLinkButton from 'components/keyword/keyword-link-button';
+'use client';
+
+import KeywordButton from 'components/keyword-button';
 import PostPreview from 'components/post/post-preview';
 import {
   keywordCounts,
   latestPost,
   sortedUniqueKeywords,
 } from 'lib/contentlayer';
+import { useKeyword } from 'stores/keyword-store';
 
-interface MainPageProps {
-  searchParams?: { [key: string]: string | undefined };
-}
-
-export default function Main({ searchParams }: MainPageProps) {
-  const getFilterPosts = (keyword?: string) => {
-    if (keyword === 'all' || !keyword) return latestPost;
+export default function Main() {
+  const selectedKeyword = useKeyword();
+  const getFilterPosts = (keyword: string) => {
+    if (keyword === 'all') return latestPost;
     return latestPost.filter((post) => post.keywords?.includes(keyword));
   };
-  const filtedPosts = getFilterPosts(searchParams?.keyword);
-
+  const filtedPosts = getFilterPosts(selectedKeyword);
   return (
     <div className="flex flex-1 flex-col-reverse md:flex-row">
       <section className="flex flex-1 flex-col gap-4 md:gap-7">
@@ -29,12 +28,12 @@ export default function Main({ searchParams }: MainPageProps) {
         <ul className="mt-5 flex w-full flex-wrap gap-x-2 gap-y-4 md:w-72">
           {sortedUniqueKeywords.map((keyword) => (
             <li key={keyword}>
-              <KeywordLinkButton
-                isActive={keyword === (searchParams?.keyword || 'all')}
+              <KeywordButton
+                isActive={keyword === selectedKeyword}
                 keyword={keyword}
               >
                 {keyword} ({keywordCounts[keyword]})
-              </KeywordLinkButton>
+              </KeywordButton>
             </li>
           ))}
         </ul>

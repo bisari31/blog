@@ -1,4 +1,4 @@
-import KeywordButton from 'components/keyword/keyword-button';
+import KeywordButton from 'components/keyword-button';
 import { format, parseISO } from 'date-fns';
 import Link from 'next/link';
 

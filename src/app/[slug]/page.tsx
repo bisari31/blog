@@ -1,5 +1,5 @@
+import KeywordList from 'app/[slug]/keyword-list';
 import Utterances from 'components/comment/utterances';
-import KeywordLinkButton from 'components/keyword/keyword-link-button';
 import MorePost from 'components/post/more-post';
 import { title } from 'constants/metadata';
 import { format, parseISO } from 'date-fns';
@@ -89,13 +89,7 @@ export default function page({
         >
           {format(parseISO(currentPost.date), 'LLLL d, yyyy')}
         </time>
-        <ul className="flex gap-[10px]">
-          {currentPost.keywords?.map((keyword) => (
-            <li key={keyword}>
-              <KeywordLinkButton keyword={keyword}>{keyword}</KeywordLinkButton>
-            </li>
-          ))}
-        </ul>
+        <KeywordList keywords={currentPost.keywords} />
       </div>
       <div className="prose">
         <MDXContent
