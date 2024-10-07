@@ -1,5 +1,5 @@
-export { default as useFocus } from './use-focus';
-export { default as useKeyboardSelection } from './use-keyboard-selection';
-export { default as useModalOpen } from './use-modal-open';
-export { default as useOutsideClick } from './use-outside-click';
-export { default as useScrollHidden } from './use-scroll-hidden';
+export { default as useFocus } from './focus';
+export { default as useKeyboardSelection } from './keyboard-selection';
+export { default as useModalOpen } from './modal-open';
+export { default as useOutsideClick } from './outside-click';
+export { default as useScrollHidden } from './scroll-hidden';
