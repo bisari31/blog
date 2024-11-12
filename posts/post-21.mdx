@@ -1,0 +1,157 @@
+---
+title: React Router Navigate vs useNavigate vs redirect
+date: 2024-09-30
+description: 각각의 사용법과 옵션을 살펴본 후, 이 세 가지를 어떤 상황에서 사용하는 것이 적절한지 알아보겠습니다.
+thumbnail:
+keywords:
+  - react
+  - react-router-dom
+---
+
+각각의 사용법과 옵션을 살펴본 후, 이 세 가지를 어떤 상황에서 사용하는 것이 적절한지 알아보겠습니다. 해당 글은 v6.27 기준으로 설명되어 있습니다.
+
+## useNavigate
+
+useNavigate 훅은 함수를 반환합니다.
+타입 정의는 아래와 같습니다.
+
+```ts
+declare function useNavigate(): NavigateFunction;
+
+interface NavigateFunction {
+  (to: To, options?: NavigateOptions): void;
+  (delta: number): void;
+}
+
+interface NavigateOptions {
+  replace?: boolean;
+  state?: any;
+  preventScrollReset?: boolean;
+  relative?: RelativeRoutingType;
+  flushSync?: boolean;
+  viewTransition?: boolean;
+}
+
+type RelativeRoutingType = 'route' | 'path';
+```
+
+useNavigate의 사용 방법에는 두 가지가 있습니다. 첫 번째는 경로를 지정하고 선택적으로 옵션을 추가할 수 있습니다.
+
+```tsx
+export default function Auth() {
+  const navigate = useNavigate()
+  const logout = async () => {
+      const result = await auth.logout();
+      if (result) navigate("/login");
+  }
+```
+
+두 번째는 히스토리 스택에서 이동할 위치를 숫자로 지정할 수 있습니다.
+
+```tsx
+const navigate = useNavigate();
+const goBack = () => {
+  navigate(-1);
+};
+```
+
+다음으로는 옵션에 대해 알아보겠습니다. 여기에서는 자주 사용하는 옵션에 대해 다룹니다.
+
+### options.replace
+
+값이 true일 경우 히스토리 스택에서 **현재 페이지**를 대체해 기록에 남기지 않습니다.
+만약 로그인이 성공할 경우 뒤로가기 버튼으로 다시 로그인 페이지를 보여줄 필요가 없습니다. 이러한 경우에 replace 옵션을 통해 히스토리 스택을 관리할 수 있습니다.
+
+```tsx
+export const useLogin = () => {
+  const naviagte = useNavigate();
+  return useMutation({
+    mutationFn: authService.login,
+    onSuccess: (data) => {
+      naviagte('/', { replace: true });
+    },
+  });
+};
+```
+
+### options.state
+
+히스토리 상태에 값을 저장할 수 있으며 이후에 해당 경로에서 useLocation 훅을 통해 값을 가져올 수 있습니다.
+
+```tsx
+// /auth
+export const useLogin = () => {
+  const naviagte = useNavigate();
+  return useMutation({
+    mutationFn: authService.login,
+    onSuccess: (data) => {
+      naviagte('/', { replace: true, state: { value: 'hi' } });
+    },
+  });
+};
+
+// index
+import { useLocation } from 'react-router-dom';
+
+export default function Main() {
+  const location = useLocation();
+  console.log(location.state.value); // 'hi'
+}
+```
+
+### options.preventScrollReset
+
+만약 `<ScrollRestoration>` 컴포넌트를 사용 중이라면 페이지 이동 시 스크롤이 리셋되는데 preventScrollReset을 true로 설정하면 스크롤 위치가 유지됩니다.
+
+## Navigate
+
+Navigate는 컴포넌트로 구성되어 있습니다.
+타입 정의는 아래와 같습니다. `NavigateProps`는 useNavigate의 `NavigateFunction`와 동일한 타입입니다.
+
+```ts
+declare function Navigate(props: NavigateProps): null;
+
+interface NavigateProps {
+  to: To;
+  replace?: boolean;
+  state?: any;
+  relative?: RelativeRoutingType;
+}
+```
+
+`useNavigate`와의 차이점은 `useNavigate`는 훅으로 되어있고 `Navigate`는 JSX로 구성되어 DOM에 렌더링되어야 합니다.
+`Navigate`는 다음과 같이 특정 조건에 따라 렌더링할 때 사용하기 용이합니다.
+
+```tsx
+import { Navigate } from 'react-router-dom';
+
+export default function Market() {
+  const data = null;
+  if (!data) return <Navigate to={'/'} />;
+}
+```
+
+## redirect
+
+redirect의 타입 정의는 다음과 같습니다.
+
+```ts
+type RedirectFunction = (url: string, init?: number | ResponseInit) => Response;
+```
+
+redirect는 함수가 아닌 Response 객체를 반환합니다. 따라서 컴포넌트 내부에서 사용하면 페이지 전환이 이루어지지 않습니다.
+아래와 같이 loader와 action에서 사용할 수 있습니다.
+
+```ts
+export const loader = () => {
+  const user = null;
+  if (!user) {
+    return redirect('/');
+  }
+  return user;
+};
+```
+
+### 참조
+
+- [공식 문서](https://reactrouter.com/en/main/hooks/use-navigate#usenavigate)
