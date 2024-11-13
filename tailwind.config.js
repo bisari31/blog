@@ -47,6 +47,13 @@ module.exports = {
             figcaption: {
               textAlign: 'center',
             },
+            code: {
+              fontWeight: 500,
+              backgroundColor: '#dadbdf',
+              padding: '4px 6px',
+              fontSize: '12px',
+              borderRadius: '6px',
+            },
             maxWidth: null,
           },
         },
