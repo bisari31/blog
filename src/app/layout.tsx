@@ -44,7 +44,7 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body
-        className={`${pretendard.variable} flex min-h-screen flex-col bg-bg text-gray-800`}
+        className={`${pretendard.variable} flex min-h-screen flex-col bg-bg font-pretendard text-gray-800`}
       >
         <Header />
         <main className="flex flex-1 px-4 pb-[100px] pt-10 sm:px-[37px] md:pt-14">
