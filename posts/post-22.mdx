@@ -47,10 +47,10 @@ History API는 브라우저에 환경에서 제공되는 Web API입니다. Histo
 
 ### pushState()
 
-pushState를 사용해 SPA를 구현할 수 있습니다. pushState는 세션 기록에 항목을 추가하는 메서드입니다. 브라우저는 해당 url로 변경되지만 리로드 되지는 않습니다.
+pushState를 사용해 SPA를 구현할 수 있습니다. pushState는 세션 기록에 항목을 추가하는 메서드입니다. url은 변경되지만 리렌더링은 발생하지 않습니다.
 
 ```tsx
-pushState(state, unused, url);
+pushState(state, title, url);
 ```
 
 pushState는 3개의 매개변수를 받고 있습니다.
@@ -59,9 +59,9 @@ pushState는 3개의 매개변수를 받고 있습니다.
 
 다음 페이지에서 넘겨줄 값입니다. react router의 state와 같습니다. `history.state`를 통해 확인할 수 있습니다.
 
-#### unused
+#### title (unused)
 
-역사적인 이유로 존재해서 생략할 수 없다고 합니다. 빈 문자열을 전달하는 것이 안전하다고 합니다.
+대부분의 브라우저에서 이 매개변수는 무시됩니다. 빈 문자열을 전달하는 것이 이후 메서드 변경에 대비하는 데 더 안전합니다.
 
 #### url
 
