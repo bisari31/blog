@@ -74,9 +74,7 @@ export default function App() {
     <div className="flex flex-1 flex-col items-center justify-center gap-5">
       <h1 className="text-5xl">App Page</h1>
       <button
-        onClick={() => {
-          history.pushState(null, '', '/about');
-        }}
+        onClick={() => history.pushState(null, '', '/about')}
         className="rounded-sm bg-blue-500 p-3 text-white"
       >
         페이지 이동
@@ -86,7 +84,7 @@ export default function App() {
 }
 ```
 
-버튼을 하나 만들고 pushState 메서드를 이용해 `/about` 페이지로 이동해 url이 변경되었지만 랜더링된 페이지는 아직 App Page인 걸 볼 수 있습니다.
+버튼을 하나 만들고 pushState 메서드를 핸들러에 등록하여 버튼을 클릭하면 `/about` 페이지로 url이 변경되었지만 랜더링된 페이지는 아직 App Page인 걸 볼 수 있습니다.
 
 ![pushState example 1](/imgs/posts/22/11.png)
 
@@ -185,9 +183,7 @@ export default function App() {
     <div className="flex flex-1 flex-col items-center justify-center gap-5">
       <h1 className="text-5xl">App Page</h1>
       <button
-        onClick={() => {
-          navigate('/about');
-        }}
+        onClick={() => navigate('/about')}
         className="rounded-sm bg-blue-500 p-3 text-white"
       >
         이동
@@ -213,12 +209,20 @@ function Router({ children }: RouterProps) {
   const [pathname, setPathname] = useState(location.pathname);
 
   useEffect(() => {
-    window.addEventListener('popstate', () => {
+    const handlePopState = () => {
       setPathname(location.pathname);
-    });
+    };
+
+    window.addEventListener("popstate", handlePopState);
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
   }, []);
 
-  ...
+  return (
+    ...
+  )
+}
 ```
 
 이렇게 History API를 통해 간단하게 React SPA Router를 구현해 보았습니다.
