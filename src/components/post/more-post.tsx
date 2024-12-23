@@ -18,17 +18,15 @@ function MorePostItem({ post, type }: MorePostItemProps) {
       className={clsx(
         { 'pointer-events-none': !post },
         { 'text-right': type === '다음' },
-        'group flex flex-1 flex-col gap-1 rounded-lg bg-[#ebedf1] p-4 text-gray-500',
+        'group flex flex-1 flex-col gap-1 rounded-lg bg-[#ebedf1] p-4',
       )}
       href={post?.url ?? '#'}
     >
-      <span className={clsx({ 'text-[#a9a9a9]': !post }, 'text-sm')}>
-        {type} 글
-      </span>
+      <span className="text-sm text-[#4D4D4D]">{type} 글</span>
       <span
         className={cn('line-clamp-2 text-gray-800', {
           'group-hover:text-primary': post,
-          'text-[#a9a9a9]': !post,
+          'text-[#4D4D4D]': !post,
         })}
       >
         {post?.title ?? `${type} 글이 존재하지 않습니다.`}
