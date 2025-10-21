@@ -27,27 +27,14 @@ module.exports = {
             pre: {
               fontSize: '12px',
               lineHeight: '22px',
-              backgroundColor: '#1e1e1e',
-              color: '#d4d4d4',
-            },
-            a: {
-              color: theme('colors.primary'),
-            },
-            h2: {
-              color: theme('colors.gray[700]'),
-            },
-            h3: {
-              color: theme('colors.gray[700]'),
-            },
-            h4: {
-              color: theme('colors.gray[700]'),
             },
             figcaption: {
               textAlign: 'center',
             },
             code: {
               fontWeight: 500,
-              backgroundColor: '#dadbdf',
+              backgroundColor: '#1f2937',
+              color: '#9ca3af',
               padding: '4px 6px',
               fontSize: '12px',
               borderRadius: '6px',

@@ -14,6 +14,7 @@ export default function Utterances() {
       script.setAttribute('repo', 'bisari31/blog');
       script.setAttribute('issue-term', 'title');
       script.setAttribute('label', 'comments');
+      script.setAttribute('theme', 'github-dark');
       element?.appendChild(script);
     };
     makeComments();

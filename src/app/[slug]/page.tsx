@@ -79,17 +79,17 @@ export default function page({
   return (
     <article className="mx-auto w-full max-w-3xl break-all">
       <div className="flex flex-col gap-5 pb-20 pt-5">
-        <h1 className="text-4xl font-bold leading-tight text-gray-700">
+        <h1 className="text-4xl font-bold leading-tight">
           {currentPost.title}
         </h1>
         <time
           dateTime={currentPost.date}
-          className="text-sm font-medium text-gray-600"
+          className="text-sm font-medium text-gray-500"
         >
           {format(parseISO(currentPost.date), 'LLLL d, yyyy')}
         </time>
       </div>
-      <div className="prose">
+      <div className="prose text-gray-300">
         <MDXContent
           components={{
             img: (props) => (
@@ -100,15 +100,32 @@ export default function page({
                 height={props.height ? +props.height : 300}
               />
             ),
+            h1: (props) => <h1 className="text-gray-400">{props.children}</h1>,
+            h2: (props) => <h2 className="text-gray-400">{props.children}</h2>,
+            h3: (props) => <h3 className="text-gray-400">{props.children}</h3>,
+            h4: (props) => <h4 className="text-gray-400">{props.children}</h4>,
+            h5: (props) => <h5 className="text-gray-400">{props.children}</h5>,
+            strong: (props) => (
+              <strong className="text-gray-500">{props.children}</strong>
+            ),
+            blockquote: (props) => (
+              <blockquote className="border-l-4 border-gray-600 pl-4 italic text-gray-400">
+                {props.children}
+              </blockquote>
+            ),
             a: (props) => (
-              <Link target="_blank" href={props.href || ''}>
+              <Link
+                className="text-gray-400"
+                target="_blank"
+                href={props.href || ''}
+              >
                 {props.children}
               </Link>
             ),
           }}
         />
       </div>
-      <MorePost nextPost={nextPost} previousPost={previousPost} />
+      {/* <MorePost nextPost={nextPost} previousPost={previousPost} /> */}
       <Utterances />
     </article>
   );

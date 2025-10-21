@@ -42,8 +42,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ko" className={pretendard.className}>
-      <body className="flex min-h-screen flex-col bg-bg text-gray-800">
+    <html
+      lang="ko"
+      className={`${pretendard.className} [scrollbar-gutter:stable]`}
+    >
+      <body className="flex min-h-screen flex-col bg-gray-900 text-gray-300">
         <Header />
         <main className="flex flex-1 px-4 pb-[100px] pt-10 sm:px-[37px] md:pt-14">
           <div className="mx-auto flex min-h-full w-full max-w-3xl flex-1">
