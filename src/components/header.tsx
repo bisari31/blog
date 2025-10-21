@@ -1,26 +1,33 @@
 'use client';
-import { Email, GithubIcon } from 'assets/icons';
-import { title } from 'constants/metadata';
+import cn from 'lib/cn';
 import Link from 'next/link';
-import { useKeywordActions } from 'stores/keyword-store';
+import { usePathname } from 'next/navigation';
 
 export default function Header() {
-  const { setKeyword } = useKeywordActions();
-  const goHome = () => {
-    setKeyword('all');
-  };
+  const pathname = usePathname();
   return (
     <header className="sticky top-0 z-50 border-b bg-bg px-4 sm:px-[37px]">
-      <div className="mx-auto flex h-14 max-w-5xl items-center">
-        <div className="flex flex-1 items-center justify-between">
+      <div className="mx-auto flex h-14 max-w-3xl items-center">
+        <div className="flex flex-1 items-center space-x-4">
           <Link
             href={'/'}
-            onClick={goHome}
-            className="font-medium text-gray-900"
+            className={cn(
+              'font-medium text-gray-900 decoration-gray-500 underline-offset-4 hover:underline',
+              pathname !== '/about' && 'underline',
+            )}
           >
-            {title}
+            Home
           </Link>
-          <div className="flex items-center gap-3">
+          <Link
+            href={'/about'}
+            className={cn(
+              'font-medium text-gray-900 decoration-gray-500 underline-offset-4 hover:underline',
+              pathname === '/about' && 'underline',
+            )}
+          >
+            About
+          </Link>
+          {/* <div className="flex items-center gap-3">
             <Link
               aria-label="email:bisari31@gmail.com"
               href="mailto:bisari31@gmail.com"
@@ -38,7 +45,7 @@ export default function Header() {
             >
               <GithubIcon width={24} height={24} className="fill-gray-600" />
             </Link>
-          </div>
+          </div> */}
         </div>
       </div>
     </header>
