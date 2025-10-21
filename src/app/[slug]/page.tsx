@@ -1,4 +1,3 @@
-import KeywordList from 'app/[slug]/keyword-list';
 import Utterances from 'components/comment/utterances';
 import MorePost from 'components/post/more-post';
 import { title } from 'constants/metadata';
@@ -89,7 +88,6 @@ export default function page({
         >
           {format(parseISO(currentPost.date), 'LLLL d, yyyy')}
         </time>
-        <KeywordList keywords={currentPost.keywords} />
       </div>
       <div className="prose">
         <MDXContent
