@@ -1,4 +1,4 @@
-import PostPreview from 'components/post/post-preview';
+import PostPreview from 'app/post-preview';
 import { latestPost } from 'lib/contentlayer';
 
 export default function Main() {

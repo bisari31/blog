@@ -1,6 +1,6 @@
 import './globals.css';
 
-import Header from 'components/header';
+import Header from 'app/header';
 import { description, title } from 'constants/metadata';
 import { pretendard } from 'lib/font';
 import { Metadata } from 'next';
