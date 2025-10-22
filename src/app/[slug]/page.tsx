@@ -1,4 +1,4 @@
-import Utterances from 'components/comment/utterances';
+import Utterances from 'app/[slug]/utterances';
 import { title } from 'constants/metadata';
 import { format, parseISO } from 'date-fns';
 import { latestPost } from 'lib/contentlayer';
@@ -124,7 +124,6 @@ export default function page({
           }}
         />
       </div>
-      {/* <MorePost nextPost={nextPost} previousPost={previousPost} /> */}
       <Utterances />
     </article>
   );

@@ -23,14 +23,3 @@ export default function Utterances() {
 
   return <div className="mt-20" ref={ref} />;
 }
-
-{
-  /* <script src="https://utteranc.es/client.js"
-        repo="[ENTER REPO HERE]"
-        issue-term="pathname"
-        label="comments"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
-</script> */
-}
