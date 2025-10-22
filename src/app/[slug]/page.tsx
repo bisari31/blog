@@ -1,5 +1,4 @@
 import Utterances from 'components/comment/utterances';
-import MorePost from 'components/post/more-post';
 import { title } from 'constants/metadata';
 import { format, parseISO } from 'date-fns';
 import { latestPost } from 'lib/contentlayer';
